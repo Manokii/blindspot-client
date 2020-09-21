@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "Tungsten";
+    src: local("Tungsten"), url("./assets/tungsten.ttf") format("truetype");
+}
+/* @font-face {
+    font-family: "Gotham Pro";
+    src: local("Gotham Pro"), url("./assets/gothampro.ttf") format("truetype");
+} */
+
+@font-face {
+    font-family: Valorant;
+    src: url("./assets/valorant.ttf");
+}
+
+@font-face {
+    font-family: "Don Graffiti";
+    src: url("./assets/DonGraffiti.ttf");
+}
+@font-face {
+    font-family: "Sivar";
+    src: url("./assets/sivarpro.ttf");
+}
+
+@font-face {
+    font-family: "Anton";
+    src: url("./assets/Anton-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Whatka";
+    src: url("./assets/whatka.ttf");
+}
