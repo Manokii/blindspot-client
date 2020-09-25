@@ -26,6 +26,7 @@ import Talents from "./ControlTalents";
 import { withRouter } from "react-router-dom";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import MVP from "./ControlMVP";
+import Downstage from "./ControlDownstageMonitor";
 
 const us = makeStyles((theme) => ({
     root: {
@@ -33,6 +34,8 @@ const us = makeStyles((theme) => ({
         boxSizing: "border-box",
         width: "100%",
         display: "grid",
+
+        gridAutoFlow: "dense",
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         gridGap: theme.spacing(2),
         overflow: "auto",
@@ -42,6 +45,11 @@ const us = makeStyles((theme) => ({
 
         [theme.breakpoints.up("sm")]: {
             gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
+
+            "& .players": { gridColumnStart: "span 2" },
+            "& .downstage": { gridColumnStart: "span 2" },
+            "& .popups": { gridColumnStart: "span 2" },
+            "& .veto": { gridColumnStart: "span 2" },
         },
 
         // [theme.breakpoints.down("sm")]: { padding: 0 },
@@ -76,6 +84,10 @@ const us = makeStyles((theme) => ({
         "& .matchlist": { backgroundColor: "#14cc60" },
         "& .series": { backgroundColor: "#2f3e46" },
         "& .talents": { backgroundColor: "#4C3A3D" },
+
+        "& .downstage": {
+            backgroundColor: "#282a36",
+        },
     },
 
     fab: {
@@ -111,6 +123,7 @@ const ControlPage = ({ history, location: { search } }) => {
             popups: true,
             previousMatches: true,
             mvp: true,
+            downstage: true,
             mogul: true,
         },
     } = useSelector((state) => state.ui);
@@ -148,6 +161,7 @@ const ControlPage = ({ history, location: { search } }) => {
                 popups: true,
                 previousMatches: true,
                 mvp: true,
+                downstage: true,
                 mogul: true,
             });
         } else {
@@ -161,6 +175,7 @@ const ControlPage = ({ history, location: { search } }) => {
                 popups: false,
                 previousMatches: false,
                 mvp: false,
+                downstage: false,
                 mogul: false,
             });
         }
@@ -235,6 +250,12 @@ const ControlPage = ({ history, location: { search } }) => {
                 <Paper elevation={5} className="section series">
                     <Typography variant="button">MVP</Typography>
                     <MVP />
+                </Paper>
+            )}
+
+            {state.downstage && (
+                <Paper elevation={5} className="section downstage">
+                    <Downstage />
                 </Paper>
             )}
 
