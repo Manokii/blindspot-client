@@ -146,7 +146,7 @@ const LiveVeto = ({ onLowerThirds = false }) => {
     };
     const {
         maps = { bestOf: "bo3", veto: [] },
-        current_match_state: state,
+        current_match_state: state = "VETO",
         match_current: {
             EntityParticipantA: a,
             EntityParticipantB: b,

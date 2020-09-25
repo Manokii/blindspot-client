@@ -35,7 +35,7 @@ const q = makeStyles((theme) => ({
 
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",   
+                backgroundPosition: "center",
                 backgroundImage: `url(${mvptexture})`,
                 mixBlendMode: "multiply",
             },
@@ -86,8 +86,8 @@ const q = makeStyles((theme) => ({
 const LiveMVP = () => {
     const {
         mvp = {
-            name: "",
-            agent: "",
+            name: "Lamoku",
+            agent: "sage",
             team: "",
             kills: 0,
             assists: 0,
