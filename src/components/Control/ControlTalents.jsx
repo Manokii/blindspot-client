@@ -19,6 +19,26 @@ const q = makeStyles((theme) => ({
     root: {
         display: "flex",
         flexDirection: "column",
+        maxHeight: 490,
+        overflowY: "auto",
+
+        "&:hover": {
+            "&::-webkit-scrollbar": {
+                "&-thumb": {
+                    backgroundColor: "rgba(255,255,255,.5)",
+                },
+            },
+        },
+        "&::-webkit-scrollbar": {
+            width: 10,
+
+            "&-thumb": {
+                borderRadius: 5,
+                backgroundColor: "rgba(255,255,255,.1)",
+                border: "2px solid #2f3e46",
+                transition: "all 300ms ease-in-out",
+            },
+        },
         "& .section": {
             backgroundColor: "transparent",
             margin: theme.spacing(2, 0),

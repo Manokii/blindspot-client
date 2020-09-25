@@ -29,7 +29,7 @@ const q = makeStyles((theme) => ({
         "& .container": {
             display: "flex",
             flexDirection: "column",
-            maxHeight: 600,
+            maxHeight: 330,
             overflowY: "auto",
             padding: theme.spacing(2),
 

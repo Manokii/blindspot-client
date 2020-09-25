@@ -11,12 +11,23 @@ import { wsContext } from "../WebsocketProvider";
 
 const q = makeStyles((t) => ({
     root: {
-        display: "flex",
+        [t.breakpoints.up("sm")]: {
+            gridTemplateColumns: "1fr 1fr",
+        },
+        display: "grid",
+        gridTemplateColumns: "1fr",
         flexDirection: "column",
+        gridGap: 16,
 
         "& .section": {
-            margin: t.spacing(2, 0),
+            // margin: t.spacing(2, 0),
             backgroundColor: "#1e96fc",
+            display: "flex",
+            flexDirection: "column",
+
+            "& button": {
+                justifySelf: "flex-end",
+            },
         },
     },
 }));

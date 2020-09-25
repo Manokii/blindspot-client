@@ -25,7 +25,7 @@ const us = makeStyles((theme) => ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            border: "1px solid rgba(255,255,255,.1)",
+            border: "1px solid rgba(255,255,255,.3)",
             // width: "100%",
             position: "relative",
 
@@ -49,8 +49,22 @@ const us = makeStyles((theme) => ({
     },
 
     control: {
+        [theme.breakpoints.up("sm")]: {
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gridGap: 16,
+
+            "& .system": {
+                gridColumnStart: "span 2",
+            },
+        },
+
         "& .team": {
             margin: theme.spacing(2, 0),
+
+            "& h6": {
+                fontSize: 15,
+            },
         },
     },
     veto: {
@@ -157,9 +171,7 @@ const ControlVeto = () => {
             <div className={c.control}>
                 {/* ========================== TEAM A ========================== */}
                 <div className="team a">
-                    <Typography variant="h6">
-                        {a?.Profile?.DisplayName}
-                    </Typography>
+                    <Typography>{a?.Profile?.DisplayName}</Typography>
                     <div className={c.mapButtons}>
                         {mapPool
                             .filter(
@@ -168,7 +180,7 @@ const ControlVeto = () => {
                             )
                             .map((map) => (
                                 <div key={map} className="mapButtonWrap">
-                                    <Typography variant="h6">{map}</Typography>
+                                    <Typography>{map}</Typography>
                                     <div className="btns">
                                         <Button
                                             color="secondary"
@@ -208,9 +220,7 @@ const ControlVeto = () => {
 
                 {/* ========================== TEAM B========================== */}
                 <div className="team b">
-                    <Typography variant="h6">
-                        {b?.Profile?.DisplayName}
-                    </Typography>
+                    <Typography>{b?.Profile?.DisplayName}</Typography>
                     <div className={c.mapButtons}>
                         {mapPool
                             .filter(
@@ -220,7 +230,7 @@ const ControlVeto = () => {
                             .map((map) =>
                                 // prettier-ignore
                                 <div key={map} className="mapButtonWrap">
-                                <Typography variant="h6">{map}</Typography>
+                                <Typography >{map}</Typography>
                                 <div className="btns">
                                     <Button
                                         color="secondary"
@@ -244,7 +254,7 @@ const ControlVeto = () => {
 
                 {/* ========================== System ========================== */}
                 <div className="team system">
-                    <Typography variant="h6">System</Typography>
+                    <Typography>System</Typography>
                     <div className={c.mapButtons}>
                         {mapPool
                             .filter(
@@ -254,7 +264,7 @@ const ControlVeto = () => {
                             .map((map) =>
                                 // prettier-ignore
                                 <div key={map} className="mapButtonWrap">
-                                    <Typography variant="h6">{map}</Typography>
+                                    <Typography >{map}</Typography>
                                     <div className="btns">
                                         <Button
                                             color="secondary"

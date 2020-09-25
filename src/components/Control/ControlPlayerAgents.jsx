@@ -15,9 +15,17 @@ import { useSelector } from "react-redux";
 import { wsContext } from "../WebsocketProvider";
 import agents from "../../assets/agents.json";
 import axios from "axios";
+import isDev from "../../isDev";
 
 const us = makeStyles((theme) => ({
     root: {
+        [theme.breakpoints.up("sm")]: {
+            "& .wrap": {
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gridGap: 20,
+            },
+        },
         "& .team": {
             margin: theme.spacing(4, 0),
             "& .player": {
@@ -111,14 +119,14 @@ const ControlPlayerAgents = () => {
     };
 
     const reset = () => {
-        const cors = `http://${window.location.hostname}:8080/`;
+        const cors = `${window.location.hostname}:8080/`;
         const headers = {
             "arena-api-key": "C434EDE3-2E7E-4B9D-A070-58B2CF94846D",
             "arena-login-token": "fd1e9e0d-3c25-4ccd-b6b5-9b70be315e18",
         };
 
         // prettier-ignore
-        axios.get(`${cors}polling.mogul.gg/api/tournament/match/${match_current.TournamentMatchId}/?LastUpdatedDateTime=`,{ headers })
+        axios.get(`http://${isDev() ? cors: ''}polling.mogul.gg/api/tournament/match/${match_current.TournamentMatchId}/?LastUpdatedDateTime=`,{ headers })
             .then(({data: {Response :{TeamAPlayers, TeamBPlayers}}}) => {
                 set({
                     a: [
@@ -157,117 +165,118 @@ const ControlPlayerAgents = () => {
             <Button variant="contained" className={c.reset} onClick={reset}>
                 Refresh / Reset
             </Button>
-            <div className="team a">
-                <Typography variant="h6">
-                    {match_current.EntityParticipantA.Profile.Nickname}
-                </Typography>
+            <div className="wrap">
+                <div className="team a">
+                    <Typography variant="h6">
+                        {match_current.EntityParticipantA.Profile.Nickname}
+                    </Typography>
 
-                {form.a.map((player, i) => (
-                    <div key={player.id} className="player">
-                        <TextField
-                            className="player-name"
-                            variant="filled"
-                            size="small"
-                            color="primary"
-                            onChange={changeAPlayerName(player.id)}
-                            label={
-                                <font
-                                    style={{
-                                        color: "rgba(255,255,255,0.5",
-                                    }}>{`player ${i + 1}`}</font>
-                            }
-                            value={player.name}
-                        />
-
-                        <FormControl
-                            size="small"
-                            variant="filled"
-                            className="select">
-                            <InputLabel
-                                style={{ color: "rgba(255,255,255,.5)" }}
-                                id="select-filled-label">
-                                Agent
-                            </InputLabel>
-                            <Select
-                                labelId="select-filled-label"
-                                label="Agent"
-                                value={player.agent}
-                                onChange={selectAgentA(player.id)}>
-                                {Object.keys(agents).map((a) => (
-                                    <MenuItem
-                                        dense
-                                        key={a}
-                                        value={a}
+                    {form.a.map((player, i) => (
+                        <div key={player.id} className="player">
+                            <TextField
+                                className="player-name"
+                                variant="filled"
+                                size="small"
+                                color="primary"
+                                onChange={changeAPlayerName(player.id)}
+                                label={
+                                    <font
                                         style={{
-                                            display: form.a
-                                                .map((aa) => aa.agent)
-                                                .includes(a)
-                                                ? "none"
-                                                : "",
-                                        }}>
-                                        {agents[a]}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </div>
-                ))}
-            </div>
+                                            color: "rgba(255,255,255,0.5",
+                                        }}>{`player ${i + 1}`}</font>
+                                }
+                                value={player.name}
+                            />
 
-            <div className="team b">
-                <Typography variant="h6">
-                    {match_current.EntityParticipantB.Profile.Nickname}
-                </Typography>
+                            <FormControl
+                                size="small"
+                                variant="filled"
+                                className="select">
+                                <InputLabel
+                                    style={{ color: "rgba(255,255,255,.5)" }}
+                                    id="select-filled-label">
+                                    Agent
+                                </InputLabel>
+                                <Select
+                                    labelId="select-filled-label"
+                                    label="Agent"
+                                    value={player.agent}
+                                    onChange={selectAgentA(player.id)}>
+                                    {Object.keys(agents).map((a) => (
+                                        <MenuItem
+                                            dense
+                                            key={a}
+                                            value={a}
+                                            style={{
+                                                display: form.a
+                                                    .map((aa) => aa.agent)
+                                                    .includes(a)
+                                                    ? "none"
+                                                    : "",
+                                            }}>
+                                            {agents[a]}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </div>
+                    ))}
+                </div>
+                <div className="team b">
+                    <Typography variant="h6">
+                        {match_current.EntityParticipantB.Profile.Nickname}
+                    </Typography>
 
-                {form.b.map((player, i) => (
-                    <div key={player.id} className="player">
-                        <TextField
-                            className="player-name"
-                            variant="filled"
-                            size="small"
-                            label={
-                                <font
-                                    style={{
-                                        color: "rgba(255,255,255,0.5",
-                                    }}>{`player ${i + 1}`}</font>
-                            }
-                            onChange={changeBPlayerName(player.id)}
-                            value={player.name}
-                        />
-
-                        <FormControl
-                            size="small"
-                            variant="filled"
-                            className="select">
-                            <InputLabel
-                                style={{ color: "rgba(255,255,255,.5)" }}
-                                id="select-filled-label">
-                                Agent
-                            </InputLabel>
-                            <Select
-                                labelId="select-filled-label"
-                                label="Agent"
-                                value={player.agent}
-                                onChange={selectAgentB(player.id)}>
-                                {Object.keys(agents).map((a) => (
-                                    <MenuItem
-                                        dense
-                                        key={a}
-                                        value={a}
+                    {form.b.map((player, i) => (
+                        <div key={player.id} className="player">
+                            <TextField
+                                className="player-name"
+                                variant="filled"
+                                size="small"
+                                label={
+                                    <font
                                         style={{
-                                            display: form.b
-                                                .map((aa) => aa.agent)
-                                                .includes(a)
-                                                ? "none"
-                                                : "",
-                                        }}>
-                                        {agents[a]}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </div>
-                ))}
+                                            color: "rgba(255,255,255,0.5",
+                                        }}>{`player ${i + 1}`}</font>
+                                }
+                                onChange={changeBPlayerName(player.id)}
+                                value={player.name}
+                            />
+
+                            <FormControl
+                                size="small"
+                                variant="filled"
+                                className="select">
+                                <InputLabel
+                                    style={{ color: "rgba(255,255,255,.5)" }}
+                                    id="select-filled-label">
+                                    Agent
+                                </InputLabel>
+                                <Select
+                                    labelId="select-filled-label"
+                                    label="Agent"
+                                    value={player.agent}
+                                    onChange={selectAgentB(player.id)}>
+                                    {Object.keys(agents).map((a) => (
+                                        <MenuItem
+                                            dense
+                                            key={a}
+                                            value={a}
+                                            style={{
+                                                display: form.b
+                                                    .map((aa) => aa.agent)
+                                                    .includes(a)
+                                                    ? "none"
+                                                    : "",
+                                            }}>
+                                            {agents[a]}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <FormControlLabel
