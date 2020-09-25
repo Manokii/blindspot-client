@@ -27,6 +27,7 @@ import { withRouter } from "react-router-dom";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import MVP from "./ControlMVP";
 import Downstage from "./ControlDownstageMonitor";
+import Giveaways from "./ControlGiveaways";
 
 const us = makeStyles((theme) => ({
     root: {
@@ -124,6 +125,7 @@ const ControlPage = ({ history, location: { search } }) => {
             previousMatches: true,
             mvp: true,
             downstage: true,
+            giveaways: true,
             mogul: true,
         },
     } = useSelector((state) => state.ui);
@@ -162,6 +164,7 @@ const ControlPage = ({ history, location: { search } }) => {
                 previousMatches: true,
                 mvp: true,
                 downstage: true,
+                giveaways: true,
                 mogul: true,
             });
         } else {
@@ -176,6 +179,7 @@ const ControlPage = ({ history, location: { search } }) => {
                 previousMatches: false,
                 mvp: false,
                 downstage: false,
+                giveaways: false,
                 mogul: false,
             });
         }
@@ -258,6 +262,12 @@ const ControlPage = ({ history, location: { search } }) => {
                     <Downstage />
                 </Paper>
             )}
+            {/* 
+            {state.giveaways && (
+                <Paper elevation={5} className="section giveaways">
+                    <Giveaways />
+                </Paper>
+            )} */}
 
             {state.mogul && (
                 <Paper elevation={5} className="section">
