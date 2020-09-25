@@ -26,35 +26,49 @@ const q = makeStyles((theme) => ({
 
 const ControlMVP = () => {
     const c = q();
+    const live = useSelector((state) => state.live);
     const {
         mvp = {
-            name: "",
-            agent: "",
+            name: "Lamoku",
+            agent: "sage",
             team: "",
-            kills: 0,
-            assists: 0,
-            deaths: 0,
-            rating: 0,
+            kills: 999,
+            assists: 999,
+            deaths: 999,
+            rating: 999,
         },
-    } = useSelector((state) => state.live);
-    const [state, set] = useState(mvp);
+    } = live;
+    const [state, set] = useState({
+        name: "Lamoku",
+        agent: "sage",
+        team: "",
+        kills: 999,
+        assists: 999,
+        deaths: 999,
+        rating: 999,
+    });
     const ws = useContext(wsContext);
 
     useEffect(() => {
-        if (!mvp) return;
-        set(mvp);
-    }, [mvp]);
+        if (!live?.mvp) return;
+        if (live?.mvp === state) return;
+        set(live?.mvp);
+    }, [live]);
 
     const apply = () => {
         ws.set_live_settings({ mvp: state });
     };
 
     const setState = ({ target: { name, value, type } }) => {
+        console.log(value);
         set({
             ...state,
             [name]: type !== "number" ? value : value < 0 ? 0 : parseInt(value),
         });
-        console.log(state);
+    };
+
+    const selectAgent = ({ target: { value } }) => {
+        console.log(value);
     };
     return (
         <div className={c.root}>
@@ -102,7 +116,7 @@ const ControlMVP = () => {
                         variant="filled"
                         labelId="agent-select-label"
                         id="agent-select"
-                        value={mvp.agent}
+                        value={state.agent}
                         name="agent"
                         onChange={setState}>
                         <MenuItem value={"sage"}>Sage</MenuItem>
