@@ -17,6 +17,7 @@ import LiveIngamePlayers from "./components/Live/LiveIngamePlayers";
 import LiveSponsorSlot from "./components/Live/LiveSponsorSlot";
 import LivePreviousMatches from "./components/Live/LivePreviousMatches";
 import LiveMVP from "./components/Live/LiveMVP";
+import Downstage from "./components/Live/Downstage";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,6 +55,7 @@ const App = () => {
                     <Route path="/live/sponsors" exact component={LiveSponsorSlot} />
                     <Route path="/live/previousmatches" exact component={LivePreviousMatches} />
                     <Route path="/live/mvp" exact component={LiveMVP} />
+                    <Route path="/downstage" exact component={Downstage} />
                 </Switch>
             </Box>
         </div>
