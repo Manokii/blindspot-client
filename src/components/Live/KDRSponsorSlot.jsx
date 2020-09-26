@@ -29,13 +29,16 @@ const q = makeStyles((theme) => ({
         padding: "20px 30px",
         alignItems: "flex-start",
         "& .sponsor-slot": {
+            position: "relative",
             "& .headline": {
+                position: "relative",
                 backgroundSize: "100% 100%",
                 backgroundPositionX: "left",
                 backgroundRepeat: "no-repeat",
                 backgroundImage: `url(${tape})`,
                 padding: theme.spacing(2),
                 transform: "translateY(25px)",
+                zIndex: 10,
 
                 "& .headline-text": {
                     transform: "translateY(-4px)",
@@ -46,14 +49,30 @@ const q = makeStyles((theme) => ({
             "& .sponsors": {
                 width: 470,
                 height: 125,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${paper1})`,
                 padding: theme.spacing(2, 1),
                 display: "flex",
                 alignItems: "center",
+                position: "relative",
+                backgroundColor: "#141414",
+                zIndex: 1,
+                "& .texture": {
+                    position: "absolute",
+                    display: "block",
+                    height: 125,
+                    width: 470,
+                    top: 0,
+                    left: 0,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundImage: `url(${paper1})`,
+                    // backgroundColor: "red",
+                    mixBlendMode: "multiply",
+                    zIndex: 5,
+                },
                 "& .main": {
+                    position: "relative",
+                    zIndex: 2,
                     display: "flex",
                     flexDirection: "column",
                     position: "relative",
@@ -75,6 +94,8 @@ const q = makeStyles((theme) => ({
                 },
 
                 "& .border": {
+                    position: "relative",
+                    zIndex: 2,
                     height: "80%",
                     width: 3,
                     // marginTop: 12,
@@ -83,6 +104,8 @@ const q = makeStyles((theme) => ({
                 },
 
                 "& .secondary": {
+                    position: "relative",
+                    zIndex: 2,
                     height: "100%",
                     flex: 1,
                     backgroundSize: "100%",
@@ -134,6 +157,7 @@ const LiveSponsorSlot = () => {
                                 </div>
                                 <div className="border"></div>
                                 <div className="secondary"></div>
+                                <div className="texture"></div>
                             </div>
                         </div>
                     ))

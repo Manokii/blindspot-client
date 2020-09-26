@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles, TextField } from "@material-ui/core";
+import { makeStyles, Button, Typography, Paper } from "@material-ui/core";
 
 const q = makeStyles((theme) => ({
     root: {},
@@ -10,12 +10,21 @@ const ControlGiveaways = () => {
     const [state, set] = useState({
         giveaways: [
             {
-                prizes: [{ product: "", imgUrl: "", amount: 5 }],
+                prizes: [
+                    {
+                        product: "Default Product",
+                        imgUrl: "",
+                        amount: 5,
+                        winners: [],
+                    },
+                ],
                 date: Date.now(),
+                live: false,
             },
         ],
     });
-    return <div className={c.root}>test</div>;
+
+    return <div className={c.root}></div>;
 };
 
 export default ControlGiveaways;

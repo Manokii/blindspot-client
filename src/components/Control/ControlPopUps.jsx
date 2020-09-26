@@ -103,63 +103,6 @@ const ControlPopUps = () => {
         }));
     }, [match_current_player_agents]);
 
-    // ======================= POPUP TEXT ======================= //
-
-    const popup_text_head = ({ currentTarget: { value } }) => {
-        set((o) => ({ ...o, popup_text: { ...o.popup_text, head: value } }));
-    };
-
-    const popup_text_body = ({ currentTarget: { value } }) => {
-        set((o) => ({ ...o, popup_text: { ...o.popup_text, body: value } }));
-    };
-
-    const popup_text_live = (e) => {
-        set((state) => ({
-            ...state,
-            popup_text: { ...state.popup_text, live: !state.popup_text.live },
-        }));
-    };
-
-    // ======================= POPUP SPONSOR ======================= //
-
-    const popup_sponsor_live = (e) => {
-        set((state) => ({
-            ...state,
-            popup_sponsor: {
-                ...state.popup_sponsor,
-                live: !state.popup_sponsor.live,
-            },
-        }));
-    };
-
-    // ======================= COUNTDOWN ======================= //
-
-    const countdown_value = ({ currentTarget: { value } }) => {
-        set((o) => ({
-            ...o,
-            countdown: { ...o.countdown, secs: parseInt(value) },
-        }));
-    };
-
-    const countdown_live = (e) => {
-        set((state) => ({
-            ...state,
-            countdown: { ...state.countdown, live: !state.countdown.live },
-        }));
-    };
-
-    // ======================= Music ======================= //
-
-    const music_title = ({ currentTarget: { value } }) => {
-        set((o) => ({ ...o, music: { ...o.music, title: value } }));
-    };
-    const music_artist = ({ currentTarget: { value } }) => {
-        set((o) => ({ ...o, music: { ...o.music, artist: value } }));
-    };
-    const music_live = (e) => {
-        set((o) => ({ ...o, music: { ...o.music, live: !o.music.live } }));
-    };
-
     // ======================= Music ======================= //
     const player_agents_live = (e) => {
         set((o) => ({
@@ -171,10 +114,28 @@ const ControlPopUps = () => {
         }));
     };
 
-    const apply = () => {
-        ws.set_live_settings(form);
+    const setLive = (key) => () => {
+        set((o) => ({ ...o, [key]: { ...o[key], live: !o[key].live } }));
     };
 
+    const apply = () => {
+        Object.keys(form).forEach((key) => {
+            if (form[key] === live[key]) return;
+            ws.set_live_settings({ [key]: form[key] });
+        });
+        // ws.set_live_settings(form);
+    };
+
+    const setState = (key) => ({ currentTarget: { value, name, type } }) => {
+        set((o) => ({
+            ...o,
+            [key]: {
+                ...o[key],
+                [name]:
+                    type !== "number" ? value : value < 0 ? 0 : parseInt(value),
+            },
+        }));
+    };
     // ===================== JSX ========================= //
     return (
         <div className={c.root}>
@@ -189,8 +150,9 @@ const ControlPopUps = () => {
                     }
                     variant="filled"
                     size="small"
+                    name="head"
                     value={form.popup_text.head}
-                    onChange={popup_text_head}
+                    onChange={setState("popup_text")}
                 />
 
                 <TextField
@@ -205,14 +167,15 @@ const ControlPopUps = () => {
                     multiline
                     rows={3}
                     rowsMax={10}
+                    name="body"
                     value={form.popup_text.body}
-                    onChange={popup_text_body}
+                    onChange={setState("popup_text")}
                 />
 
                 <Button
                     variant="contained"
                     color={form.popup_text.live ? "secondary" : "default"}
-                    onClick={popup_text_live}>
+                    onClick={setLive("popup_text")}>
                     {form.popup_text.live ? "Hide" : "Go Live"}
                 </Button>
             </Paper>
@@ -222,8 +185,9 @@ const ControlPopUps = () => {
                 <TextField
                     variant="filled"
                     value={form.countdown.secs}
-                    onChange={countdown_value}
+                    onChange={setState("countdown")}
                     type="number"
+                    name="secs"
                     label={
                         <font style={{ color: "rgba(255,255,255,.5)" }}>
                             Timer
@@ -232,7 +196,7 @@ const ControlPopUps = () => {
                 <Button
                     variant="contained"
                     color={form.countdown.live ? "secondary" : "default"}
-                    onClick={countdown_live}>
+                    onClick={setLive("countdown")}>
                     {form.countdown.live ? "Hide" : "Go Live"}
                 </Button>
             </Paper>
@@ -242,7 +206,8 @@ const ControlPopUps = () => {
                 <TextField
                     variant="filled"
                     value={form.music.title}
-                    onChange={music_title}
+                    onChange={setState("music")}
+                    name="title"
                     label={
                         <font style={{ color: "rgba(255,255,255,.5)" }}>
                             Title
@@ -251,7 +216,8 @@ const ControlPopUps = () => {
                 <TextField
                     variant="filled"
                     value={form.music.artist}
-                    onChange={music_artist}
+                    onChange={setState("music")}
+                    name="artist"
                     label={
                         <font style={{ color: "rgba(255,255,255,.5)" }}>
                             Artist
@@ -260,7 +226,7 @@ const ControlPopUps = () => {
                 <Button
                     variant="contained"
                     color={form.music.live ? "secondary" : "default"}
-                    onClick={music_live}>
+                    onClick={setLive("music")}>
                     {form.music.live ? "Hide" : "Go Live"}
                 </Button>
             </Paper>
@@ -271,7 +237,7 @@ const ControlPopUps = () => {
                 <Button
                     variant="contained"
                     color={form.popup_sponsor.live ? "secondary" : "default"}
-                    onClick={popup_sponsor_live}>
+                    onClick={setLive("popup_sponsor")}>
                     {form.popup_sponsor.live ? "Hide" : "Go Live"}
                 </Button>
             </Paper>
@@ -287,7 +253,7 @@ const ControlPopUps = () => {
                     }
                     onClick={player_agents_live}>
                     {form.match_current_player_agents.showIngame
-                        ? "Hide"
+                        ? "Now Livew"
                         : "Go Live"}
                 </Button>
             </Paper>

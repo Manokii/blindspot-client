@@ -8,10 +8,13 @@ import {
     ListItemIcon,
     ListItemText,
 } from "@material-ui/core";
-import ControlCameraIcon from "@material-ui/icons/ControlCamera";
+// import ControlCameraIcon from "@material-ui/icons/ControlCamera";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import VideocamIcon from "@material-ui/icons/Videocam";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import RedeemIcon from "@material-ui/icons/Redeem";
+
 import Mogul from "./Mogul";
 import qs from "qs";
 
@@ -35,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
 
 const links = [
     { title: "Tournament", path: "/tournament", icon: <AccountTreeIcon /> },
-    { title: "Control", path: "/control", icon: <ControlCameraIcon /> },
-    { title: "Settings", path: "/settings", icon: <SettingsIcon /> },
+    { title: "Control", path: "/control", icon: <DashboardIcon /> },
+    { title: "Giveaways", path: "/giveaways", icon: <RedeemIcon /> },
     { title: "Live", path: "/live", icon: <VideocamIcon /> },
 ];
 

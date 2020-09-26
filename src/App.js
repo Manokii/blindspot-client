@@ -5,19 +5,20 @@ import { makeStyles, Box } from "@material-ui/core";
 import SideNav from "./components/Navigation";
 import TournamentPage from "./components/TournamentPage";
 import ControlPage from "./components/Control/ControlPage";
-import Live from "./components/Live/LivePage";
-import LiveInfoBox from "./components/Live/LiveInfoBox";
-import LiveMatchWidgets from "./components/Live/LiveMatchWidgets";
-import LiveIngame from "./components/Live/LiveIngame";
-import LiveMatchUp from "./components/Live/LiveMatchUp";
-import LiveVeto from "./components/Live/LiveVeto";
-import LiveLowerThirds from "./components/Live/LiveLowerThirds";
-import LiveScore from "./components/Live/LiveScore";
-import LiveIngamePlayers from "./components/Live/LiveIngamePlayers";
-import LiveSponsorSlot from "./components/Live/LiveSponsorSlot";
-import LivePreviousMatches from "./components/Live/LivePreviousMatches";
-import LiveMVP from "./components/Live/LiveMVP";
+import Live from "./components/Live/KDRPage";
+import LiveInfoBox from "./components/Live/KDRInfoBox";
+import LiveMatchWidgets from "./components/Live/KDRMatchWidgets";
+import LiveIngame from "./components/Live/KDRIngame";
+import LiveMatchUp from "./components/Live/KDRMatchUp";
+import LiveVeto from "./components/Live/KDRVeto";
+import LiveLowerThirds from "./components/Live/KDRLowerThirds";
+import LiveScore from "./components/Live/KDRScore";
+import LiveIngamePlayers from "./components/Live/KDRIngamePlayers";
+import LiveSponsorSlot from "./components/Live/KDRSponsorSlot";
+import LivePreviousMatches from "./components/Live/KDRPreviousMatches";
+import LiveMVP from "./components/Live/KDRMVP";
 import Downstage from "./components/Live/Downstage";
+import GiveawayPage from "./components/GiveawayPage";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,6 +57,7 @@ const App = () => {
                     <Route path="/live/previousmatches" exact component={LivePreviousMatches} />
                     <Route path="/live/mvp" exact component={LiveMVP} />
                     <Route path="/downstage" exact component={Downstage} />
+                    <Route path="/giveaways" exact component={GiveawayPage} />
                 </Switch>
             </Box>
         </div>

@@ -262,12 +262,12 @@ const ControlPage = ({ history, location: { search } }) => {
                     <Downstage />
                 </Paper>
             )}
-            {/* 
+
             {state.giveaways && (
                 <Paper elevation={5} className="section giveaways">
                     <Giveaways />
                 </Paper>
-            )} */}
+            )}
 
             {state.mogul && (
                 <Paper elevation={5} className="section">

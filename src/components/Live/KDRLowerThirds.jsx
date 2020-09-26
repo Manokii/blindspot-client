@@ -8,7 +8,7 @@ import globe from "../../assets/globe.png";
 import { Transition } from "react-spring/renderprops";
 import paper from "../../assets/paper1.jpg";
 import note from "../../assets/note.webp";
-import LiveVeto from "./LiveVeto";
+import LiveVeto from "./KDRVeto";
 
 const q = makeStyles((theme) => ({
     root: {
