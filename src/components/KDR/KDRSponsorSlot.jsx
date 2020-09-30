@@ -3,10 +3,20 @@ import { makeStyles, Typography } from "@material-ui/core";
 // import paper from "../../assets/paper1.jpg";
 import paper1 from "../../assets/paper_texture2.jpg";
 import tape from "../../assets/tape2.png";
-import globe from "../../assets/globe.png";
+import globeLogo from "../../assets/globe.png";
+import sponsorsLockUp from "../../assets/KDR-Sponsor-Lock-up.png";
 import legion_intel from "../../assets/legion.png";
 import { useSelector } from "react-redux";
 import { Transition } from "react-spring/renderprops";
+import { AdbRounded } from "@material-ui/icons";
+
+// import globe from "../../assets/globe.png";
+// import legion from "../../assets/globe.png";
+// import music from "../../assets/globe.png";
+import globe from "../../assets/globe-ad-small.jpg";
+import legion from "../../assets/legion-ad-small.png";
+import xsplit from "../../assets/xsplit-ad-small.png";
+// import music from "../../assets/legion-ad-small.png";
 
 // const gitRandomBackground = () => {
 //     const rand = Math.floor(Math.random() * (5 - 1) + 1);
@@ -18,6 +28,8 @@ import { Transition } from "react-spring/renderprops";
 //         return "";
 //     }
 // };
+
+//
 
 const q = makeStyles((theme) => ({
     root: {
@@ -54,6 +66,11 @@ const q = makeStyles((theme) => ({
                 alignItems: "center",
                 position: "relative",
                 backgroundColor: "#141414",
+
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundImage: `url(${sponsorsLockUp})`,
                 zIndex: 1,
                 "& .texture": {
                     position: "absolute",
@@ -88,7 +105,7 @@ const q = makeStyles((theme) => ({
                         backgroundSize: "80%",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
-                        backgroundImage: `url(${globe})`,
+                        backgroundImage: `url(${globeLogo})`,
                         // borderRight: "3px solid #1d439c",
                     },
                 },
@@ -116,51 +133,83 @@ const q = makeStyles((theme) => ({
             },
         },
     },
+
+    ad: {
+        width: 470,
+        height: 271,
+        // border: "1px solid blue",
+        display: "flex",
+        flexDirection: "column-reverse",
+
+        "& .img": {
+            width: "100%",
+            height: "auto",
+            transition: "all 1s ease-in-out",
+            // backgroundPosition: "bottom",/
+        },
+    },
 }));
 
 const LiveSponsorSlot = () => {
     const c = q();
     const {
         popup_sponsor = { live: false },
-        current_match_state = "",
+        current_match_state = "KDR Series",
         maps = { bestOf: "bo3" },
     } = useSelector((state) => state.live);
+
+    const getSrc = (ad) => {
+        switch (ad) {
+            case "globe":
+                return globe;
+            case "legion":
+                return legion;
+            case "xsplit":
+                return xsplit;
+
+            default:
+                break;
+        }
+    };
 
     return (
         <div className={c.root}>
             <Transition
-                items={popup_sponsor.live}
-                from={{ opacity: 0, transform: "scale(0.8)", height: 0 }}
+                items={popup_sponsor.live && !popup_sponsor.showAd}
+                from={{ opacity: 0, transform: "translateX(-120%)", height: 0 }}
                 enter={[
-                    { height: "auto" },
-                    { opacity: 1, transform: "scale(1)" },
+                    { height: "" },
+                    { opacity: 1, transform: "translateX(0px)" },
                 ]}
                 leave={[
-                    { opacity: 0, transform: "scale(0.8)" },
+                    { opacity: 0, transform: "translateX(-120%)" },
                     { height: 0 },
                 ]}>
                 {(show) =>
-                    show &&
-                    ((props) => (
-                        <div style={props} className="sponsor-slot">
-                            <div className="headline">
-                                <Typography
-                                    className="headline-text"
-                                    variant="h4">
-                                    {current_match_state} -{" "}
-                                    {maps.bestOf.toUpperCase()}
-                                </Typography>
-                            </div>
-                            <div className="sponsors">
-                                <div className="main">
-                                    <div className="globe"></div>
-                                </div>
-                                <div className="border"></div>
-                                <div className="secondary"></div>
-                                <div className="texture"></div>
-                            </div>
-                        </div>
-                    ))
+                    show
+                        ? (props) => (
+                              <div style={props} className="sponsor-slot">
+                                  <div className="headline">
+                                      <Typography
+                                          className="headline-text"
+                                          variant="h4">
+                                          {current_match_state} -{" "}
+                                          {maps.bestOf.toUpperCase()}
+                                      </Typography>
+                                  </div>
+                                  <div className="sponsors">
+                                      <div className="texture"></div>
+                                  </div>
+                              </div>
+                          )
+                        : (props) => (
+                              <div className={c.ad} style={props}>
+                                  <img
+                                      src={getSrc(popup_sponsor.ad)}
+                                      className="img"
+                                  />
+                              </div>
+                          )
                 }
             </Transition>
             {/* test */}

@@ -9,6 +9,7 @@ import tapeA2 from "../../assets/TapeA2.png";
 import tapeB1 from "../../assets/TapeB1.png";
 import tapeB2 from "../../assets/TapeB2.png";
 import agents from "../../assets/agents.json";
+import defaultAgent from "../../assets/default-agent-light.png";
 
 const us = makeStyles((theme) => ({
     matchup: {
@@ -173,10 +174,15 @@ const us = makeStyles((theme) => ({
                     width: 158,
                     backgroundColor: "#101a23",
                     // backgroundColor: theme.palette.secondary.main,
-                    backgroundSize: "350%",
+                    // backgroundSize: "350%",
+                    // backgroundPosition: "center top",
+                    backgroundPosition: "47% -5%",
+                    backgroundSize: "375%",
                     backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center top",
                     overflow: "hidden",
+                    transitionProperty: "background-image",
+                    transition: "0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+                    // backgroundImage: `url(${defaultAgent})`,
 
                     "& .webm": {
                         height: "275%",
@@ -345,7 +351,9 @@ const LiveMatchUp = ({ history }) => {
                                             ? `url(${getAgentImage(player.agent)})`
                                             : imgOnly && player.agent
                                             ? `url(${getAgentImage(player.agent)})`
-                                            : "",
+                                            : !player.agent 
+                                            ? `url(${defaultAgent})`
+                                            : "none",
                                     backgroundColor: inverse ? '#101a23' :  '#ff4656',
                                     ...gitImageStyleBitchiz[agents[player.agent]] || ''
                                 }}>
@@ -420,7 +428,9 @@ const LiveMatchUp = ({ history }) => {
                                             ? `url(${getAgentImage(player.agent)})`
                                             : imgOnly && player.agent
                                             ? `url(${getAgentImage(player.agent)})`
-                                            : "",
+                                            : !player.agent 
+                                            ? `url(${defaultAgent})`
+                                            : "none",
                                     backgroundColor: inverse ? '#ff4656' : '#101a23',
                                     ...gitImageStyleBitchiz[agents[player.agent]] || ''
                                 }}>

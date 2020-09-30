@@ -9,13 +9,14 @@ import {
     FormGroup,
     FormControlLabel,
     Checkbox,
+    MenuItem,
 } from "@material-ui/core";
 import MatchesWidget from "../MatchesWidget";
 import { useDispatch, useSelector } from "react-redux";
 import { setUISettings } from "../../redux/Actions";
 import qs from "qs";
 
-import InfoBox from "./ControlMatchUp";
+import MatchUp from "./ControlMatchUp";
 import Veto from "./ControlVeto";
 import PlayerAgents from "./ControlPlayerAgents";
 import Mogul from "../Mogul";
@@ -81,7 +82,7 @@ const us = makeStyles((theme) => ({
         "& .popups": { backgroundColor: "#1e96fc" },
         "& .veto": { backgroundColor: "#6987C9" },
         "& .matchup": { backgroundColor: "#DD6031" },
-        "& .lowerthirds": { backgroundColor: "#ff4242" },
+        "& .lowerthirds": { backgroundColor: "#922d50" },
         "& .matchlist": { backgroundColor: "#14cc60" },
         "& .series": { backgroundColor: "#2f3e46" },
         "& .talents": { backgroundColor: "#4C3A3D" },
@@ -205,7 +206,7 @@ const ControlPage = ({ history, location: { search } }) => {
             {state.match && (
                 <Paper elevation={5} className="section matchup">
                     <Typography variant="button">Match Up</Typography>
-                    <InfoBox />
+                    <MatchUp />
                 </Paper>
             )}
 
@@ -216,19 +217,19 @@ const ControlPage = ({ history, location: { search } }) => {
                 </Paper>
             )}
 
-            {state.talents && (
-                <Paper elevation={5} className="section talents">
-                    <Typography variant="button">Talents</Typography>
-                    <Talents />
-                </Paper>
-            )}
-
             {state.veto && Object.keys(match_current).length ? (
                 <Paper elevation={5} className="section veto">
                     <Typography variant="button">Veto</Typography>
                     <Veto />
                 </Paper>
             ) : null}
+
+            {state.talents && (
+                <Paper elevation={5} className="section talents">
+                    <Typography variant="button">Talents</Typography>
+                    <Talents />
+                </Paper>
+            )}
 
             {state.playerAgents && Object.keys(match_current).length ? (
                 <Paper elevation={5} className="section players">
@@ -239,7 +240,7 @@ const ControlPage = ({ history, location: { search } }) => {
 
             {state.popups && (
                 <Paper elevation={5} className="section popups">
-                    <Typography variant="button">Popups</Typography>
+                    <Typography variant="button">In-Game Popups</Typography>
                     <Popups />
                 </Paper>
             )}
@@ -337,6 +338,13 @@ const ControlPage = ({ history, location: { search } }) => {
                         />
                     </FormGroup>
                 </div>
+                <MenuItem
+                    button
+                    onClick={() =>
+                        history.push("/tournament?noSidebar=1&simple=1")
+                    }>
+                    Go to Match list
+                </MenuItem>
             </Menu>
         </div>
     );

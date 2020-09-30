@@ -59,8 +59,8 @@ const ControlPlayerAgents = () => {
     const [form, set] = useState({
         a: [],
         b: [],
-        imgOnly: false,
-        showLogoAsBG: false,
+        imgOnly: true,
+        showLogoAsBG: true,
         showIngame: false,
     });
 
@@ -145,6 +145,8 @@ const ControlPlayerAgents = () => {
                             agent: "",
                         })),
                     ],
+                    imgOnly: true,
+                    showLogoAsBG: true,
                 });
             });
     };
@@ -153,8 +155,8 @@ const ControlPlayerAgents = () => {
         ws.set_live_settings({ match_current_player_agents: form });
     };
 
-    const toggleImgOnly = (e) => {
-        set((v) => ({ ...v, imgOnly: !v.imgOnly }));
+    const toggleImgOnly = ({ target: { checked, name } }) => {
+        set((v) => ({ ...v, [name]: checked }));
     };
     const toggleLogoAsBG = (e) => {
         set((v) => ({ ...v, showLogoAsBG: !v.showLogoAsBG }));
@@ -282,9 +284,10 @@ const ControlPlayerAgents = () => {
             <FormControlLabel
                 control={
                     <Switch
-                        value={form.imgOnly}
+                        checked={form.imgOnly}
                         onChange={toggleImgOnly}
                         color="secondary"
+                        name="imgOnly"
                     />
                 }
                 label="Use Image Only?"
@@ -292,7 +295,7 @@ const ControlPlayerAgents = () => {
             <FormControlLabel
                 control={
                     <Switch
-                        value={form.showLogoAsBG}
+                        checked={form.showLogoAsBG}
                         onChange={toggleLogoAsBG}
                         color="secondary"
                     />

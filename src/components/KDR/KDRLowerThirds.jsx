@@ -7,8 +7,12 @@ import subbar from "../../assets/lt_bar_sub.png";
 import globe from "../../assets/globe.png";
 import { Transition } from "react-spring/renderprops";
 import paper from "../../assets/paper1.jpg";
-import note from "../../assets/note.webp";
+import albumCover from "../../assets/kdr-album-cover.jpg";
 import LiveVeto from "./KDRVeto";
+import logoLockup from "../../assets/logos.png";
+import KDRtalents from "./KDRTalents";
+
+import Ticker from "react-ticker";
 
 const q = makeStyles((theme) => ({
     root: {
@@ -27,8 +31,10 @@ const q = makeStyles((theme) => ({
             // border: "1px solid black",
 
             "& .matchup": {
+                flexShrink: 0,
                 position: "relative",
                 height: "100%",
+                minWidth: 358,
                 width: 358,
                 borderBottom: "4px solid #ff4656",
                 display: "flex",
@@ -75,6 +81,7 @@ const q = makeStyles((theme) => ({
                 flex: 1,
                 display: "flex",
                 flexDirection: "column",
+                width: 986,
 
                 "& .main": {
                     height: 76,
@@ -93,6 +100,7 @@ const q = makeStyles((theme) => ({
                 },
                 "& .sub": {
                     height: 54,
+                    overflowY: "hidden",
                     backgroundSize: "cover",
                     backgroundImage: `url(${subbar})`,
                     display: "flex",
@@ -102,20 +110,29 @@ const q = makeStyles((theme) => ({
                     fontWeight: "lighter",
 
                     "& .content": {
-                        fontSize: "1.4rem",
+                        fontSize: "1.7rem",
                         width: "100%",
+                        fontWeight: "normal",
+                        fontFamily: "monospace",
+                        whiteSpace: "nowrap",
                     },
                 },
             },
 
             "& .sponsors": {
+                flexShrink: 0,
                 position: "relative",
+                minWidth: 411,
                 width: 411,
                 height: "100%",
                 backgroundColor: "white",
                 display: "flex",
                 padding: theme.spacing(2),
 
+                backgroundSize: "90%",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundImage: `url(${logoLockup})`,
                 "& .main": {
                     width: "55%",
                     display: "flex",
@@ -145,7 +162,7 @@ const q = makeStyles((theme) => ({
                     width: "100%",
                     backgroundColor: "white",
                     backgroundSize: "cover",
-                    // backgroundImage: `url(${paper})`,
+                    backgroundImage: `url(${paper})`,
                     mixBlendMode: "multiply",
                     transform: "scaleY(-1)",
                 },
@@ -154,6 +171,7 @@ const q = makeStyles((theme) => ({
     },
 
     music: {
+        marginTop: theme.spacing(2),
         display: "flex",
         "& .icon": {
             height: 100,
@@ -162,19 +180,11 @@ const q = makeStyles((theme) => ({
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "left center",
-            backgroundImage: `url(${paper})`,
-            "& .note": {
-                height: "100%",
-                width: "100%",
-                backgroundSize: "50%",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "40% center",
-                backgroundImage: `url(${note})`,
-            },
+            backgroundImage: `url(${albumCover})`,
         },
 
         "& .bar": {
-            width: 500,
+            // width: 500,
             display: "flex",
             flexDirection: "column",
             color: "#fff",
@@ -182,12 +192,28 @@ const q = makeStyles((theme) => ({
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "left center",
-            backgroundImage: `url(${subbar})`,
+            // backgroundImage: `url(${subbar})`,
             padding: theme.spacing(0, 4),
+            position: "relative",
+            zIndex: 1,
+            backgroundColor: "#141414",
+
+            "&::after": {
+                content: '""',
+                position: "absolute",
+                height: "100%",
+                width: "100%",
+                top: 0,
+                left: 0,
+                backgroundSize: "cover",
+                backgroundImage: `url(${paper})`,
+                mixBlendMode: "multiply",
+            },
             "& .main": {
                 // display: "flex",
                 // alignItems: "center",
                 // flexBasis: "60%",
+                // color: theme.palette.primary.main,
             },
 
             "& .sub": {
@@ -198,6 +224,8 @@ const q = makeStyles((theme) => ({
             },
         },
     },
+
+    talents: { marginTop: theme.spacing(1.5) },
 }));
 
 const LiveLowerThirds = () => {
@@ -211,6 +239,7 @@ const LiveLowerThirds = () => {
             liveOnLowerThirds: false,
             veto: [],
         },
+        talents = { casters: [], observers: [] },
     } = useSelector((state) => state.live);
     const {
         EntityParticipantA: a = {},
@@ -311,23 +340,26 @@ const LiveLowerThirds = () => {
                                     </Typography>
                                 </div>
                                 <div className="sub">
-                                    <Typography
-                                        variant="subtitle1"
-                                        className="content">
-                                        {lower_thirds.subtext}
-                                    </Typography>
+                                    <div className="content">
+                                        <Ticker>
+                                            {() => (
+                                                <>
+                                                    <span
+                                                        style={{
+                                                            marginRight: 16,
+                                                        }}>
+                                                        {lower_thirds.subtext.replace(
+                                                            /\n/gi,
+                                                            " | "
+                                                        )}
+                                                    </span>
+                                                </>
+                                            )}
+                                        </Ticker>
+                                    </div>
                                 </div>
                             </div>
                             <div className="sponsors">
-                                <div className="main">
-                                    {/* <Typography
-                                        variant="caption"
-                                        className="caption">
-                                        Presented by:
-                                    </Typography> */}
-                                    <div className="globe"></div>
-                                </div>
-
                                 <div className="texture"></div>
                             </div>
                         </div>
@@ -362,6 +394,7 @@ const LiveLowerThirds = () => {
                         transform: "translatY(20px)",
                     },
                     {
+                        marginTop: 0,
                         height: 0,
                     },
                 ]}>
@@ -369,17 +402,51 @@ const LiveLowerThirds = () => {
                     show &&
                     ((props) => (
                         <div style={props} className={c.music}>
-                            <div className="icon">
-                                <div className="note"></div>
-                            </div>
+                            <div className="icon"></div>
                             <div className="bar">
                                 <Typography variant="h4" className="main">
-                                    {music.title}
+                                    Now Playing: {music.title}
                                 </Typography>
                                 <Typography variant="subtitle1" className="sub">
-                                    {music.artist}
+                                    Artist: {music.artist}
                                 </Typography>
                             </div>
+                        </div>
+                    ))
+                }
+            </Transition>
+
+            <Transition
+                items={talents.liveOnLowerThirds && !maps.liveOnLowerThirds}
+                // keys
+                from={{
+                    height: 0,
+                    opacity: 0,
+                    clipPath: "polygon(-100% 0%, 0% 0%, 0% 100% , -100% 100%)",
+                    transform: "translateY(20px)",
+                }}
+                enter={{
+                    height: 150,
+                    opacity: 1,
+                    clipPath:
+                        "polygon(-100% 0%, 100% 0%, 100% 100% , -100% 100%)",
+                    transform: "translateY(0px)",
+                }}
+                leave={[
+                    {
+                        opacity: 0,
+                        clipPath:
+                            "polygon(-100% 0%, 0% 0%, 0% 100% , -100% 100%)",
+                        transform: "translateY(0px)",
+                    },
+                    { height: 0 },
+                ]}
+                delay={1000}>
+                {(show) =>
+                    show &&
+                    ((props) => (
+                        <div style={props} className={c.talents}>
+                            <KDRtalents onLowerThirds={true} />
                         </div>
                     ))
                 }

@@ -19,31 +19,32 @@ const q = makeStyles((theme) => ({
     root: {
         display: "flex",
         flexDirection: "column",
-        maxHeight: 490,
-        overflowY: "auto",
 
-        "&:hover": {
-            "&::-webkit-scrollbar": {
-                "&-thumb": {
-                    backgroundColor: "rgba(255,255,255,.5)",
-                },
-            },
-        },
-        "&::-webkit-scrollbar": {
-            width: 10,
-
-            "&-thumb": {
-                borderRadius: 5,
-                backgroundColor: "rgba(255,255,255,.1)",
-                border: "2px solid #2f3e46",
-                transition: "all 300ms ease-in-out",
-            },
-        },
         "& .section": {
+            overflowY: "auto",
+            maxHeight: 400,
             backgroundColor: "transparent",
             margin: theme.spacing(2, 0),
             display: "flex",
             flexDirection: "column",
+
+            "&:hover": {
+                "&::-webkit-scrollbar": {
+                    "&-thumb": {
+                        backgroundColor: "rgba(255,255,255,.5)",
+                    },
+                },
+            },
+            "&::-webkit-scrollbar": {
+                width: 10,
+
+                "&-thumb": {
+                    borderRadius: 5,
+                    backgroundColor: "rgba(255,255,255,.1)",
+                    border: "2px solid #2f3e46",
+                    transition: "all 300ms ease-in-out",
+                },
+            },
 
             "& .caster": {
                 display: "flex",
@@ -65,6 +66,8 @@ const ControlTalents = () => {
     const [state, set] = useState({
         casters: [],
         observers: [],
+        liveOnLowerThirds: false,
+        live: false,
     });
 
     useEffect(() => {
@@ -173,6 +176,9 @@ const ControlTalents = () => {
         ws.set_live_settings({ talents: state });
     };
 
+    const toggle = ({ currentTarget: { name } }) => {
+        set((o) => ({ ...o, [name]: !o[name] }));
+    };
     const c = q();
     return (
         <div className={c.root}>
@@ -269,16 +275,23 @@ const ControlTalents = () => {
                 ))}
             </div>
             <div className="add">
-                <Button className="btn" variant="contained" onClick={addCaster}>
+                <Button className="btn" variant="text" onClick={addCaster}>
                     Add Caster
                 </Button>
-                <Button
-                    className="btn"
-                    variant="contained"
-                    onClick={addObserver}>
+                <Button className="btn" variant="text" onClick={addObserver}>
                     Add Observer
                 </Button>
             </div>
+
+            <Button
+                variant="outlined"
+                onClick={apply}
+                color={state.live ? "secondary" : "default"}
+                onClick={toggle}
+                style={{ margin: "16px 0px" }}
+                name="live">
+                {state.live ? "Live" : "Offline"}
+            </Button>
             <Button variant="contained" onClick={apply} color="primary">
                 Apply
             </Button>

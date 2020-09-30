@@ -5,6 +5,12 @@ import {
     TextField,
     Button,
     Paper,
+    FormControlLabel,
+    Switch,
+    Select,
+    FormControl,
+    InputLabel,
+    MenuItem,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { wsContext } from "../WebsocketProvider";
@@ -41,7 +47,6 @@ const ControlPopUps = () => {
         popup_text,
         popup_sponsor,
         countdown,
-        music,
         match_current_player_agents,
     } = live;
     const [form, set] = useState({
@@ -52,15 +57,11 @@ const ControlPopUps = () => {
         },
         popup_sponsor: {
             live: false,
+            showAd: false,
+            ad: "globe",
         },
         countdown: {
             secs: 600,
-            live: false,
-        },
-
-        music: {
-            title: "",
-            artist: "",
             live: false,
         },
 
@@ -91,11 +92,6 @@ const ControlPopUps = () => {
     }, [countdown]);
 
     useEffect(() => {
-        if (!music) return;
-        set((f) => ({ ...f, music: music }));
-    }, [music]);
-
-    useEffect(() => {
         if (!match_current_player_agents) return;
         set((f) => ({
             ...f,
@@ -103,7 +99,6 @@ const ControlPopUps = () => {
         }));
     }, [match_current_player_agents]);
 
-    // ======================= Music ======================= //
     const player_agents_live = (e) => {
         set((o) => ({
             ...o,
@@ -126,7 +121,7 @@ const ControlPopUps = () => {
         // ws.set_live_settings(form);
     };
 
-    const setState = (key) => ({ currentTarget: { value, name, type } }) => {
+    const setState = (key) => ({ target: { value, name, type } }) => {
         set((o) => ({
             ...o,
             [key]: {
@@ -136,6 +131,19 @@ const ControlPopUps = () => {
             },
         }));
     };
+
+    const setChecked = (key) => ({
+        currentTarget: { checked, name, type },
+    }) => {
+        set((o) => ({
+            ...o,
+            [key]: {
+                ...o[key],
+                [name]: checked,
+            },
+        }));
+    };
+
     // ===================== JSX ========================= //
     return (
         <div className={c.root}>
@@ -201,38 +209,38 @@ const ControlPopUps = () => {
                 </Button>
             </Paper>
 
-            <Paper elevation={2} className="section timer">
-                <Typography variant="h6">Music</Typography>
-                <TextField
-                    variant="filled"
-                    value={form.music.title}
-                    onChange={setState("music")}
-                    name="title"
-                    label={
-                        <font style={{ color: "rgba(255,255,255,.5)" }}>
-                            Title
-                        </font>
-                    }></TextField>
-                <TextField
-                    variant="filled"
-                    value={form.music.artist}
-                    onChange={setState("music")}
-                    name="artist"
-                    label={
-                        <font style={{ color: "rgba(255,255,255,.5)" }}>
-                            Artist
-                        </font>
-                    }></TextField>
-                <Button
-                    variant="contained"
-                    color={form.music.live ? "secondary" : "default"}
-                    onClick={setLive("music")}>
-                    {form.music.live ? "Hide" : "Go Live"}
-                </Button>
-            </Paper>
+            {/* =============================== SPONSORS =============================== */}
 
             <Paper elevation={2} className="section sponsors">
                 <Typography variant="h6">Sponsors</Typography>
+
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={form.popup_sponsor.showAd}
+                            onChange={setChecked("popup_sponsor")}
+                            name="showAd"
+                        />
+                    }
+                    label="Show Ad"
+                />
+
+                {form.popup_sponsor.showAd && (
+                    <FormControl variant="filled">
+                        <InputLabel id="select-label">Select Ad</InputLabel>
+                        <Select
+                            labelId="select-label"
+                            id="ad"
+                            value={form.popup_sponsor.ad}
+                            onChange={setState("popup_sponsor")}
+                            name="ad">
+                            <MenuItem value={"globe"}>Globe</MenuItem>
+                            <MenuItem value={"legion"}>Legion | Intel</MenuItem>
+                            <MenuItem value={"xsplit"}>XSplit</MenuItem>
+                            <MenuItem value={"music"}>$auceboss</MenuItem>
+                        </Select>
+                    </FormControl>
+                )}
 
                 <Button
                     variant="contained"

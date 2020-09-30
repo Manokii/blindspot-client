@@ -79,6 +79,7 @@ const q = makeStyles((theme) => ({
             width: 1920,
             backgroundRepeat: "no-repeat",
             backgroundSize: "auto 150%",
+            transition: "all .6s ease-in-out",
         },
     },
 }));
