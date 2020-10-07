@@ -205,6 +205,7 @@ const LiveSponsorSlot = () => {
                                   <img
                                       src={getSrc(popup_sponsor.ad)}
                                       className="img"
+                                      alt="ad"
                                   />
                               </div>
                           )

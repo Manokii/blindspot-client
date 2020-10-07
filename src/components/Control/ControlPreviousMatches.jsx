@@ -82,14 +82,7 @@ const ControlPreviousMatches = () => {
     const c = q();
     const ws = useContext(wsContext);
     const live = useSelector((state) => state.live);
-    const {
-        previous_matches = [],
-        match_current: {
-            EntityParticipantA: a = {},
-            EntityParticipantB: b = {},
-        },
-        match_widgets: matches = [],
-    } = live;
+    const { previous_matches = [], match_widgets: matches = [] } = live;
     const [series, set] = useState([]);
 
     useEffect(() => {

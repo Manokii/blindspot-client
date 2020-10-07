@@ -8,8 +8,6 @@ import {
     ListItemIcon,
     ListItemText,
 } from "@material-ui/core";
-// import ControlCameraIcon from "@material-ui/icons/ControlCamera";
-import SettingsIcon from "@material-ui/icons/Settings";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import DashboardIcon from "@material-ui/icons/Dashboard";

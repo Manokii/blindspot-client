@@ -137,7 +137,7 @@ const GiveawayPage = () => {
                 winners: []
               },
               {
-                product: 'Legion H300 Gaming Headset',
+                product: 'Legion H300 Gaming Headset Gaming Headset',
                 imgUrl: 'https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png',
                 amount: 1,
                 winners: []
@@ -161,7 +161,7 @@ const GiveawayPage = () => {
                 winners: []
               },
               {
-                product: 'Legion H300 Gaming Headset',
+                product: 'Legion H300 Gaming Headset Gaming Headset',
                 imgUrl: 'https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png',
                 amount: 1,
                 winners: []
@@ -233,7 +233,7 @@ const GiveawayPage = () => {
                 winners: []
               },
               {
-                product: 'Legion H300 Gaming Headset',
+                product: 'Legion H300 Gaming Headset Gaming Headset',
                 imgUrl: 'https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png',
                 amount: 2,
                 winners: []
@@ -275,7 +275,7 @@ const GiveawayPage = () => {
                 winners: []
               },
               {
-                product: 'Legion H300 Gaming Headset',
+                product: 'Legion H300 Gaming Headset Gaming Headset',
                 imgUrl: 'https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png',
                 amount: 1,
                 winners: []

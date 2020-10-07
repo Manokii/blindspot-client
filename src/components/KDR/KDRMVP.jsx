@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import mvpbg from "../../assets/mvp.png";

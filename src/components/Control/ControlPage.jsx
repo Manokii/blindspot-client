@@ -136,7 +136,7 @@ const ControlPage = ({ history, location: { search } }) => {
     useEffect(() => {
         if (!state) return;
         dispatch(setUISettings({ control_view: state }));
-    }, [state]);
+    }, [state, dispatch]);
 
     const [anchorElement, setAnchor] = useState(null);
 

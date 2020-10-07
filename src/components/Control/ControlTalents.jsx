@@ -10,10 +10,8 @@ import { useSelector } from "react-redux";
 import { wsContext } from "../WebsocketProvider";
 
 import DeleteIcon from "@material-ui/icons/Delete";
-import SaveIcon from "@material-ui/icons/Save";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CancelIcon from "@material-ui/icons/Cancel";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 const q = makeStyles((theme) => ({
     root: {

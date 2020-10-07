@@ -108,7 +108,7 @@ const ControlGiveaways = () => {
                         winners: [],
                     },
                     {
-                        product: "Legion H300",
+                        product: "Legion H300 Gaming Headset",
                         imgUrl:
                             "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png",
                         amount: 1,
@@ -134,7 +134,7 @@ const ControlGiveaways = () => {
                         winners: [],
                     },
                     {
-                        product: "Legion H300",
+                        product: "Legion H300 Gaming Headset",
                         imgUrl:
                             "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png",
                         amount: 1,
@@ -213,7 +213,7 @@ const ControlGiveaways = () => {
                         winners: [],
                     },
                     {
-                        product: "Legion H300",
+                        product: "Legion H300 Gaming Headset",
                         imgUrl:
                             "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png",
                         amount: 2,
@@ -259,7 +259,7 @@ const ControlGiveaways = () => {
                         winners: [],
                     },
                     {
-                        product: "Legion H300",
+                        product: "Legion H300 Gaming Headset",
                         imgUrl:
                             "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png",
                         amount: 1,
