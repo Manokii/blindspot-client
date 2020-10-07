@@ -227,7 +227,7 @@ const ControlPreviousMatches = () => {
                                         style={{
                                             color: "rgba(255,255,255,.5)",
                                         }}>
-                                        {a.Profile?.DisplayName} Score
+                                        Left Team Score
                                     </font>
                                 }
                             />
@@ -242,7 +242,7 @@ const ControlPreviousMatches = () => {
                                         style={{
                                             color: "rgba(255,255,255,.5)",
                                         }}>
-                                        {b.Profile?.DisplayName} Score
+                                        Right Team Score
                                     </font>
                                 }
                             />

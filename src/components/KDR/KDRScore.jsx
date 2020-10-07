@@ -123,7 +123,7 @@ const LiveScore = () => {
     const gitTeamLogo = (profile) => {
         // prettier-ignore
         try {
-            let src = require(`../../assets/${profile?.Nickname.toLowerCase()}.png`).replace(' ', '_');
+            let src = require(`../../assets/${profile?.Nickname.toLowerCase().replace(/ /gi, '_')}.png`);
             console.log(src);
             return src;
         } catch (err) {

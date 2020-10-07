@@ -120,6 +120,7 @@ const q = makeStyles((theme) => ({
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
 
+                        filter: "drop-shadow(0px 10px 5px rgba(0,0,0,0.5))",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -167,7 +168,7 @@ const LiveVeto = ({ onLowerThirds = false }) => {
     const getWinnerImage = (profile = {}) => {
         try {
             let src = require(`../../assets/${profile?.Nickname.replace(
-                " ",
+                / /gi,
                 "_"
             ).toLowerCase()}.png`);
             return src;

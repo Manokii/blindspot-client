@@ -8,7 +8,6 @@ import sponsorsLockUp from "../../assets/KDR-Sponsor-Lock-up.png";
 import legion_intel from "../../assets/legion.png";
 import { useSelector } from "react-redux";
 import { Transition } from "react-spring/renderprops";
-import { AdbRounded } from "@material-ui/icons";
 
 // import globe from "../../assets/globe.png";
 // import legion from "../../assets/globe.png";
@@ -92,7 +91,6 @@ const q = makeStyles((theme) => ({
                     zIndex: 2,
                     display: "flex",
                     flexDirection: "column",
-                    position: "relative",
                     height: "100%",
                     width: "50%",
                     "& .caption": {

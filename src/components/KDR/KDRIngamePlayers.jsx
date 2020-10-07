@@ -132,7 +132,7 @@ const LiveIngamePlayers = () => {
                     }}>
                     {(player) => (props) => (
                         <div style={props} className="player">
-                            <Typography variant="h6" className="name">
+                            <Typography variant="h5" className="name">
                                 {player.name}
                             </Typography>
                             <div

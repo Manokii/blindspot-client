@@ -64,10 +64,27 @@ const ControlTalents = () => {
     const ws = useContext(wsContext);
     const { talents } = useSelector((state) => state.live);
     const [state, set] = useState({
-        casters: [],
-        observers: [],
-        liveOnLowerThirds: false,
-        live: false,
+        casters: [
+            {
+                name: "Daks",
+                social: "@dakscasts",
+                live: true,
+            },
+            {
+                name: "Vyminal",
+                social: "@vyminal",
+                live: true,
+            },
+        ],
+        observers: [
+            {
+                name: "DodgeThiss",
+                social: "@dodgethiss_",
+                live: true,
+            },
+        ],
+        liveOnLowerThirds: true,
+        live: true,
     });
 
     useEffect(() => {
@@ -285,7 +302,6 @@ const ControlTalents = () => {
 
             <Button
                 variant="outlined"
-                onClick={apply}
                 color={state.live ? "secondary" : "default"}
                 onClick={toggle}
                 style={{ margin: "16px 0px" }}

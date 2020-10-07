@@ -86,7 +86,7 @@ const us = makeStyles((theme) => ({
         "& .matchlist": { backgroundColor: "#14cc60" },
         "& .series": { backgroundColor: "#2f3e46" },
         "& .talents": { backgroundColor: "#4C3A3D" },
-
+        "& .giveaways": { backgroundColor: "#241623" },
         "& .downstage": {
             backgroundColor: "#282a36",
         },
@@ -266,6 +266,7 @@ const ControlPage = ({ history, location: { search } }) => {
 
             {state.giveaways && (
                 <Paper elevation={5} className="section giveaways">
+                    <Typography variant="button">Giveaways</Typography>
                     <Giveaways />
                 </Paper>
             )}

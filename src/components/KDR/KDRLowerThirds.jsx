@@ -13,6 +13,7 @@ import logoLockup from "../../assets/logos.png";
 import KDRtalents from "./KDRTalents";
 
 import Ticker from "react-ticker";
+import KDRGiveaways from "./KDRGiveaways";
 
 const q = makeStyles((theme) => ({
     root: {
@@ -57,6 +58,7 @@ const q = makeStyles((theme) => ({
                     wordBreak: "break-all",
                     lineHeight: "2rem",
                     textAlign: "center",
+                    filter: "drop-shadow(0px 10px 5px rgba(0,0,0,0.5))",
                 },
 
                 "& .vs": {
@@ -239,6 +241,7 @@ const LiveLowerThirds = () => {
             liveOnLowerThirds: false,
             veto: [],
         },
+        giveaways = [],
         talents = { casters: [], observers: [] },
     } = useSelector((state) => state.live);
     const {
@@ -250,9 +253,12 @@ const LiveLowerThirds = () => {
 
     const logoCheck = (t = {}) => {
         try {
-            let src = require(`../../assets/${t.Nickname.toLowerCase()}.png`);
-            return src.replace(" ", "_");
+            let src = require(`../../assets/${t.Nickname.trim()
+                .toLowerCase()
+                .replace(/ /gi, "_")}.png`);
+            return src;
         } catch (err) {
+            console.log(err);
             return t.LogoUrl;
         }
     };
@@ -362,6 +368,48 @@ const LiveLowerThirds = () => {
                             <div className="sponsors">
                                 <div className="texture"></div>
                             </div>
+                        </div>
+                    ))
+                }
+            </Transition>
+
+            {/* <div className={c.giveaways}>
+                <KDRGiveaways onLowerThirds={true} />
+            </div> */}
+
+            <Transition
+                items={
+                    Boolean(giveaways.filter((g) => g.live).length) &&
+                    !maps.liveOnLowerThirds
+                }
+                from={{
+                    maxHeight: 0,
+                    opacity: 0,
+                    clipPath: "polygon(-100% 0%, 0% 0%, 0% 100% , -100% 100%)",
+                    transform: "translateY(20px)",
+                }}
+                enter={{
+                    maxHeight: 400,
+                    opacity: 1,
+                    clipPath:
+                        "polygon(-100% 0%, 100% 0%, 100% 100% , -100% 100%)",
+                    transform: "translateY(0px)",
+                }}
+                leave={[
+                    {
+                        opacity: 0,
+                        clipPath:
+                            "polygon(-100% 0%, 0% 0%, 0% 100% , -100% 100%)",
+                        transform: "translateY(0px)",
+                    },
+                    { maxHeight: 0 },
+                ]}
+                delay={1000}>
+                {(show) =>
+                    show &&
+                    ((props) => (
+                        <div style={props} className={c.talents}>
+                            <KDRGiveaways onLowerThirds={true} />
                         </div>
                     ))
                 }

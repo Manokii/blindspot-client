@@ -32,7 +32,6 @@ const q = makeStyles((theme) => ({
                 position: "absolute",
                 top: 0,
                 left: 0,
-
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",

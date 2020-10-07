@@ -23,9 +23,9 @@ const q = makeStyles((theme) => ({
     preview: {
         flex: 1,
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         margin: theme.spacing(2, 0),
+        wordBreak: "break-word",
+        whiteSpace: "pre-wrap",
     },
 }));
 
@@ -122,7 +122,7 @@ const ControlDownstageMonitor = () => {
                     backgroundColor: state.bgColor,
                     fontSize: state.customFontSize,
                 }}>
-                Abc123
+                {state.msg}
             </div>
 
             <Button

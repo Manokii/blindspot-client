@@ -212,7 +212,6 @@ const KDRTalents = ({ onLowerThirds }) => {
                                         className="head"
                                         style={{
                                             borderLeft: "none",
-                                            borderLeft: "none",
                                             flexDirection: "row-reverse",
                                         }}>
                                         <ControlCameraIcon

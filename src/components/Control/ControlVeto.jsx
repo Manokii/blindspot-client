@@ -148,8 +148,8 @@ const ControlVeto = () => {
 
     // prettier-ignore
     const selectMapWinner = ({ index, team }, { teamA, teamB }) => {
-        if(teamA) ws.set_live_settings({match_current: {...match_current, EntityParticipantA: {...teamA, Score: parseInt(teamA.Score + 1)}}})
-        if(teamB) ws.set_live_settings({match_current: {...match_current, EntityParticipantB: {...teamB, Score: parseInt(teamB.Score + 1)}}})
+        if(teamA) ws.set_live_settings({match_current: {...match_current, EntityParticipantA: {...teamA, Score: parseInt(teamA.Score) + 1}}})
+        if(teamB) ws.set_live_settings({match_current: {...match_current, EntityParticipantB: {...teamB, Score: parseInt(teamB.Score) + 1}}})
         ws.set_live_settings({
             maps: {
                 ...maps,

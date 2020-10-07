@@ -43,19 +43,10 @@ const q = makeStyles((theme) => ({
 const ControlLowerThirds = () => {
     const ws = useContext(wsContext);
     const live = useSelector((state) => state.live);
-    const {
-        lower_thirds,
-        talents = {
-            casters: [],
-            observers: [],
-            live: false,
-            liveOnLowerThirds: false,
-        },
-        music,
-    } = live;
+    const { lower_thirds, talents, music } = live;
     const [state, set] = useState({
-        headline: "",
-        subtext: "",
+        headline: "KDR Series",
+        subtext: "#Globe #LegionxIntel #XSplit #KDRseries #StepUpYourGame",
         live: false,
     });
     const [t, tt] = useState({
@@ -65,7 +56,11 @@ const ControlLowerThirds = () => {
         liveOnLowerThirds: false,
     });
 
-    const [m, setM] = useState({ title: "", artist: "", live: false });
+    const [m, setM] = useState({
+        title: "KDR Retrowave",
+        artist: "$aucepekt",
+        live: false,
+    });
 
     useEffect(() => {
         if (!lower_thirds) return;
@@ -78,10 +73,10 @@ const ControlLowerThirds = () => {
     }, [music]);
 
     useEffect(() => {
-        if (live.talents) {
-            tt(live.talents);
+        if (talents) {
+            tt(talents);
         }
-    }, [live.talents]);
+    }, [talents]);
 
     const setHeadline = ({ currentTarget: { value } }) => {
         set((state) => ({ ...state, headline: value }));
@@ -103,6 +98,7 @@ const ControlLowerThirds = () => {
             talents: {
                 ...t,
                 liveOnLowerThirds: !t.liveOnLowerThirds,
+                live: !t.liveOnLowerThirds ? true : false,
             },
         });
     };

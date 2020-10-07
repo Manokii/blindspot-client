@@ -27,17 +27,7 @@ const q = makeStyles((theme) => ({
 const ControlMVP = () => {
     const c = q();
     const live = useSelector((state) => state.live);
-    const {
-        mvp = {
-            name: "Lamoku",
-            agent: "sage",
-            team: "",
-            kills: 999,
-            assists: 999,
-            deaths: 999,
-            rating: 999,
-        },
-    } = live;
+    const { mvp } = live;
     const [state, set] = useState({
         name: "Lamoku",
         agent: "sage",
@@ -50,10 +40,10 @@ const ControlMVP = () => {
     const ws = useContext(wsContext);
 
     useEffect(() => {
-        if (!live?.mvp) return;
-        if (live?.mvp === state) return;
-        set(live?.mvp);
-    }, [live]);
+        if (mvp) {
+            set(mvp);
+        }
+    }, [mvp]);
 
     const apply = () => {
         ws.set_live_settings({ mvp: state });
@@ -67,9 +57,9 @@ const ControlMVP = () => {
         });
     };
 
-    const selectAgent = ({ target: { value } }) => {
-        console.log(value);
-    };
+    // const selectAgent = ({ target: { value } }) => {
+    //     console.log(value);
+    // };
     return (
         <div className={c.root}>
             <div className="fields">

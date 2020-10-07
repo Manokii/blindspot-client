@@ -54,6 +54,8 @@ const us = makeStyles((theme) => ({
                 flexDirection: "row-reverse",
                 "& .logo": {
                     marginLeft: theme.spacing(2),
+
+                    filter: "drop-shadow(-5px 5px 5px rgba(0,0,0,0.5))",
                 },
             },
         },
@@ -95,6 +97,8 @@ const us = makeStyles((theme) => ({
                 flexDirection: "row",
                 "& .logo": {
                     marginRight: theme.spacing(2),
+
+                    filter: "drop-shadow(5px 5px 5px rgba(0,0,0,0.5))",
                 },
             },
         },
@@ -138,7 +142,6 @@ const us = makeStyles((theme) => ({
                     backgroundSize: "contain",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
-
                     transform: "translateY(-5px)",
                     // border: "2px solid black",
                     // borderRadius: 10,
@@ -224,14 +227,16 @@ const us = makeStyles((theme) => ({
         backgroundPosition: "center",
         zIndex: 1,
         overflow: "hidden",
-        opacity: 0.15,
+        opacity: 0.3,
+        // mixBlendMode: "multiply",
 
         "& .logo": {
             position: "absolute",
             width: "100%",
             paddingTop: "100%",
             backgroundSize: "contain",
-            backgroundRepeat: "norepeat",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
         },
 
         "& .b": {
@@ -306,11 +311,14 @@ const LiveMatchUp = ({ history }) => {
         }
     };
 
-    const getTeamLogoBG = (name) => {
+    const getTeamLogoBG = (name = "") => {
         try {
-            let src = require(`../../assets/${name.toLowerCase()}.png`);
-            return src.replace(" ", "_");
+            // prettier-ignore
+            let src = require(`../../assets/${name.trim().toLowerCase().replace(/ /gi, "_")}.png`);
+            console.log(name);
+            return src;
         } catch (err) {
+            console.log(err);
             return null;
         }
     };
@@ -318,7 +326,7 @@ const LiveMatchUp = ({ history }) => {
     const gitTeamLogo = (profile) => {
         // prettier-ignore
         try {
-            let src = require(`../../assets/${profile?.Nickname.toLowerCase()}.png`).replace(' ', '_');
+            let src = require(`../../assets/${profile?.Nickname.trim().toLowerCase().replace(/ /gi, '_')}.png`);
             console.log(src);
             return src;
         } catch (err) {
@@ -396,13 +404,12 @@ const LiveMatchUp = ({ history }) => {
                     <div className="logo a"
                         style={{
                             backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(ateam?.Profile?.Nickname)})` : '',
-                            
                             backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#ff4656' : '#101a23')
                         }}></div>
                 </div>
                 <div className="texture"></div>
                 <div className="tape1"></div>
-                {/* <div className="tape2"></div> */}
+                <div className="tape2"></div>
             </div>
 
             <div className="team b">
@@ -410,7 +417,9 @@ const LiveMatchUp = ({ history }) => {
 
                 <div className="headline">
                     <div className="logo"
-                        style={{ backgroundImage: `url(${gitTeamLogo(bteam?.Profile)})`,
+                        style={{
+                            backgroundImage: `url(${gitTeamLogo(bteam?.Profile)})`,
+                            backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#101a23' : '#ff4656')
                         }}>{!gitTeamLogo(bteam?.Profile) && bShortname}</div>
                     <Typography color="textSecondary"  variant="h3" className="team-name">
                         {bteam?.Profile?.Nickname}
@@ -473,6 +482,7 @@ const LiveMatchUp = ({ history }) => {
                     <div className="logo b"
                         style={{
                             backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(bteam?.Profile?.Nickname)})` : '',
+                            backgroundColor: !gitTeamLogo(bteam?.Profile) && (!inverse ? '#ff4656' : '#101a23')
                         }}></div>
                 </div>
 
