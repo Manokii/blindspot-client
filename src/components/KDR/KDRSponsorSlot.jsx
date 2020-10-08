@@ -9,26 +9,10 @@ import legion_intel from "../../assets/legion.png";
 import { useSelector } from "react-redux";
 import { Transition } from "react-spring/renderprops";
 
-// import globe from "../../assets/globe.png";
-// import legion from "../../assets/globe.png";
-// import music from "../../assets/globe.png";
-import globe from "../../assets/globe-ad-small.jpg";
-import legion from "../../assets/legion-ad-small.png";
-import xsplit from "../../assets/xsplit-ad-small.png";
-// import music from "../../assets/legion-ad-small.png";
-
-// const gitRandomBackground = () => {
-//     const rand = Math.floor(Math.random() * (5 - 1) + 1);
-//     console.log(rand);
-//     try {
-//         const src = require(`../../assets/paper_texture${rand}.jpg`);
-//         return src;
-//     } catch (err) {
-//         return "";
-//     }
-// };
-
-//
+import AdSmLegion from "./ad_sm/AdSmallLenovo";
+import AdSmXSplit from "./ad_sm/AdSmallXSplit";
+import AdSmGlobe from "./ad_sm/AdSmallGlobe";
+import AdSmMusic from "./ad_sm/AdSmallMusic";
 
 const q = makeStyles((theme) => ({
     root: {
@@ -158,12 +142,14 @@ const LiveSponsorSlot = () => {
 
     const getSrc = (ad) => {
         switch (ad) {
-            case "globe":
-                return globe;
             case "legion":
-                return legion;
+                return <AdSmLegion />;
             case "xsplit":
-                return xsplit;
+                return <AdSmXSplit />;
+            case "globe":
+                return <AdSmGlobe />;
+            case "music":
+                return <AdSmMusic />;
 
             default:
                 break;
@@ -202,11 +188,7 @@ const LiveSponsorSlot = () => {
                           )
                         : (props) => (
                               <div className={c.ad} style={props}>
-                                  <img
-                                      src={getSrc(popup_sponsor.ad)}
-                                      className="img"
-                                      alt="ad"
-                                  />
+                                  {getSrc(popup_sponsor.ad)}
                               </div>
                           )
                 }
