@@ -18,6 +18,7 @@ import LiveSponsorSlot from "./components/KDR/KDRSponsorSlot";
 import LivePreviousMatches from "./components/KDR/KDRPreviousMatches";
 import LiveMVP from "./components/KDR/KDRMVP";
 import Downstage from "./components/KDR/Downstage";
+import Downstage2 from "./components/KDR/Downstage2";
 import GiveawayPage from "./components/GiveawayPage";
 import KDRTalents from "./components/KDR/KDRTalents";
 
@@ -58,6 +59,7 @@ const App = () => {
                     <Route path="/kdr/previousmatches" exact component={LivePreviousMatches} />
                     <Route path="/kdr/mvp" exact component={LiveMVP} />
                     <Route path="/downstage" exact component={Downstage} />
+                    <Route path="/downstage2" exact component={Downstage2} />
                     <Route path="/giveaways" exact component={GiveawayPage} />
                     <Route path="/kdr/talents" exact component={KDRTalents} />
                 </Switch>
