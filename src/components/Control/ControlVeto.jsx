@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { wsContext } from "../WebsocketProvider";
-
 import {
     makeStyles,
     Typography,
@@ -9,6 +8,8 @@ import {
     Switch,
     FormControlLabel,
 } from "@material-ui/core";
+import axios from "axios";
+import isDev from "../../isDev";
 
 const us = makeStyles((theme) => ({
     root: {},
@@ -107,6 +108,7 @@ const ControlVeto = () => {
         maps = {
             bestOf: "bo3",
             liveOnLowerThirds: false,
+            pool: [],
             veto: [],
         },
     } = useSelector((state) => state.live);
@@ -166,8 +168,39 @@ const ControlVeto = () => {
         });
     };
 
+    const grabVeto = () => {
+        const cors = `${window.location.hostname}:8080/`;
+        const headers = {
+            "arena-api-key": "C434EDE3-2E7E-4B9D-A070-58B2CF94846D",
+            "arena-login-token": "fd1e9e0d-3c25-4ccd-b6b5-9b70be315e18",
+        };
+
+        // prettier-ignore
+        axios.get(`http://${isDev() ? cors: ''}polling.mogul.gg/api/tournament/match/${match_current.TournamentMatchId}/?LastUpdatedDateTime=`,{ headers })
+            .then(({data: {Response: res}}) => {
+                console.log(res)
+                ws.set_live_settings({
+                    maps: {
+                        ...maps,
+                        pool: [...res?.MapVotingResult?.MapPoolList?.map(map => ({mapId: map.GameTitleMapNameId, mapName: map.GameTitleMapProperName}))],
+                        veto: [...res?.MapVotingResult?.VotingResults?.map(result => ({
+                            team: result.ResultCastByRandomizer ? 'mogulsystem' : result.ResultCastByTeamA ? a?.Profile?.DisplayName : b?.Profile?.DisplayName,
+                            map: res?.MapVotingResult?.MapPoolList?.find(map => map.GameTitleMapNameId === result.GameTitleMapId).GameTitleMapProperName,
+                            shortname: result.ResultCastByRandomizer ?  'random'  : result.ResultCastByTeamA ? aShortname : bShortname,
+                            type: result.ResultTypeIsBan ? 'ban' : 'pick'
+                        }))]
+                    }
+                })
+            });
+    };
+
     return (
         <div className={c.root}>
+            {/* ============== Grab Veto from mogul ============== */}
+            <Button variant="outlined" color="primary" onClick={grabVeto}>
+                Grab Veto from Mogul
+            </Button>
+
             <div className={c.control}>
                 {/* ========================== TEAM A ========================== */}
                 <div className="team a">
