@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { wsContext } from "../WebsocketProvider";
 import { makeStyles, TextField, Button, Typography } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
@@ -30,7 +30,7 @@ const q = makeStyles((theme) => ({
     },
 }));
 
-const ControlDownstageMonitor = () => {
+const ControlDownstage2Monitor = () => {
     const c = q();
     const ws = useContext(wsContext);
     const [state, set] = useState({
@@ -40,6 +40,13 @@ const ControlDownstageMonitor = () => {
         customFontSize: 54,
     });
 
+    const {downstage2} = useSelector(state => state.live)
+
+    useEffect(() => {
+        if(!downstage2) return
+        set(downstage2)
+    }, [downstage2])
+
     const setState = ({ target: { value, name, type } }) => {
         set({
             ...state,
@@ -47,15 +54,8 @@ const ControlDownstageMonitor = () => {
         });
     };
 
-    const {downstage} = useSelector(state => state.live)
-
-    useEffect(() => {
-        if(!downstage) return
-        set(downstage)
-    }, [downstage])
-
     const apply = () => {
-        ws.set_live_settings({ downstage: state });
+        ws.set_live_settings({ downstage2: state });
     };
 
     return (
@@ -142,4 +142,4 @@ const ControlDownstageMonitor = () => {
     );
 };
 
-export default ControlDownstageMonitor;
+export default ControlDownstage2Monitor;
