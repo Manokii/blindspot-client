@@ -1,5 +1,5 @@
 import React from "react";
-import { Slide } from "react-slideshow-image";
+// import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import { makeStyles } from "@material-ui/core";
 

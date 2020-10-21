@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { wsContext } from "../WebsocketProvider";
-import { makeStyles, TextField, Button, Typography } from "@material-ui/core";
+import { makeStyles, TextField, Button } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 
 const q = makeStyles((theme) => ({
     root: {
@@ -47,12 +47,12 @@ const ControlDownstageMonitor = () => {
         });
     };
 
-    const {downstage} = useSelector(state => state.live)
+    const { downstage } = useSelector((state) => state.live);
 
     useEffect(() => {
-        if(!downstage) return
-        set(downstage)
-    }, [downstage])
+        if (!downstage) return;
+        set(downstage);
+    }, [downstage]);
 
     const apply = () => {
         ws.set_live_settings({ downstage: state });
