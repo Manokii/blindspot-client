@@ -16,6 +16,9 @@ import { wsContext } from "../WebsocketProvider";
 import agents from "../../assets/agents.json";
 import axios from "axios";
 import isDev from "../../isDev";
+import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
+import Save from "@material-ui/icons/Save";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 const us = makeStyles((theme) => ({
     root: {
@@ -39,11 +42,15 @@ const us = makeStyles((theme) => ({
     },
 
     reset: { width: "100%" },
+
+    btn: {
+        margin: theme.spacing(1, 0),
+    },
 }));
 
 const ControlPlayerAgents = () => {
     const ws = useContext(wsContext);
-    const { match_current, match_current_player_agents } = useSelector(
+    const { match_current, match_current_player_agents, inverse } = useSelector(
         (state) => state.live
     );
     // const {
@@ -160,6 +167,30 @@ const ControlPlayerAgents = () => {
     };
     const toggleLogoAsBG = (e) => {
         set((v) => ({ ...v, showLogoAsBG: !v.showLogoAsBG }));
+    };
+
+    const fixNames = () => {
+        const namesFixed = {
+            ...form,
+            a: [
+                ...form.a.map((p) => ({
+                    ...p,
+                    name: p.name
+                        .replace(/\w+\s(\w+)/gi, "$1")
+                        .replace(/(\w+)\s?#.*/gi, "$1"),
+                })),
+            ],
+            b: [
+                ...form.b.map((p) => ({
+                    ...p,
+                    name: p.name
+                        .replace(/\w+\s(\w+)/gi, "$1")
+                        .replace(/(\w+)\s?#.*/gi, "$1"),
+                })),
+            ],
+        };
+
+        ws.set_live_settings({ match_current_player_agents: namesFixed });
     };
 
     return (
@@ -284,7 +315,7 @@ const ControlPlayerAgents = () => {
             <FormControlLabel
                 control={
                     <Switch
-                        checked={form.imgOnly}
+                        checked={Boolean(form.imgOnly)}
                         onChange={toggleImgOnly}
                         color="secondary"
                         name="imgOnly"
@@ -304,9 +335,31 @@ const ControlPlayerAgents = () => {
             />
 
             <Button
+                className={c.btn}
+                style={{ width: "100%" }}
+                variant="outlined"
+                startIcon={<SettingsIcon />}
+                onClick={fixNames}>
+                Fix the names
+            </Button>
+
+            <Button
+                className={c.btn}
+                variant="contained"
+                size="small"
+                startIcon={<SwapHorizIcon />}
+                style={{ width: "100%" }}
+                color={inverse ? "secondary" : "primary"}
+                onClick={() => ws.set_live_settings({ inverse: !inverse })}>
+                Swap Team Sides
+            </Button>
+
+            <Button
+                className={c.btn}
                 disabled={form === match_current_player_agents}
                 style={{ width: "100%" }}
                 variant="contained"
+                startIcon={<Save />}
                 onClick={save}>
                 Save
             </Button>

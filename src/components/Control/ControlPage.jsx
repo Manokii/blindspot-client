@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
     makeStyles,
     Typography,
@@ -15,6 +15,7 @@ import MatchesWidget from "../MatchesWidget";
 import { useDispatch, useSelector } from "react-redux";
 import { setUISettings } from "../../redux/Actions";
 import qs from "qs";
+import { wsContext } from "../WebsocketProvider";
 
 import MatchUp from "./ControlMatchUp";
 import Veto from "./ControlVeto";
@@ -30,6 +31,8 @@ import MVP from "./ControlMVP";
 import Downstage from "./ControlDownstageMonitor";
 import Downstage2 from "./ControlDownstageMonitor2";
 import Giveaways from "./ControlGiveaways";
+import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
+import CallToActionIcon from "@material-ui/icons/CallToAction";
 
 const us = makeStyles((theme) => ({
     root: {
@@ -93,10 +96,17 @@ const us = makeStyles((theme) => ({
         },
     },
 
-    fab: {
+    fabs: {
         position: "fixed",
         right: theme.spacing(2),
         bottom: theme.spacing(2),
+        display: "flex",
+        flexDirection: "column-reverse",
+        alignItems: "center",
+
+        "& .fab": {
+            marginTop: theme.spacing(1),
+        },
     },
 
     menu: {
@@ -110,10 +120,14 @@ const us = makeStyles((theme) => ({
 const ControlPage = ({ history, location: { search } }) => {
     const params = qs.parse(search, { ignoreQueryPrefix: true });
     const c = us();
-    const { match_current, match_widgets = [] } = useSelector(
-        (state) => state.live
-    );
+    const {
+        match_current,
+        match_widgets = [],
+        inverse,
+        lower_thirds,
+    } = useSelector((state) => state.live);
     const dispatch = useDispatch();
+    const ws = useContext(wsContext);
 
     const {
         control_view = {
@@ -270,8 +284,9 @@ const ControlPage = ({ history, location: { search } }) => {
             )}
             {state.downstage2 && (
                 <Paper elevation={5} className="section downstage">
-                    
-                    <Typography variant="button">Downstage Monitor 2</Typography>
+                    <Typography variant="button">
+                        Downstage Monitor 2
+                    </Typography>
                     <Downstage2 />
                 </Paper>
             )}
@@ -289,15 +304,45 @@ const ControlPage = ({ history, location: { search } }) => {
                 </Paper>
             )}
 
-            {!params.hideMenu && (
+            <div className={c.fabs}>
+                {!params.hideMenu && (
+                    <Fab
+                        className="fab"
+                        aria-controls="simple-menu"
+                        aria-haspopup="true"
+                        onClick={openMenu}>
+                        <MenuBookIcon />
+                    </Fab>
+                )}
+
                 <Fab
-                    className={c.fab}
+                    className="fab"
                     aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={openMenu}>
-                    <MenuBookIcon />
+                    // aria-haspopup="true"
+                    size="medium"
+                    color={lower_thirds?.live ? "secondary" : "primary"}
+                    onClick={() =>
+                        ws.set_live_settings({
+                            lower_thirds: {
+                                ...lower_thirds,
+                                live: !lower_thirds?.live,
+                            },
+                        })
+                    }>
+                    <CallToActionIcon />
                 </Fab>
-            )}
+
+                <Fab
+                    className="fab"
+                    aria-controls="simple-menu"
+                    // aria-haspopup="true"
+                    size="medium"
+                    color={inverse ? "secondary" : "primary"}
+                    onClick={() => ws.set_live_settings({ inverse: !inverse })}>
+                    <SwapHorizIcon />
+                </Fab>
+            </div>
+
             <Menu
                 id="simple-menu"
                 anchorEl={anchorElement}

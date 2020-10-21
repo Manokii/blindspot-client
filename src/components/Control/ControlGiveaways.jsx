@@ -351,8 +351,8 @@ const ControlGiveaways = () => {
             </FormControl>
 
             <div className={c.prizes}>
-                {gg[ii].prizes.map((p) => (
-                    <Paper elevation={3} className="prize section">
+                {gg[ii].prizes.map((p, index) => (
+                    <Paper key={index} elevation={3} className="prize section">
                         <div className="name">
                             x{p.amount} {p.product}
                         </div>
