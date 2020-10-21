@@ -14,6 +14,8 @@ import {
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { wsContext } from "../WebsocketProvider";
+import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
+import SaveIcon from "@material-ui/icons/Save";
 
 const q = makeStyles((t) => ({
     root: {
@@ -48,6 +50,7 @@ const ControlPopUps = () => {
         popup_sponsor,
         countdown,
         match_current_player_agents,
+        inverse,
     } = live;
     const [form, set] = useState({
         popup_text: {
@@ -266,7 +269,19 @@ const ControlPopUps = () => {
                 </Button>
             </Paper>
 
-            <Button variant="contained" color="primary" onClick={apply}>
+            <Button
+                variant="contained"
+                color={inverse ? "secondary" : "primary"}
+                startIcon={<SwapHorizIcon />}
+                onClick={() => ws.set_live_settings({ inverse: !inverse })}>
+                Swap Sides
+            </Button>
+
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={apply}
+                startIcon={<SaveIcon />}>
                 APPLY to Popups
             </Button>
         </div>

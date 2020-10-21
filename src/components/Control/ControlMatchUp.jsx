@@ -218,7 +218,7 @@ const ControlInfobox = ({ history }) => {
                             size="small"
                             startIcon={<SwapHorizIcon />}
                             style={{ width: "100%" }}
-                            color={inverse ? "primary" : "secondary"}
+                            color={inverse ? "secondary" : "primary"}
                             onClick={() =>
                                 ws.set_live_settings({ inverse: !inverse })
                             }>
