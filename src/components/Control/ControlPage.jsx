@@ -31,6 +31,7 @@ import MVP from "./ControlMVP";
 import Downstage from "./ControlDownstageMonitor";
 import Downstage2 from "./ControlDownstageMonitor2";
 import Giveaways from "./ControlGiveaways";
+import ManualInput from "./ControlManualInput";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 import CallToActionIcon from "@material-ui/icons/CallToAction";
 
@@ -132,6 +133,7 @@ const ControlPage = ({ history, location: { search } }) => {
     const {
         control_view = {
             matches: true,
+            manualInput: false,
             match: true,
             lowerThirds: true,
             talents: true,
@@ -172,6 +174,7 @@ const ControlPage = ({ history, location: { search } }) => {
         if (!Object.values(state).every((v) => v === true)) {
             set({
                 matches: true,
+                manualInput: true,
                 match: true,
                 lowerThirds: true,
                 talents: true,
@@ -188,6 +191,7 @@ const ControlPage = ({ history, location: { search } }) => {
         } else {
             set({
                 matches: false,
+                manualInput: false,
                 match: false,
                 lowerThirds: false,
                 talents: false,
@@ -220,6 +224,13 @@ const ControlPage = ({ history, location: { search } }) => {
                     </Button>
                 </Paper>
             ) : null}
+
+            {state.manualInput && (
+                <Paper elevation={5} className="section matchup">
+                    <Typography variant="button">Manual Input</Typography>
+                    <ManualInput />
+                </Paper>
+            )}
 
             {state.match && (
                 <Paper elevation={5} className="section matchup">

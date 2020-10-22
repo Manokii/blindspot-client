@@ -73,12 +73,11 @@ const ControlPlayerAgents = () => {
 
     useEffect(() => {
         if (
-            !match_current.TeamAPlayers.length &&
-            !match_current.TeamBPlayers.length
-        )
+            !match_current.TeamAPlayers?.length &&
+            !match_current.TeamBPlayers?.length
+        ) {
             return;
-        if (match_current_player_agents)
-            return set(match_current_player_agents);
+        }
         set({
             a: [
                 ...match_current.TeamAPlayers.map((p) => ({
@@ -97,7 +96,12 @@ const ControlPlayerAgents = () => {
                 })),
             ],
         });
-    }, [set, match_current, match_current_player_agents]);
+    }, [set, match_current]);
+
+    useEffect(() => {
+        if (!match_current_player_agents) return;
+        set(match_current_player_agents);
+    }, [match_current_player_agents]);
 
     const changeAPlayerName = (id) => ({ currentTarget: { value } }) =>
         set((v) => ({
