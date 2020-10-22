@@ -109,7 +109,7 @@ const us = makeStyles((theme) => ({
             width: 901,
             // top: 237,
 
-            backgroundColor: "#d4d4d4",
+            backgroundColor: "#101923",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-around",
@@ -227,7 +227,7 @@ const us = makeStyles((theme) => ({
         backgroundPosition: "center",
         zIndex: 1,
         overflow: "hidden",
-        opacity: 0.3,
+        opacity: 0.4,
         // mixBlendMode: "multiply",
 
         "& .logo": {
@@ -240,12 +240,12 @@ const us = makeStyles((theme) => ({
         },
 
         "& .b": {
-            bottom: "-10%",
+            bottom: "-17%",
             right: "-15%",
             transform: "rotate(-25deg)",
         },
         "& .a": {
-            bottom: "-10%",
+            bottom: "-17%",
             left: "-15%",
             transform: "rotate(25deg)",
         },
@@ -315,10 +315,8 @@ const LiveMatchUp = ({ history }) => {
         try {
             // prettier-ignore
             let src = require(`../../assets/${name.trim().toLowerCase().replace(/ /gi, "_")}.png`);
-            console.log(name);
             return src;
         } catch (err) {
-            console.log(err);
             return null;
         }
     };
@@ -327,7 +325,6 @@ const LiveMatchUp = ({ history }) => {
         // prettier-ignore
         try {
             let src = require(`../../assets/${profile?.Nickname.trim().toLowerCase().replace(/ /gi, '_')}.png`);
-            console.log(src);
             return src;
         } catch (err) {
             return profile?.LogoUrl;
@@ -344,7 +341,7 @@ const LiveMatchUp = ({ history }) => {
                             backgroundImage: `url(${gitTeamLogo(ateam?.Profile)})`,
                             backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#101a23' : '#ff4656')
                         }}>{!gitTeamLogo(ateam?.Profile) && aShortname}</div>
-                    <Typography color="textSecondary" variant="h3" className="team-name">
+                    <Typography color="textPrimary" variant="h3" className="team-name">
                         {ateam?.Profile?.Nickname}
                     </Typography>
                 </div>
@@ -390,7 +387,7 @@ const LiveMatchUp = ({ history }) => {
                 <div className="names">
                     {a.map((player) => (
                         <Typography
-                            color="textSecondary"
+                            color="textPrimary"
                             key={player.id}
                             variant="h4"
                             className="name">
@@ -403,8 +400,7 @@ const LiveMatchUp = ({ history }) => {
                 <div className={c.logowrap}>
                     <div className="logo a"
                         style={{
-                            backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(ateam?.Profile?.Nickname)})` : '',
-                            backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#ff4656' : '#101a23')
+                            backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(ateam?.Profile?.Nickname)})` : ''
                         }}></div>
                 </div>
                 <div className="texture"></div>
@@ -419,9 +415,9 @@ const LiveMatchUp = ({ history }) => {
                     <div className="logo"
                         style={{
                             backgroundImage: `url(${gitTeamLogo(bteam?.Profile)})`,
-                            backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#101a23' : '#ff4656')
+                            backgroundColor: !gitTeamLogo(bteam?.Profile) && (!inverse ? '#101a23' : '#ff4656')
                         }}>{!gitTeamLogo(bteam?.Profile) && bShortname}</div>
-                    <Typography color="textSecondary"  variant="h3" className="team-name">
+                    <Typography color="textPrimary" variant="h3" className="team-name">
                         {bteam?.Profile?.Nickname}
                     </Typography>
                 </div>
@@ -468,7 +464,7 @@ const LiveMatchUp = ({ history }) => {
                 <div className="names">
                     {b.map((player) => (
                         <Typography
-                            color="textSecondary"
+                            color="textPrimary"
                             key={player.id}
                             variant="h4"
                             className="name">
@@ -482,7 +478,6 @@ const LiveMatchUp = ({ history }) => {
                     <div className="logo b"
                         style={{
                             backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(bteam?.Profile?.Nickname)})` : '',
-                            backgroundColor: !gitTeamLogo(bteam?.Profile) && (!inverse ? '#ff4656' : '#101a23')
                         }}></div>
                 </div>
 
