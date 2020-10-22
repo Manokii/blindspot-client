@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { wsContext } from "../WebsocketProvider";
 import { withRouter } from "react-router-dom";
@@ -43,10 +43,18 @@ const us = makeStyles((theme) => ({
             },
         },
     },
+
+    save: {
+        width: "100%",
+    },
 }));
 
 const ControlInfobox = ({ history }) => {
     const c = us();
+    const [state, set] = useState({
+        aShortname: "TeamA",
+        bShortname: "TeamB",
+    });
     const ws = useContext(wsContext);
     const {
         match_current,
@@ -72,9 +80,14 @@ const ControlInfobox = ({ history }) => {
         // TeamAPlayers: a_players,
         // TeamBPlayers: b_players,
         // TournamentMatchExtendedStateId: state,
-        aShortname = "TEAM1",
-        bShortname = "TEAM2",
+        aShortname,
+        bShortname,
     } = match_current;
+
+    useEffect(() => {
+        if (!aShortname && !bShortname) return;
+        set({ aShortname, bShortname });
+    }, [aShortname, bShortname]);
 
     // const changeContentType = ({ target: { value } }) =>
     //     ws.set_live_settings({ infoBoxContentType: value });
@@ -100,17 +113,15 @@ const ControlInfobox = ({ history }) => {
             });
     };
 
+    const handleChange = ({ currentTarget: { name, value } }) =>
+        set({ ...state, [name]: value });
+
+    const save = () => {
+        ws.set_live_settings({ match_current: { ...match_current, ...state } });
+    };
+
     return (
         <div className={c.matchup}>
-            {/* <FormControl
-                variant="outlined"
-                className={c.formControl}
-                size="small">
-                <Select value={infoBoxContentType} onChange={changeContentType}>
-                    <MenuItem value={"current_match"}>Current Match</MenuItem>
-                    <MenuItem value={"current_match_veto"}>Match Veto</MenuItem>
-                </Select>
-            </FormControl> */}
             <div className="details">
                 <Typography variant="button">Curret Match</Typography>
 
@@ -199,8 +210,8 @@ const ControlInfobox = ({ history }) => {
                                 value={a.Score}
                                 type="number"
                                 onChange={(e) => ws.set_live_settings({match_current: {...match_current, EntityParticipantA: {...a, Score: e.currentTarget.value < 0 ? 0 : e.currentTarget.value}}})}/>
-                            <TextField size="small" variant="outlined"  onChange={changeTeamShortname('a')}
-                                label={<span style={{color: 'rgba(255,255,255,.5)'}}>Short Name</span>} value={aShortname} />
+                            <TextField size="small" variant="outlined"  onChange={handleChange}
+                                label={<span style={{color: 'rgba(255,255,255,.5)'}}>Short Name</span>} name="aShortname" value={state.aShortname} />
                             <TextField
                                 size="small"
                                 color="secondary"
@@ -210,19 +221,19 @@ const ControlInfobox = ({ history }) => {
                                 value={b.Score}
                                 type="number"
                                 onChange={(e) => ws.set_live_settings({match_current: {...match_current, EntityParticipantB: {...b, Score: e.currentTarget.value < 0 ? 0 : e.currentTarget.value}}})}/>
-                        <TextField size="small" variant="outlined"  onChange={changeTeamShortname('b')}
-                                label={<span style={{color: 'rgba(255,255,255,.5)'}}>Short Name</span>} value={bShortname} />
+                        <TextField size="small" variant="outlined"  onChange={handleChange}
+                                label={<span style={{color: 'rgba(255,255,255,.5)'}}>Short Name</span>} name="bShortname" value={state.bShortname} />
                         </div>
                         <Button
+                            className={c.save}
                             variant="contained"
-                            size="small"
-                            startIcon={<SwapHorizIcon />}
-                            style={{ width: "100%" }}
-                            color={inverse ? "secondary" : "primary"}
-                            onClick={() =>
-                                ws.set_live_settings({ inverse: !inverse })
-                            }>
-                            Swap Team Sides
+                            color="primary"
+                            disabled={
+                                state.aShortname === aShortname &&
+                                state.bShortname === bShortname
+                            }
+                            onClick={save}>
+                            Save
                         </Button>
                     </div>
                 ) : (
