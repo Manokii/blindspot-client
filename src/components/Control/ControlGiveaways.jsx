@@ -8,6 +8,7 @@ import {
     Button,
     Paper,
     Typography,
+    Tooltip,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import moment from "moment";
@@ -23,11 +24,10 @@ const q = makeStyles((theme) => ({
     },
 
     prizes: {
-        display: "grid",
-        gridTemplateColumns: "1fr",
-        margin: theme.spacing(2, 0),
-        gridGap: theme.spacing(2),
+        display: "flex",
+        flexWrap: "wrap-reverse",
         "& .prize": {
+            margin: theme.spacing(2, 2, 0, 0),
             display: "flex",
             flexDirection: "column",
             backgroundColor: "transparent",

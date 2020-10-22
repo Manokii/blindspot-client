@@ -30,3 +30,7 @@
     font-family: "Whatka";
     src: url("./assets/whatka.ttf");
 }
+
+* {
+    backface-visibility: hidden;
+}
