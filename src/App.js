@@ -4,7 +4,7 @@ import { makeStyles, Box } from "@material-ui/core";
 
 import SideNav from "./components/Navigation";
 import TournamentPage from "./components/TournamentPage";
-import ControlPage from "./components/Control/ControlPage";
+import ControlList from "./components/Control/ControlList";
 import Live from "./components/KDR/KDRPage";
 import LiveInfoBox from "./components/KDR/KDRInfoBox";
 import LiveMatchWidgets from "./components/KDR/KDRMatchWidgets";
@@ -46,7 +46,7 @@ const App = () => {
             <Box className={classes.content}>
                 <Switch>
                     <Route path="/tournament" component={TournamentPage} />
-                    <Route path="/control" component={ControlPage} />
+                    <Route path="/control" component={ControlList} />
                     <Route path="/kdr" exact component={Live} />
                     <Route path="/kdr/infobox" exact component={LiveInfoBox} />
                     <Route path="/kdr/matchwidgets" exact component={LiveMatchWidgets} />
