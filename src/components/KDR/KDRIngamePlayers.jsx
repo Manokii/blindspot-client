@@ -101,7 +101,8 @@ const LiveIngamePlayers = () => {
                         transform: players.showIngame
                             ? "translateX(0%)"
                             : "translateX(-120%)",
-                    }}>
+                    }}
+                    config={{ mass: 1, tension: 500, friction: 40 }}>
                     {(player) => (props) => (
                         <animated.div style={props} className="player">
                             <Typography variant="h5" className="name">
@@ -129,7 +130,8 @@ const LiveIngamePlayers = () => {
                         transform: players.showIngame
                             ? "translateX(0%)"
                             : "translateX(120%)",
-                    }}>
+                    }}
+                    config={{ mass: 1, tension: 500, friction: 40 }}>
                     {(player) => (props) => (
                         <div style={props} className="player">
                             <Typography variant="h5" className="name">

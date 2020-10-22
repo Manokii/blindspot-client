@@ -159,6 +159,7 @@ const LiveSponsorSlot = () => {
     return (
         <div className={c.root}>
             <Transition
+                // config={{ mass: 1, tension: 500, friction: 40 }}
                 items={popup_sponsor.live && !popup_sponsor.showAd}
                 from={{ opacity: 0, transform: "translateX(-120%)", height: 0 }}
                 enter={[
