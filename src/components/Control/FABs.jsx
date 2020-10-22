@@ -12,10 +12,12 @@ import {
     FormControlLabel,
     Checkbox,
     MenuItem,
+    Tooltip,
 } from "@material-ui/core";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 import CallToActionIcon from "@material-ui/icons/CallToAction";
+import HeadsetMicIcon from "@material-ui/icons/HeadsetMic";
 
 const us = makeStyles((theme) => ({
     fabs: {
@@ -39,7 +41,9 @@ const us = makeStyles((theme) => ({
 const FABs = ({ history, location: { search }, state, set }) => {
     const params = qs.parse(search, { ignoreQueryPrefix: true });
     const c = us();
-    const { inverse, lower_thirds } = useSelector((state) => state.live);
+    const { inverse, lower_thirds, talents } = useSelector(
+        (state) => state.live
+    );
     const ws = useContext(wsContext);
     const [anchorElement, setAnchor] = useState(null);
 
@@ -106,32 +110,82 @@ const FABs = ({ history, location: { search }, state, set }) => {
                     </Fab>
                 )}
 
-                <Fab
-                    className="fab"
-                    aria-controls="simple-menu"
-                    // aria-haspopup="true"
-                    size="medium"
-                    color={lower_thirds?.live ? "secondary" : "primary"}
-                    onClick={() =>
-                        ws.set_live_settings({
-                            lower_thirds: {
-                                ...lower_thirds,
-                                live: !lower_thirds?.live,
-                            },
-                        })
-                    }>
-                    <CallToActionIcon />
-                </Fab>
+                <Tooltip
+                    title={
+                        <span>
+                            Click to {lower_thirds?.live ? "HIDE" : "SHOW"}{" "}
+                            Lower Thirds
+                        </span>
+                    }
+                    placement="left">
+                    <Fab
+                        className="fab"
+                        // aria-haspopup="true"
+                        size="medium"
+                        color={lower_thirds?.live ? "secondary" : "primary"}
+                        onClick={() =>
+                            ws.set_live_settings({
+                                lower_thirds: {
+                                    ...lower_thirds,
+                                    live: !lower_thirds?.live,
+                                },
+                            })
+                        }>
+                        <CallToActionIcon />
+                    </Fab>
+                </Tooltip>
 
-                <Fab
-                    className="fab"
-                    aria-controls="simple-menu"
-                    // aria-haspopup="true"
-                    size="medium"
-                    color={inverse ? "secondary" : "primary"}
-                    onClick={() => ws.set_live_settings({ inverse: !inverse })}>
-                    <SwapHorizIcon />
-                </Fab>
+                <Tooltip title={<span>Swap Team Sides</span>} placement="left">
+                    <Fab
+                        className="fab"
+                        // aria-haspopup="true"
+                        size="medium"
+                        color={inverse ? "secondary" : "primary"}
+                        onClick={() =>
+                            ws.set_live_settings({ inverse: !inverse })
+                        }>
+                        <SwapHorizIcon />
+                    </Fab>
+                </Tooltip>
+
+                <Tooltip
+                    title={
+                        <span>
+                            Click to{" "}
+                            {talents?.live && talents?.liveOnLowerThirds
+                                ? "HIDE"
+                                : "SHOW"}{" "}
+                            Talents
+                        </span>
+                    }
+                    placement="left">
+                    <Fab
+                        className="fab"
+                        // aria-haspopup="true"
+                        size="medium"
+                        color={
+                            talents?.live && talents?.liveOnLowerThirds
+                                ? "secondary"
+                                : "primary"
+                        }
+                        onClick={() =>
+                            ws.set_live_settings({
+                                talents: {
+                                    ...talents,
+                                    live: !Boolean(
+                                        talents.live &&
+                                            talents.liveOnLowerThirds
+                                    ),
+                                    liveOnLowerThirds: !Boolean(
+                                        talents.live &&
+                                            talents.liveOnLowerThirds
+                                    ),
+                                },
+                            })
+                        }>
+                        <HeadsetMicIcon />
+                    </Fab>
+                </Tooltip>
             </div>
 
             <Menu
