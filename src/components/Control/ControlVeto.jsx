@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import { wsContext } from "../WebsocketProvider";
 import {
@@ -101,6 +101,7 @@ const us = makeStyles((theme) => ({
 
 const ControlVeto = () => {
     const c = us();
+    const [isFinals, setIsFinals] = useState(false);
     const mapPool = ["Bind", "Haven", "Split", "Ascent"];
     const ws = useContext(wsContext);
     const {
@@ -111,6 +112,7 @@ const ControlVeto = () => {
             pool: [],
             veto: [],
         },
+        round_winner,
     } = useSelector((state) => state.live);
 
     const {
@@ -150,8 +152,29 @@ const ControlVeto = () => {
 
     // prettier-ignore
     const selectMapWinner = ({ index, team }, { teamA, teamB }) => {
-        if(teamA) ws.set_live_settings({match_current: {...match_current, EntityParticipantA: {...teamA, Score: parseInt(teamA.Score) + 1}}})
-        if(teamB) ws.set_live_settings({match_current: {...match_current, EntityParticipantB: {...teamB, Score: parseInt(teamB.Score) + 1}}})
+        if(teamA) ws.set_live_settings({
+            match_current: {
+                ...match_current, 
+                EntityParticipantA: {...teamA, Score: parseInt(teamA.Score) + 1}
+            },
+            round_winner: {
+                profile: a.Profile,
+                side: 'a',
+                isFinalGame: isFinals
+            }
+        })
+        if(teamB) ws.set_live_settings({
+            match_current: {
+                ...match_current, 
+                EntityParticipantB: {...teamB, Score: parseInt(teamB.Score) + 1}
+            },
+            round_winner: {
+                profile: b.Profile,
+                side: 'b',
+                isFinalGame: isFinals,
+                map: maps.veto[index].map
+            }
+        })
         ws.set_live_settings({
             maps: {
                 ...maps,
@@ -337,6 +360,20 @@ const ControlVeto = () => {
                     </div>
                 )}
             </div>
+            <FormControlLabel
+                control={
+                    <Switch
+                        size="small"
+                        checked={isFinals}
+                        onChange={({ currentTarget: { checked } }) =>
+                            setIsFinals(checked)
+                        }
+                        name="checkedB"
+                        color="primary"
+                    />
+                }
+                label="Final Match?"
+            />
 
             <Button
                 className={c.clear}

@@ -21,6 +21,7 @@ import Downstage from "./components/KDR/Downstage";
 import Downstage2 from "./components/KDR/Downstage2";
 import GiveawayPage from "./components/GiveawayPage";
 import KDRTalents from "./components/KDR/KDRTalents";
+import KDRRoundWinner from "./components/KDR/KDRRoundWinner";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -62,6 +63,7 @@ const App = () => {
                     <Route path="/downstage2" exact component={Downstage2} />
                     <Route path="/giveaways" exact component={GiveawayPage} />
                     <Route path="/kdr/talents" exact component={KDRTalents} />
+                    <Route path="/kdr/roundwinner" exact component={KDRRoundWinner} />
                 </Switch>
             </Box>
         </div>
