@@ -137,7 +137,7 @@ const LiveSponsorSlot = () => {
     const {
         popup_sponsor = { live: false },
         current_match_state = "KDR Series",
-        maps = { bestOf: "bo3" },
+        maps = { bestOf: "bo1" },
     } = useSelector((state) => state.live);
 
     const getSrc = (ad) => {
