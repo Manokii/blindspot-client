@@ -160,7 +160,9 @@ const ControlVeto = () => {
             round_winner: {
                 profile: a.Profile,
                 side: 'a',
-                isFinalGame: isFinals
+                loser: b.Profile,
+                isFinalGame: isFinals,
+                map: maps.veto[index].map
             }
         })
         if(teamB) ws.set_live_settings({
@@ -172,6 +174,7 @@ const ControlVeto = () => {
                 profile: b.Profile,
                 side: 'b',
                 isFinalGame: isFinals,
+                loser: b.Profile,
                 map: maps.veto[index].map
             }
         })
