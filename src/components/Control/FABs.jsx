@@ -18,6 +18,7 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 import CallToActionIcon from "@material-ui/icons/CallToAction";
 import HeadsetMicIcon from "@material-ui/icons/HeadsetMic";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const us = makeStyles((theme) => ({
     fabs: {
@@ -57,6 +58,10 @@ const FABs = ({ history, location: { search }, state, set }) => {
 
     const handleChange = ({ target: { name, checked } }) => {
         set({ ...state, [name]: checked });
+    };
+
+    const deleteRoundWinner = () => {
+        ws.set_live_settings({ round_winner: null });
     };
 
     const changeAll = () => {
@@ -184,6 +189,18 @@ const FABs = ({ history, location: { search }, state, set }) => {
                             })
                         }>
                         <HeadsetMicIcon />
+                    </Fab>
+                </Tooltip>
+                <Tooltip
+                    title="Hide Round Winner Flash Screen"
+                    placement="left">
+                    <Fab
+                        className="fab"
+                        // aria-haspopup="true"
+                        size="medium"
+                        color="secondary"
+                        onClick={deleteRoundWinner}>
+                        <DeleteIcon />
                     </Fab>
                 </Tooltip>
             </div>
