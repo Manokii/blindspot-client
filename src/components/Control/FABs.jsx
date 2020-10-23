@@ -41,9 +41,37 @@ const us = makeStyles((theme) => ({
 const FABs = ({ history, location: { search }, state, set }) => {
     const params = qs.parse(search, { ignoreQueryPrefix: true });
     const c = us();
-    const { inverse, lower_thirds, talents } = useSelector(
-        (state) => state.live
-    );
+    const {
+        inverse,
+        lower_thirds = {
+            headline: "KDR Series",
+            subtext: "#Globe #LegionxIntel #XSplit #KDRseries #StepUpYourGame",
+            live: false,
+        },
+        talents = {
+            casters: [
+                {
+                    name: "Daks",
+                    social: "@dakscasts",
+                    live: true,
+                },
+                {
+                    name: "Vyminal",
+                    social: "@vyminal",
+                    live: true,
+                },
+            ],
+            observers: [
+                {
+                    name: "DodgeThiss",
+                    social: "@dodgethiss_",
+                    live: true,
+                },
+            ],
+            liveOnLowerThirds: true,
+            live: true,
+        },
+    } = useSelector((state) => state.live);
     const ws = useContext(wsContext);
     const [anchorElement, setAnchor] = useState(null);
 
@@ -173,12 +201,12 @@ const FABs = ({ history, location: { search }, state, set }) => {
                                 talents: {
                                     ...talents,
                                     live: !Boolean(
-                                        talents.live &&
-                                            talents.liveOnLowerThirds
+                                        talents?.live &&
+                                            talents?.liveOnLowerThirds
                                     ),
                                     liveOnLowerThirds: !Boolean(
-                                        talents.live &&
-                                            talents.liveOnLowerThirds
+                                        talents?.live &&
+                                            talents?.liveOnLowerThirds
                                     ),
                                 },
                             })

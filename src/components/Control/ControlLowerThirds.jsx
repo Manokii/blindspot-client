@@ -11,19 +11,6 @@ import { useEffect } from "react";
 import { wsContext } from "../WebsocketProvider";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-// const q = makeStyles((theme) => ({
-//     root: {
-//         display: "flex",
-//         flexDirection: "column-reverse",
-
-//         "& .main-bar": {
-//             display: "flex",
-//             height: 176,
-//             width: 1795,
-//             backgroundColor: "white",
-//         },
-//     },
-// }));
 
 const q = makeStyles((theme) => ({
     root: {
@@ -53,7 +40,6 @@ const ControlLowerThirds = () => {
         casters: [],
         observers: [],
         live: false,
-        liveOnLowerThirds: false,
     });
 
     const [m, setM] = useState({
