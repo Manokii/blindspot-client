@@ -174,7 +174,7 @@ const ControlVeto = () => {
                 profile: b.Profile,
                 side: 'b',
                 isFinalGame: isFinals,
-                loser: b.Profile,
+                loser: a.Profile,
                 map: maps.veto[index].map
             }
         })
