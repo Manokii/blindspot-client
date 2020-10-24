@@ -112,7 +112,6 @@ const ControlVeto = () => {
             pool: [],
             veto: [],
         },
-        round_winner,
     } = useSelector((state) => state.live);
 
     const {

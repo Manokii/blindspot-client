@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { wsContext } from "../WebsocketProvider";
 import { withRouter } from "react-router-dom";
-import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 
 import {
     makeStyles,
@@ -59,8 +58,6 @@ const ControlInfobox = ({ history }) => {
     const {
         match_current,
         is_current_match_polling = true,
-        // infoBoxContentType = "current_match",
-        inverse = false,
         current_match_state = "Up Next",
         maps = {
             bestOf: "bo3",
@@ -100,18 +97,18 @@ const ControlInfobox = ({ history }) => {
             is_current_match_polling: !is_current_match_polling,
         });
 
-    const changeTeamShortname = (teamSide) => ({
-        currentTarget: { value },
-    }) => {
-        if (teamSide === "a")
-            return ws.set_live_settings({
-                match_current: { ...match_current, aShortname: value },
-            });
-        if (teamSide === "b")
-            return ws.set_live_settings({
-                match_current: { ...match_current, bShortname: value },
-            });
-    };
+    // const changeTeamShortname = (teamSide) => ({
+    //     currentTarget: { value },
+    // }) => {
+    //     if (teamSide === "a")
+    //         return ws.set_live_settings({
+    //             match_current: { ...match_current, aShortname: value },
+    //         });
+    //     if (teamSide === "b")
+    //         return ws.set_live_settings({
+    //             match_current: { ...match_current, bShortname: value },
+    //         });
+    // };
 
     const handleChange = ({ currentTarget: { name, value } }) =>
         set({ ...state, [name]: value });

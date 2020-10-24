@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
                 position: "relative",
                 // alignItems: "flex-end",
                 justifyContent: "center",
-                position: "relative",
                 // overflow: "hidden",
                 zIndex: 10,
                 "& .players": {
@@ -151,8 +150,7 @@ const KDRRoundWinner = () => {
     const {
         round_winner = { side: "a" },
         match_current_player_agents = { a: [], b: [] },
-        match_current,
-        inverse = false,
+        match_current
     } = useSelector((state) => state.live);
 
     const gitImageStyle = {

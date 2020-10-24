@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, Typography, Button, Paper } from "@material-ui/core";
 import MatchesWidget from "../MatchesWidget";
 import { useDispatch, useSelector } from "react-redux";
