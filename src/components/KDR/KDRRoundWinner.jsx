@@ -188,6 +188,14 @@ const KDRRoundWinner = () => {
         }
     };
 
+    const getScore = () => {
+        if(round_winner?.side === 'a'){
+            return `${match_current?.EntityParticipantA?.Score} - ${match_current?.EntityParticipantB?.Score} — `
+        } else {
+            return `${match_current?.EntityParticipantB?.Score} - ${match_current?.EntityParticipantA?.Score} — `
+        }
+    }
+
     return (
         <div className={classes.roundWinner}>
             <Transition
@@ -319,14 +327,14 @@ const KDRRoundWinner = () => {
                                                 className="headline"
                                                 variant="h1"
                                                 color="initial">
-                                                {round_winner?.profile
+                                                {round_winner?.isFinalGame ? 'GRAND CHAMPIONS' : round_winner?.profile
                                                     ?.DisplayName + " Win"}
                                             </Typography>
                                             <Typography
                                                 className="subtext"
-                                                variant="h4">{`VS ${
+                                                variant="h4">{round_winner?.isFinalGame && getScore()}{`VS ${
                                                 round_winner?.loser?.DisplayName
-                                            } — Game ${
+                                            }${!round_winner?.isFinalGame ? ` — Game ${
                                                 match_current
                                                     ?.EntityParticipantA
                                                     ?.Score +
@@ -334,7 +342,7 @@ const KDRRoundWinner = () => {
                                                     ?.EntityParticipantB?.Score
                                             } — ${
                                                 round_winner?.map
-                                            }`}</Typography>
+                                            }` : ''}`}</Typography>
                                         </div>
                                     )}
                                 </Spring>
