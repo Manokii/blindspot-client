@@ -11,34 +11,28 @@ const theme = responsiveFontSizes(
     createMuiTheme({
         typography: {
             h1: {
-                fontFamily: "Tungsten",
+                fontFamily: "Neuterous",
                 textTransform: "uppercase",
-                letterSpacing: 1,
             },
             h2: {
-                fontFamily: "Tungsten",
+                fontFamily: "Neuterous",
                 textTransform: "uppercase",
-                letterSpacing: 1,
             },
             h3: {
-                fontFamily: "Tungsten",
+                fontFamily: "Neuterous",
                 textTransform: "uppercase",
-                letterSpacing: 1,
             },
             h4: {
-                fontFamily: "Tungsten",
+                fontFamily: "Neuterous",
                 textTransform: "uppercase",
-                letterSpacing: 1,
             },
             h5: {
-                fontFamily: "Tungsten",
+                fontFamily: "Neuterous",
                 textTransform: "uppercase",
-                letterSpacing: 1,
             },
             h6: {
-                fontFamily: "Tungsten",
+                fontFamily: "Neuterous",
                 textTransform: "uppercase",
-                letterSpacing: 0.5,
             },
         },
         palette: {
@@ -49,6 +43,7 @@ const theme = responsiveFontSizes(
             },
             type: "dark",
             primary: {
+                dark: "#071526",
                 main: "#0b1f37",
                 light: "#00b9ab",
             },
@@ -56,8 +51,8 @@ const theme = responsiveFontSizes(
                 main: "#ff4050",
             },
             background: {
-                default: "#202022",
-                paper: "#202022",
+                default: "#071526",
+                paper: "#071526",
             },
         },
     })

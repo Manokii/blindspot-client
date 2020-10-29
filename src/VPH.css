@@ -31,6 +31,10 @@
     src: url("./assets/whatka.ttf");
 }
 
-* {
+@font-face {
+    font-family: "Neuterous";
+    src: url("./assets/Neuterous.otf");
+}
+src * {
     backface-visibility: hidden;
 }

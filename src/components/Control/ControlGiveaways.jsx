@@ -170,7 +170,7 @@ const ControlGiveaways = ({ history }) => {
     ) : (
         <div className={c.noTournament}>
             <Typography variant="caption" color="initial">
-                No Tournament Found
+                No Giveaways Found
             </Typography>
             <Button
                 onClick={() => history.push("/giveaways")}

@@ -31,8 +31,7 @@ const us = makeStyles((theme) => ({
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         gridGap: theme.spacing(2),
         overflow: "auto",
-        // backgroundColor: theme.palette.background.default,
-        backgroundColor: "#202022",
+        backgroundColor: theme.palette.background.default,
         padding: theme.spacing(2),
 
         [theme.breakpoints.up("sm")]: {

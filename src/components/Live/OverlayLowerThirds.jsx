@@ -11,6 +11,7 @@ import albumCover from "../../assets/kdr-album-cover.jpg";
 import LiveVeto from "./OverlayVeto";
 import logoLockup from "../../assets/logos.png";
 import Overlaytalents from "./OverlayTalents";
+import IntelBanner from "../../assets/intel_banner_horizontal.jpg";
 
 import Ticker from "react-ticker";
 import OverlayGiveaways from "./OverlayGiveaways";
@@ -38,7 +39,7 @@ const q = makeStyles((theme) => ({
                 minWidth: 358,
                 width: 358,
                 backgroundColor: theme.palette.primary.main,
-                borderBottom: `4px solid ${theme.palette.primary.light}`,
+                borderBottom: `10px solid ${theme.palette.primary.light}`,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -65,7 +66,7 @@ const q = makeStyles((theme) => ({
                 "& .vs": {
                     margin: theme.spacing(0, 3),
                     fontWeight: "bold",
-                    color: "rgba(255,255,255,.75",
+                    color: "rgba(255,255,255,1)",
                 },
             },
 
@@ -81,11 +82,11 @@ const q = makeStyles((theme) => ({
                     alignItems: "center",
                     padding: theme.spacing(1, 3),
                     color: "#111923",
-                    fontFamily: "Antonio",
 
                     "& .content": {
                         transform: "translateY(2px)",
                         width: "100%",
+                        fontFamily: "Tungsten",
                     },
                 },
                 "& .sub": {
@@ -116,7 +117,8 @@ const q = makeStyles((theme) => ({
                 backgroundColor: "white",
                 display: "flex",
                 padding: theme.spacing(2),
-                backgroundColor: "#000",
+                backgroundColor: theme.palette.primary.dark,
+                // borderTop: `3px solid ${theme.palette.primary.light}`,
 
                 backgroundSize: "90%",
                 backgroundRepeat: "no-repeat",
@@ -203,6 +205,11 @@ const q = makeStyles((theme) => ({
     },
 
     talents: { marginTop: theme.spacing(1.5) },
+
+    intelBanner: {
+        width: 1755,
+        height: 216.96428571429,
+    },
 }));
 
 const LiveLowerThirds = () => {
@@ -218,10 +225,11 @@ const LiveLowerThirds = () => {
         },
         giveaways = [],
         talents = { casters: [], observers: [] },
+        banners = { intel: false },
     } = useSelector((state) => state.live);
     const {
-        EntityParticipantA: a = {},
-        EntityParticipantB: b = {},
+        EntityParticipantA: a = { Score: 0 },
+        EntityParticipantB: b = { Score: 0 },
         aShortname = "TEAMA",
         bShortname = "TEAMB",
     } = match_current;
@@ -239,6 +247,44 @@ const LiveLowerThirds = () => {
     };
     return (
         <div className={c.root}>
+            <Transition
+                items={banners.intel}
+                from={{
+                    opacity: 0,
+                    clipPath: `polygon(0% 0%, 0% 0%, 0% 100%,0% 100%)`,
+                    transform: "translateY(20px)",
+                    height: 0,
+                    marginTop: 0,
+                }}
+                enter={[
+                    {
+                        height: 216.96428571429,
+                        opacity: 1,
+                        transform: "translateY(0px)",
+                        marginTop: 16,
+                    },
+                    { clipPath: `polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)` },
+                ]}
+                leave={{
+                    opacity: 0,
+                    clipPath: `polygon(0% 0%, 0% 0%, 0% 100%,0% 100%)`,
+                    transform: "translateY(20px)",
+                    height: 0,
+                    marginTop: 0,
+                }}>
+                {(show) =>
+                    show &&
+                    ((props) => (
+                        <img
+                            src={IntelBanner}
+                            style={props}
+                            className={c.intelBanner}
+                            alt="Intel"
+                        />
+                    ))
+                }
+            </Transition>
+
             <Transition
                 items={lower_thirds.live}
                 from={{
@@ -288,10 +334,9 @@ const LiveLowerThirds = () => {
                                     {!logoCheck(a.Profile) && aShortname}
                                 </div>
                                 <Typography
-                                    variant="h3"
+                                    variant="h4"
                                     className="vs"
-                                    color="primary"
-                                    style={{ fontFamily: "Sivar" }}>
+                                    color="primary">
                                     {a.Score} VS {b.Score}
                                 </Typography>
                                 <div
@@ -344,10 +389,6 @@ const LiveLowerThirds = () => {
                     ))
                 }
             </Transition>
-
-            {/* <div className={c.giveaways}>
-                <OverlayGiveaways onLowerThirds={true} />
-            </div> */}
 
             <Transition
                 items={
