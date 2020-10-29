@@ -15,6 +15,7 @@ import { wsContext } from "../WebsocketProvider";
 
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { withRouter } from "react-router-dom";
 
 const q = makeStyles((theme) => ({
     root: {
@@ -37,251 +38,22 @@ const q = makeStyles((theme) => ({
             },
         },
     },
+    noTournament: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+        flexDirection: "column",
+    },
 }));
 
-const ControlGiveaways = () => {
+const ControlGiveaways = ({ history }) => {
     const c = q();
     const ws = useContext(wsContext);
     const { giveaways } = useSelector((state) => state.live);
     const [state, set] = useState({
-        giveaways: [
-            {
-                prizes: [
-                    {
-                        product: "GCash 500",
-                        imgUrl:
-                            "https://s3.amazonaws.com/apple-platypus-production/assets/attachments/5df2/2077/6f75/3236/bbd7/9a1e/original/GCash_Horizontal_-_Full_Blue_%28Transparent%29.png",
-                        amount: 3,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion K500 Gaming Keyboard",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-legion-k500-keyboard-feature-05.png",
-                        amount: 1,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (3-months)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 5,
-                        winners: [],
-                    },
-                ],
-                date: "2020-10-10T06:21:00.000Z",
-                live: false,
-            },
-            {
-                prizes: [
-                    {
-                        product: "GCash 500",
-                        imgUrl:
-                            "https://s3.amazonaws.com/apple-platypus-production/assets/attachments/5df2/2077/6f75/3236/bbd7/9a1e/original/GCash_Horizontal_-_Full_Blue_%28Transparent%29.png",
-                        amount: 3,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion M500 Gaming Mouse",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-legion-m500-mouse-feature-01.png",
-                        amount: 1,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (3-months)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 5,
-                        winners: [],
-                    },
-                ],
-                date: "2020-10-11T06:32:00.000Z",
-                live: false,
-            },
-            {
-                prizes: [
-                    {
-                        product: "GCash 500",
-                        imgUrl:
-                            "https://s3.amazonaws.com/apple-platypus-production/assets/attachments/5df2/2077/6f75/3236/bbd7/9a1e/original/GCash_Horizontal_-_Full_Blue_%28Transparent%29.png",
-                        amount: 3,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion H300 Gaming Headset",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png",
-                        amount: 1,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (3-months)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 5,
-                        winners: [],
-                    },
-                ],
-                date: "2020-10-17T06:34:00.000Z",
-                live: false,
-            },
-            {
-                prizes: [
-                    {
-                        product: "GCash 500",
-                        imgUrl:
-                            "https://s3.amazonaws.com/apple-platypus-production/assets/attachments/5df2/2077/6f75/3236/bbd7/9a1e/original/GCash_Horizontal_-_Full_Blue_%28Transparent%29.png",
-                        amount: 3,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion H300 Gaming Headset",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png",
-                        amount: 1,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (1-month)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 10,
-                        winners: [],
-                    },
-                ],
-                date: "2020-10-18T06:38:00.000Z",
-                live: false,
-            },
-            {
-                prizes: [
-                    {
-                        product: "GCash 500",
-                        imgUrl:
-                            "https://s3.amazonaws.com/apple-platypus-production/assets/attachments/5df2/2077/6f75/3236/bbd7/9a1e/original/GCash_Horizontal_-_Full_Blue_%28Transparent%29.png",
-                        amount: 3,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion K500 Gaming Keyboard",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-legion-k500-keyboard-feature-05.png",
-                        amount: 1,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion M500 Gaming Mouse",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-legion-m500-mouse-feature-01.png",
-                        amount: 1,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (1-month)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 10,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (3-months)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 5,
-                        winners: [],
-                    },
-                ],
-                date: "2020-10-24T06:40:00.000Z",
-                live: false,
-            },
-            {
-                prizes: [
-                    {
-                        product: "GCash 500",
-                        imgUrl:
-                            "https://s3.amazonaws.com/apple-platypus-production/assets/attachments/5df2/2077/6f75/3236/bbd7/9a1e/original/GCash_Horizontal_-_Full_Blue_%28Transparent%29.png",
-                        amount: 3,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion K500 Gaming Keyboard",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-legion-k500-keyboard-feature-05.png",
-                        amount: 2,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion M500 Gaming Mouse",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-legion-m500-mouse-feature-01.png",
-                        amount: 2,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion H300 Gaming Headset",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png",
-                        amount: 2,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (1-month)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 10,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (3-months)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 5,
-                        winners: [],
-                    },
-                ],
-                date: "2020-10-25T06:43:00.000Z",
-                live: false,
-            },
-            {
-                prizes: [
-                    {
-                        product: "GCash 500",
-                        imgUrl:
-                            "https://s3.amazonaws.com/apple-platypus-production/assets/attachments/5df2/2077/6f75/3236/bbd7/9a1e/original/GCash_Horizontal_-_Full_Blue_%28Transparent%29.png",
-                        amount: 3,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion K500 Gaming Keyboard",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-legion-k500-keyboard-feature-05.png",
-                        amount: 1,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion M500 Gaming Mouse",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-legion-m500-mouse-feature-01.png",
-                        amount: 1,
-                        winners: [],
-                    },
-                    {
-                        product: "Legion H300 Gaming Headset",
-                        imgUrl:
-                            "https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png",
-                        amount: 1,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (1-month)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 10,
-                        winners: [],
-                    },
-                    {
-                        product: "XSplit License (3-months)",
-                        imgUrl: "https://i.imgur.com/66H7bHE.png",
-                        amount: 5,
-                        winners: [],
-                    },
-                ],
-                date: "2020-10-31T06:49:00.000Z",
-                live: false,
-            },
-        ],
-        selectedIndex: 4,
+        giveaways: [],
+        selectedIndex: 0,
     });
 
     const { giveaways: gg, selectedIndex: ii } = state;
@@ -327,7 +99,7 @@ const ControlGiveaways = () => {
         });
     };
 
-    return (
+    return Boolean(gg.length) ? (
         <div className={c.root}>
             <FormControl variant="filled">
                 <InputLabel
@@ -395,7 +167,19 @@ const ControlGiveaways = () => {
                 {gg[ii].live ? "Live: Prizes" : "Show Prizes"}
             </Button>
         </div>
+    ) : (
+        <div className={c.noTournament}>
+            <Typography variant="caption" color="initial">
+                No Tournament Found
+            </Typography>
+            <Button
+                onClick={() => history.push("/giveaways")}
+                variant="outlined"
+                size="small">
+                Set Giveaways
+            </Button>
+        </div>
     );
 };
 
-export default ControlGiveaways;
+export default withRouter(ControlGiveaways);

@@ -5,23 +5,22 @@ import { makeStyles, Box } from "@material-ui/core";
 import SideNav from "./components/Navigation";
 import TournamentPage from "./components/TournamentPage";
 import ControlList from "./components/Control/ControlList";
-import Live from "./components/KDR/KDRPage";
-import LiveInfoBox from "./components/KDR/KDRInfoBox";
-import LiveMatchWidgets from "./components/KDR/KDRMatchWidgets";
-import LiveIngame from "./components/KDR/KDRIngame";
-import LiveMatchUp from "./components/KDR/KDRMatchUp";
-import LiveVeto from "./components/KDR/KDRVeto";
-import LiveLowerThirds from "./components/KDR/KDRLowerThirds";
-import LiveScore from "./components/KDR/KDRScore";
-import LiveIngamePlayers from "./components/KDR/KDRIngamePlayers";
-import LiveSponsorSlot from "./components/KDR/KDRSponsorSlot";
-import LivePreviousMatches from "./components/KDR/KDRPreviousMatches";
-import LiveMVP from "./components/KDR/KDRMVP";
-import Downstage from "./components/KDR/Downstage";
-import Downstage2 from "./components/KDR/Downstage2";
+import Live from "./components/Live/OverlayPage";
+import LiveMatchWidgets from "./components/Live/OverlayMatchWidgets";
+import LiveIngame from "./components/Live/OverlayIngame";
+import LiveMatchUp from "./components/Live/OverlayMatchUp";
+import LiveVeto from "./components/Live/OverlayVeto";
+import LiveLowerThirds from "./components/Live/OverlayLowerThirds";
+import LiveScore from "./components/Live/OverlayScore";
+import LiveIngamePlayers from "./components/Live/OverlayIngamePlayers";
+import LiveSponsorSlot from "./components/Live/OverlaySponsorSlot";
+import LivePreviousMatches from "./components/Live/OverlayPreviousMatches";
+import LiveMVP from "./components/Live/OverlayMVP";
+import Downstage from "./components/Live/Downstage";
+import Downstage2 from "./components/Live/Downstage2";
 import GiveawayPage from "./components/GiveawayPage";
-import KDRTalents from "./components/KDR/KDRTalents";
-import KDRRoundWinner from "./components/KDR/KDRRoundWinner";
+import OverlayTalents from "./components/Live/OverlayTalents";
+import OverlayRoundWinner from "./components/Live/OverlayRoundWinner";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,7 +47,6 @@ const App = () => {
                     <Route path="/tournament" component={TournamentPage} />
                     <Route path="/control" component={ControlList} />
                     <Route path="/kdr" exact component={Live} />
-                    <Route path="/kdr/infobox" exact component={LiveInfoBox} />
                     <Route path="/kdr/matchwidgets" exact component={LiveMatchWidgets} />
                     <Route path="/kdr/ingame" exact component={LiveIngame} />
                     <Route path="/kdr/matchup" exact component={LiveMatchUp} />
@@ -62,8 +60,8 @@ const App = () => {
                     <Route path="/downstage" exact component={Downstage} />
                     <Route path="/downstage2" exact component={Downstage2} />
                     <Route path="/giveaways" exact component={GiveawayPage} />
-                    <Route path="/kdr/talents" exact component={KDRTalents} />
-                    <Route path="/kdr/roundwinner" exact component={KDRRoundWinner} />
+                    <Route path="/kdr/talents" exact component={OverlayTalents} />
+                    <Route path="/kdr/roundwinner" exact component={OverlayRoundWinner} />
                 </Switch>
             </Box>
         </div>

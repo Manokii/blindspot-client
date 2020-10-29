@@ -8,12 +8,12 @@ import globe from "../../assets/globe.png";
 import { Transition } from "react-spring/renderprops";
 import paper from "../../assets/paper1.jpg";
 import albumCover from "../../assets/kdr-album-cover.jpg";
-import LiveVeto from "./KDRVeto";
+import LiveVeto from "./OverlayVeto";
 import logoLockup from "../../assets/logos.png";
-import KDRtalents from "./KDRTalents";
+import Overlaytalents from "./OverlayTalents";
 
 import Ticker from "react-ticker";
-import KDRGiveaways from "./KDRGiveaways";
+import OverlayGiveaways from "./OverlayGiveaways";
 
 const q = makeStyles((theme) => ({
     root: {
@@ -374,7 +374,7 @@ const LiveLowerThirds = () => {
             </Transition>
 
             {/* <div className={c.giveaways}>
-                <KDRGiveaways onLowerThirds={true} />
+                <OverlayGiveaways onLowerThirds={true} />
             </div> */}
 
             <Transition
@@ -409,7 +409,7 @@ const LiveLowerThirds = () => {
                     show &&
                     ((props) => (
                         <div style={props} className={c.talents}>
-                            <KDRGiveaways onLowerThirds={true} />
+                            <OverlayGiveaways onLowerThirds={true} />
                         </div>
                     ))
                 }
@@ -494,7 +494,7 @@ const LiveLowerThirds = () => {
                     show &&
                     ((props) => (
                         <div style={props} className={c.talents}>
-                            <KDRtalents onLowerThirds={true} />
+                            <Overlaytalents onLowerThirds={true} />
                         </div>
                     ))
                 }
