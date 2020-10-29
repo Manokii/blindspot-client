@@ -2,122 +2,46 @@ import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
-import textureA from "../../assets/TextureA.png";
-import textureB from "../../assets/paper_texture4.jpg";
-import tapeA1 from "../../assets/TapeA1.png";
-import tapeA2 from "../../assets/TapeA2.png";
-import tapeB1 from "../../assets/TapeB1.png";
-import tapeB2 from "../../assets/TapeB2.png";
 import agents from "../../assets/agents.json";
 import defaultAgent from "../../assets/default-agent-light.png";
+import { Transition } from "react-spring/renderprops";
 
 const us = makeStyles((theme) => ({
     matchup: {
         position: "relative",
-        // width: 1980,
-        // height: 1080,
-        width: "100%", //
-        height: "100%", //
+        width: "100%",
+        height: "100%",
         display: "flex",
-        justifyContent: "center", //
-        alignItems: "center", //
-        // padding: theme.spacing(0, 5.5), //
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
         "& .a": {
-            // left: 44,
-            transform: "rotate(-2deg)",
-            "& .texture": { backgroundImage: `url(${textureA})` },
-
-            "& .tape1": {
-                position: "absolute",
-                height: 109,
-                width: 283,
-                top: -50,
-                left: -50,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tapeA1})`,
-                zIndex: 4,
-            },
-            "& .tape2": {
-                position: "absolute",
-                height: 109,
-                width: 283,
-                bottom: -60,
-                left: 380,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tapeA2})`,
-                zIndex: 4,
-            },
-
             "& .headline": {
                 flexDirection: "row-reverse",
                 "& .logo": {
                     marginLeft: theme.spacing(2),
-
                     filter: "drop-shadow(-5px 5px 5px rgba(0,0,0,0.5))",
                 },
             },
         },
 
         "& .b": {
-            // left: 976,
-            transform: "rotate(1deg)",
-            "& .texture": { backgroundImage: `url(${textureB})` },
-
-            "& .tape1": {
-                position: "absolute",
-                height: 106,
-                width: 148,
-                right: -40,
-                top: -40,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tapeB1})`,
-                zIndex: 4,
-            },
-            "& .tape2": {
-                position: "absolute",
-                height: 64,
-                width: 131,
-                left: -37,
-                bottom: -40,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tapeB2})`,
-                zIndex: 4,
-            },
-            "& .cards": {
-                "& .card": {
-                    // transform: "scaleX(-1)",
-                },
-            },
-
             "& .headline": {
                 flexDirection: "row",
                 "& .logo": {
                     marginRight: theme.spacing(2),
-
                     filter: "drop-shadow(5px 5px 5px rgba(0,0,0,0.5))",
                 },
             },
         },
 
         "& .team": {
-            // position: "absolute",
-            height: 601,
-            width: 901,
-            // top: 237,
-
-            backgroundColor: "#d4d4d4",
+            width: 1125,
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-around",
             padding: theme.spacing(3, 3, 1, 3),
             margin: theme.spacing(0, 2),
-
-            boxShadow: "-5px 5px 20px rgba(0,0,0,.2)",
-
             "& .texture": {
                 position: "absolute",
                 height: "100%",
@@ -132,10 +56,6 @@ const us = makeStyles((theme) => ({
             "& .headline": {
                 display: "flex",
                 alignItems: "center",
-
-                transform: "translateY(-5px)",
-                zIndex: 2,
-                // marginBottom: theme.spacing(2),
                 "& .logo": {
                     height: 75,
                     width: 75,
@@ -143,9 +63,6 @@ const us = makeStyles((theme) => ({
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                     transform: "translateY(-5px)",
-                    // border: "2px solid black",
-                    // borderRadius: 10,
-                    // backgroundColor: "rgba(0,0,0,.2)",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -158,34 +75,49 @@ const us = makeStyles((theme) => ({
                     textAlign: "center",
                 },
                 "& .team-name": {
-                    fontFamily: "Sivar",
+                    fontFamily: "Neuterous",
                     textAlign: "center",
-                    paddingBottom: theme.spacing(1),
-                    // fontWeight: "bolder",
+                    color: "#fff",
+                    padding: theme.spacing(2, 0),
                     letterSpacing: 2,
                     zIndex: 2,
-                    paddingTop: 2,
                 },
             },
 
             "& .cards": {
                 display: "flex",
                 justifyContent: "space-between",
-                zIndex: 2,
                 "& .card": {
-                    height: 401,
-                    width: 158,
-                    backgroundColor: "#101a23",
+                    height: 258,
+                    width: 200,
+                    borderTopLeftRadius: 25,
+                    borderTopRightRadius: 25,
+                    border: `2px solid ${theme.palette.secondary.main}`,
+                    backgroundColor: "#0b1f37",
                     // backgroundColor: theme.palette.secondary.main,
                     // backgroundSize: "350%",
                     // backgroundPosition: "center top",
-                    backgroundPosition: "47% -5%",
-                    backgroundSize: "375%",
+                    // backgroundPosition: "47% -5%",
+                    // backgroundSize: "375%",
+
+                    backgroundSize: "cover",
+                    backgroundPosition: "top center",
                     backgroundRepeat: "no-repeat",
                     overflow: "hidden",
                     transitionProperty: "background-image",
                     transition: "0.6s cubic-bezier(0.22, 1, 0.36, 1)",
                     // backgroundImage: `url(${defaultAgent})`,
+                    "& .agent": {
+                        height: 258,
+                        width: 200,
+                        backgroundColor: "#0b1f37",
+                        backgroundPosition: "47% -5%",
+                        backgroundSize: "375%",
+                        backgroundRepeat: "no-repeat",
+                        overflow: "hidden",
+                        transitionProperty: "background-image",
+                        transition: "0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+                    },
 
                     "& .webm": {
                         height: "275%",
@@ -202,17 +134,21 @@ const us = makeStyles((theme) => ({
 
             "& .names": {
                 display: "flex",
-                height: 75,
                 justifyContent: "space-between",
-                zIndex: 2,
                 "& .name": {
-                    width: 158,
+                    display: "flex",
+                    backgroundColor: theme.palette.secondary.main,
+                    width: 200,
+                    height: 40,
                     textAlign: "center",
                     fontFamily: "Anton",
                     textTransform: "uppercase",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    color: theme.palette.primary.main,
+                    borderBottomLeftRadius: 25,
+                    borderBottomRightRadius: 25,
                 },
             },
         },
@@ -280,17 +216,18 @@ const LiveMatchUp = ({ history }) => {
     };
 
     const gitImageStyleBitchiz = {
-        viper: { backgroundPosition: "42% -5%", backgroundSize: "390%" },
-        sage: { backgroundPosition: "55% -2%" },
-        reyna: { backgroundPosition: "58% 22%", backgroundSize: "400%" },
-        raze: { backgroundPosition: "47% 9%", backgroundSize: "365%" },
+        viper: { backgroundPosition: "42% -3%", backgroundSize: "390%" },
+        sage: { backgroundPosition: "55% -1%" },
+        reyna: { backgroundPosition: "58% 15%", backgroundSize: "400%" },
+        raze: { backgroundPosition: "47% 5%", backgroundSize: "365%" },
         phoenix: { backgroundPosition: "47% -5%", backgroundSize: "365%" },
         brimstone: { backgroundPosition: "50% 3%", backgroundSize: "365%" },
-        sova: { backgroundPosition: "55% -5%", backgroundSize: "350%" },
-        breach: { backgroundPosition: "47% -5%", backgroundSize: "375%" },
-        jett: { backgroundPosition: "35% 2%", backgroundSize: "375%" },
-        omen: { backgroundPosition: "50% -5%", backgroundSize: "350%" },
-        killjoy: { backgroundPosition: "60% -5%", backgroundSize: "240%" },
+        sova: { backgroundPosition: "55% -4%", backgroundSize: "350%" },
+        breach: { backgroundPosition: "47% -3%", backgroundSize: "375%" },
+        jett: { backgroundPosition: "35% -1%", backgroundSize: "335%" },
+        omen: { backgroundPosition: "50% -3%", backgroundSize: "350%" },
+        killjoy: { backgroundPosition: "58% -4%", backgroundSize: "240%" },
+        cypher: { backgroundPosition: "52% -3%", backgroundSize: "375%" },
     };
 
     const getAgentVideo = (id) => {
@@ -334,38 +271,89 @@ const LiveMatchUp = ({ history }) => {
         }
     };
 
+    const gitPlayerPhoto = (name) => {
+        try {
+            let src = require(`../../assets/${name
+                .trim()
+                .toLowerCase()
+                .replace(/ /gi, "_")}.png`);
+            return src;
+        } catch (err) {
+            return "";
+        }
+    };
+
     return (
         <div className={c.matchup}>
             <div className="team a">
                 {/* prettier-ignore */}
                 <div className="headline">
+
+                    {gitTeamLogo(ateam?.Profile) && 
+                    
                     <div className="logo"
                         style={{ 
                             backgroundImage: `url(${gitTeamLogo(ateam?.Profile)})`,
-                            backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#101a23' : '#ff4656')
+                            backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#0b1f37' : '#ff4050')
                         }}>{!gitTeamLogo(ateam?.Profile) && aShortname}</div>
-                    <Typography color="textSecondary" variant="h3" className="team-name">
+                    }
+                    <Typography color="textSecondary" variant="h2" className="team-name">
                         {ateam?.Profile?.Nickname}
                     </Typography>
                 </div>
                 <div className="cards">
                     {a.map((player) => (
                         <div key={player.id} className="player">
-                            {/* prettier-ignore */}
-                            <div className="card"
+                            <div
+                                className="card"
                                 style={{
-                                    backgroundImage:
-                                        player.agent && !getAgentVideo(player.agent)
-                                            ? `url(${getAgentImage(player.agent)})`
-                                            : imgOnly && player.agent
-                                            ? `url(${getAgentImage(player.agent)})`
-                                            : !player.agent 
-                                            ? `url(${defaultAgent})`
-                                            : "none",
-                                    backgroundColor: inverse ? '#101a23' :  '#ff4656',
-                                    ...gitImageStyleBitchiz[agents[player.agent]] || ''
+                                    backgroundColor: inverse
+                                        ? "#0b1f37"
+                                        : "#ff4050",
+                                    backgroundImage: `url(${gitPlayerPhoto(
+                                        player.name
+                                    )})`,
                                 }}>
-                                {!imgOnly && (
+                                <Transition
+                                    items={player.agent}
+                                    from={{
+                                        transform: "translateY(-100%)",
+                                    }}
+                                    enter={{
+                                        transform: "translateY(0%)",
+                                    }}>
+                                    {(show) =>
+                                        show &&
+                                        ((props) => (
+                                            <div
+                                                className="agent"
+                                                style={{
+                                                    ...props,
+                                                    backgroundImage:
+                                                        player.agent &&
+                                                        !getAgentVideo(
+                                                            player.agent
+                                                        )
+                                                            ? `url(${getAgentImage(
+                                                                  player.agent
+                                                              )})`
+                                                            : imgOnly &&
+                                                              player.agent
+                                                            ? `url(${getAgentImage(
+                                                                  player.agent
+                                                              )})`
+                                                            : "none",
+                                                    backgroundColor: inverse
+                                                        ? "#0b1f37"
+                                                        : "#ff4050",
+                                                    ...(gitImageStyleBitchiz[
+                                                        agents[player.agent]
+                                                    ] || ""),
+                                                }}></div>
+                                        ))
+                                    }
+                                </Transition>
+                                {/* {!imgOnly && (
                                     <video
                                         key={player.agent}
                                         loop
@@ -381,7 +369,7 @@ const LiveMatchUp = ({ history }) => {
                                             type="video/webm"
                                         />
                                     </video>
-                                )}
+                                )} */}
                             </div>
                         </div>
                     ))}
@@ -392,7 +380,7 @@ const LiveMatchUp = ({ history }) => {
                         <Typography
                             color="textSecondary"
                             key={player.id}
-                            variant="h4"
+                            variant="h6"
                             className="name">
                             {player.name}
                         </Typography>
@@ -404,62 +392,64 @@ const LiveMatchUp = ({ history }) => {
                     <div className="logo a"
                         style={{
                             backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(ateam?.Profile?.Nickname)})` : '',
-                            backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#ff4656' : '#101a23')
+                            // backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#ff4050' : '#0b1f37')
                         }}></div>
                 </div>
-                <div className="texture"></div>
-                <div className="tape1"></div>
-                <div className="tape2"></div>
             </div>
 
             <div className="team b">
-                {/* prettier-ignore */}
-
-                <div className="headline">
-                    <div className="logo"
-                        style={{
-                            backgroundImage: `url(${gitTeamLogo(bteam?.Profile)})`,
-                            backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#101a23' : '#ff4656')
-                        }}>{!gitTeamLogo(bteam?.Profile) && bShortname}</div>
-                    <Typography color="textSecondary"  variant="h3" className="team-name">
-                        {bteam?.Profile?.Nickname}
-                    </Typography>
-                </div>
-
                 <div className="cards">
                     {b.map((player) => (
                         <div key={player.id} className="player">
-                            {/* prettier-ignore */}
-                            <div className="card"
+                            <div
+                                className="card"
                                 style={{
-                                    backgroundImage:
-                                        player.agent && !getAgentVideo(player.agent)
-                                            ? `url(${getAgentImage(player.agent)})`
-                                            : imgOnly && player.agent
-                                            ? `url(${getAgentImage(player.agent)})`
-                                            : !player.agent 
-                                            ? `url(${defaultAgent})`
-                                            : "none",
-                                    backgroundColor: inverse ? '#ff4656' : '#101a23',
-                                    ...gitImageStyleBitchiz[agents[player.agent]] || ''
+                                    backgroundColor: !inverse
+                                        ? "#0b1f37"
+                                        : "#ff4050",
+                                    backgroundImage: `url(${gitPlayerPhoto(
+                                        player.name
+                                    )})`,
                                 }}>
-                                {!imgOnly && (
-                                    <video
-                                        key={player.agent}
-                                        loop
-                                        autoPlay
-                                        className="webm"
-                                        style={
-                                            gitVideoStyleBitchiz[
-                                                agents[player.agent]
-                                            ] || {}
-                                        }>
-                                        <source
-                                            src={getAgentVideo(player?.agent)}
-                                            type="video/webm"
-                                        />
-                                    </video>
-                                )}
+                                <Transition
+                                    items={player.agent}
+                                    from={{
+                                        transform: "translateY(-100%)",
+                                    }}
+                                    enter={{
+                                        transform: "translateY(0%)",
+                                    }}>
+                                    {(show) =>
+                                        show &&
+                                        ((props) => (
+                                            <div
+                                                className="agent"
+                                                style={{
+                                                    ...props,
+                                                    backgroundImage:
+                                                        player.agent &&
+                                                        !getAgentVideo(
+                                                            player.agent
+                                                        )
+                                                            ? `url(${getAgentImage(
+                                                                  player.agent
+                                                              )})`
+                                                            : imgOnly &&
+                                                              player.agent
+                                                            ? `url(${getAgentImage(
+                                                                  player.agent
+                                                              )})`
+                                                            : "none",
+                                                    backgroundColor: !inverse
+                                                        ? "#0b1f37"
+                                                        : "#ff4050",
+                                                    ...(gitImageStyleBitchiz[
+                                                        agents[player.agent]
+                                                    ] || ""),
+                                                }}></div>
+                                        ))
+                                    }
+                                </Transition>
                             </div>
                         </div>
                     ))}
@@ -470,7 +460,7 @@ const LiveMatchUp = ({ history }) => {
                         <Typography
                             color="textSecondary"
                             key={player.id}
-                            variant="h4"
+                            variant="h6"
                             className="name">
                             {player.name}
                         </Typography>
@@ -482,13 +472,32 @@ const LiveMatchUp = ({ history }) => {
                     <div className="logo b"
                         style={{
                             backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(bteam?.Profile?.Nickname)})` : '',
-                            backgroundColor: !gitTeamLogo(bteam?.Profile) && (!inverse ? '#ff4656' : '#101a23')
+                            // backgroundColor: !gitTeamLogo(bteam?.Profile) && (!inverse ? '#ff4050' : '#0b1f37')
                         }}></div>
                 </div>
 
-                <div className="texture"></div>
-                <div className="tape1"></div>
-                <div className="tape2"></div>
+                <div className="headline">
+                    {gitTeamLogo(bteam?.Profile) && (
+                        <div
+                            className="logo"
+                            style={{
+                                backgroundImage: `url(${gitTeamLogo(
+                                    bteam?.Profile
+                                )})`,
+                                backgroundColor:
+                                    !gitTeamLogo(ateam?.Profile) &&
+                                    (inverse ? "#0b1f37" : "#ff4050"),
+                            }}>
+                            {!gitTeamLogo(bteam?.Profile) && bShortname}
+                        </div>
+                    )}
+                    <Typography
+                        color="textSecondary"
+                        variant="h2"
+                        className="team-name">
+                        {bteam?.Profile?.Nickname}
+                    </Typography>
+                </div>
             </div>
         </div>
     );
