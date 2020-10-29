@@ -37,7 +37,8 @@ const q = makeStyles((theme) => ({
                 height: "100%",
                 minWidth: 358,
                 width: 358,
-                borderBottom: "4px solid #ff4656",
+                backgroundColor: theme.palette.primary.main,
+                borderBottom: `4px solid ${theme.palette.primary.light}`,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -64,18 +65,7 @@ const q = makeStyles((theme) => ({
                 "& .vs": {
                     margin: theme.spacing(0, 3),
                     fontWeight: "bold",
-                },
-
-                "& .texture": {
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    height: "100%",
-                    width: "100%",
-                    backgroundColor: "white",
-                    backgroundSize: "cover",
-                    backgroundImage: `url(${matchTexture})`,
-                    mixBlendMode: "multiply",
+                    color: "rgba(255,255,255,.75",
                 },
             },
 
@@ -87,8 +77,6 @@ const q = makeStyles((theme) => ({
 
                 "& .main": {
                     height: 76,
-                    backgroundSize: "cover",
-                    backgroundImage: `url(${mainbar})`,
                     display: "flex",
                     alignItems: "center",
                     padding: theme.spacing(1, 3),
@@ -103,13 +91,11 @@ const q = makeStyles((theme) => ({
                 "& .sub": {
                     height: 54,
                     overflowY: "hidden",
-                    backgroundSize: "cover",
-                    backgroundImage: `url(${subbar})`,
                     display: "flex",
                     alignItems: "center",
                     padding: theme.spacing(0, 3),
-                    fontFamily: "Anton",
                     fontWeight: "lighter",
+                    backgroundColor: theme.palette.secondary.main,
 
                     "& .content": {
                         fontSize: "1.7rem",
@@ -130,6 +116,7 @@ const q = makeStyles((theme) => ({
                 backgroundColor: "white",
                 display: "flex",
                 padding: theme.spacing(2),
+                backgroundColor: "#000",
 
                 backgroundSize: "90%",
                 backgroundRepeat: "no-repeat",
@@ -155,18 +142,6 @@ const q = makeStyles((theme) => ({
                         backgroundPosition: "center",
                         backgroundImage: `url(${globe})`,
                     },
-                },
-                "& .texture": {
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    height: "100%",
-                    width: "100%",
-                    backgroundColor: "white",
-                    backgroundSize: "cover",
-                    backgroundImage: `url(${paper})`,
-                    mixBlendMode: "multiply",
-                    transform: "scaleY(-1)",
                 },
             },
         },
@@ -303,7 +278,7 @@ const LiveLowerThirds = () => {
                                             a.Profile
                                         )})`,
                                         backgroundColor:
-                                            !logoCheck(a.Profile) && "#101a23",
+                                            !logoCheck(a.Profile) && "#ff4050",
                                         borderRadius:
                                             !logoCheck(a.Profile) && "10px",
                                         transform:
@@ -317,7 +292,7 @@ const LiveLowerThirds = () => {
                                     className="vs"
                                     color="primary"
                                     style={{ fontFamily: "Sivar" }}>
-                                    {a.Score} - {b.Score}
+                                    {a.Score} VS {b.Score}
                                 </Typography>
                                 <div
                                     className="team b"
@@ -326,7 +301,7 @@ const LiveLowerThirds = () => {
                                             b.Profile
                                         )})`,
                                         backgroundColor:
-                                            !logoCheck(b.Profile) && "#101a23",
+                                            !logoCheck(b.Profile) && "#ff4050",
                                         borderRadius:
                                             !logoCheck(b.Profile) && "10px",
                                         transform:
@@ -335,7 +310,6 @@ const LiveLowerThirds = () => {
                                     }}>
                                     {!logoCheck(b.Profile) && bShortname}
                                 </div>
-                                <div className="texture"></div>
                             </div>
                             <div className="longbar">
                                 <div className="main">
@@ -365,9 +339,7 @@ const LiveLowerThirds = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="sponsors">
-                                <div className="texture"></div>
-                            </div>
+                            <div className="sponsors"></div>
                         </div>
                     ))
                 }

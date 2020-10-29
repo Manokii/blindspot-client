@@ -49,10 +49,11 @@ const theme = responsiveFontSizes(
             },
             type: "dark",
             primary: {
-                main: "#0d0a20",
+                main: "#0b1f37",
+                light: "#00b9ab",
             },
             secondary: {
-                main: "#ff4656",
+                main: "#ff4050",
             },
             background: {
                 default: "#202022",

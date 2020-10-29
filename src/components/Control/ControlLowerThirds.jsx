@@ -32,8 +32,8 @@ const ControlLowerThirds = () => {
     const live = useSelector((state) => state.live);
     const { lower_thirds, talents, music } = live;
     const [state, set] = useState({
-        headline: "KDR Series",
-        subtext: "#Globe #LegionxIntel #XSplit #KDRseries #StepUpYourGame",
+        headline: "GGEZ",
+        subtext: "#Globe #LegionxIntel #XSplit #GGEZ",
         live: false,
     });
     const [t, tt] = useState({

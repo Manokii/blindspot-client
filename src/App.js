@@ -46,22 +46,22 @@ const App = () => {
                 <Switch>
                     <Route path="/tournament" component={TournamentPage} />
                     <Route path="/control" component={ControlList} />
-                    <Route path="/kdr" exact component={Live} />
-                    <Route path="/kdr/matchwidgets" exact component={LiveMatchWidgets} />
-                    <Route path="/kdr/ingame" exact component={LiveIngame} />
-                    <Route path="/kdr/matchup" exact component={LiveMatchUp} />
-                    <Route path="/kdr/veto" exact component={LiveVeto} />
-                    <Route path="/kdr/lowerthirds" exact component={LiveLowerThirds} />
-                    <Route path="/kdr/scores" exact component={LiveScore} />
-                    <Route path="/kdr/players" exact component={LiveIngamePlayers} />
-                    <Route path="/kdr/sponsors" exact component={LiveSponsorSlot} />
-                    <Route path="/kdr/previousmatches" exact component={LivePreviousMatches} />
-                    <Route path="/kdr/mvp" exact component={LiveMVP} />
+                    <Route path="/live" exact component={Live} />
+                    <Route path="/live/matchwidgets" exact component={LiveMatchWidgets} />
+                    <Route path="/live/ingame" exact component={LiveIngame} />
+                    <Route path="/live/matchup" exact component={LiveMatchUp} />
+                    <Route path="/live/veto" exact component={LiveVeto} />
+                    <Route path="/live/lowerthirds" exact component={LiveLowerThirds} />
+                    <Route path="/live/scores" exact component={LiveScore} />
+                    <Route path="/live/players" exact component={LiveIngamePlayers} />
+                    <Route path="/live/sponsors" exact component={LiveSponsorSlot} />
+                    <Route path="/live/previousmatches" exact component={LivePreviousMatches} />
+                    <Route path="/live/mvp" exact component={LiveMVP} />
                     <Route path="/downstage" exact component={Downstage} />
                     <Route path="/downstage2" exact component={Downstage2} />
                     <Route path="/giveaways" exact component={GiveawayPage} />
-                    <Route path="/kdr/talents" exact component={OverlayTalents} />
-                    <Route path="/kdr/roundwinner" exact component={OverlayRoundWinner} />
+                    <Route path="/live/talents" exact component={OverlayTalents} />
+                    <Route path="/live/roundwinner" exact component={OverlayRoundWinner} />
                 </Switch>
             </Box>
         </div>
