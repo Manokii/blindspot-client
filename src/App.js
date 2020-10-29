@@ -21,6 +21,7 @@ import Downstage2 from "./components/Live/Downstage2";
 import GiveawayPage from "./components/GiveawayPage";
 import OverlayTalents from "./components/Live/OverlayTalents";
 import OverlayRoundWinner from "./components/Live/OverlayRoundWinner";
+import FABs from "./components/Control/FABs";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -62,6 +63,9 @@ const App = () => {
                     <Route path="/giveaways" exact component={GiveawayPage} />
                     <Route path="/live/talents" exact component={OverlayTalents} />
                     <Route path="/live/roundwinner" exact component={OverlayRoundWinner} />
+                    <Route path="/fabs" exact> 
+                        <FABs fabsOnly={true}/>
+                    </Route>
                 </Switch>
             </Box>
         </div>

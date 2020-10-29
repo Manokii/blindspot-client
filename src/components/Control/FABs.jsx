@@ -19,6 +19,8 @@ import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 import CallToActionIcon from "@material-ui/icons/CallToAction";
 import HeadsetMicIcon from "@material-ui/icons/HeadsetMic";
 import DeleteIcon from "@material-ui/icons/Delete";
+import TurnedInIcon from "@material-ui/icons/TurnedIn";
+import BlockIcon from "@material-ui/icons/Block";
 
 const us = makeStyles((theme) => ({
     fabs: {
@@ -39,7 +41,7 @@ const us = makeStyles((theme) => ({
     },
 }));
 
-const FABs = ({ history, location: { search }, state, set }) => {
+const FABs = ({ history, location: { search }, state, set, fabsOnly }) => {
     const params = qs.parse(search, { ignoreQueryPrefix: true });
     const c = us();
     const {
@@ -57,20 +59,26 @@ const FABs = ({ history, location: { search }, state, set }) => {
                     live: true,
                 },
                 {
-                    name: "Vyminal",
-                    social: "@vyminal",
+                    name: "L1ng2X",
+                    social: "@l1ng2x",
                     live: true,
                 },
             ],
             observers: [
                 {
-                    name: "DodgeThiss",
-                    social: "@dodgethiss_",
+                    name: "Manoki",
+                    social: "",
                     live: true,
                 },
             ],
             liveOnLowerThirds: true,
             live: true,
+        },
+        banners = {
+            intel: false,
+        },
+        maps = {
+            onLowerThirds: false,
         },
     } = useSelector((state) => state.live);
     const ws = useContext(wsContext);
@@ -131,170 +139,312 @@ const FABs = ({ history, location: { search }, state, set }) => {
     };
 
     return (
-        <>
+        <div
+            style={
+                fabsOnly && {
+                    backgroundColor: "#1f1e1f",
+                    height: "100%",
+                    width: "100%",
+                }
+            }>
             <div className={c.fabs}>
-                {!params.hideMenu && (
-                    <Fab
-                        className="fab"
-                        aria-controls="simple-menu"
-                        aria-haspopup="true"
-                        onClick={openMenu}>
-                        <MenuBookIcon />
-                    </Fab>
+                {!fabsOnly ? (
+                    <>
+                        {!params.hideMenu && (
+                            <Fab
+                                className="fab"
+                                aria-controls="simple-menu"
+                                aria-haspopup="true"
+                                onClick={openMenu}>
+                                <MenuBookIcon />
+                            </Fab>
+                        )}
+                        <Tooltip
+                            title={
+                                <span>
+                                    Click to{" "}
+                                    {lower_thirds?.live ? "HIDE" : "SHOW"} Lower
+                                    Thirds
+                                </span>
+                            }
+                            placement="left">
+                            <Fab
+                                className="fab"
+                                // aria-haspopup="true"
+                                size="medium"
+                                color={
+                                    lower_thirds?.live ? "secondary" : "primary"
+                                }
+                                onClick={() =>
+                                    ws.set_live_settings({
+                                        lower_thirds: {
+                                            ...lower_thirds,
+                                            live: !lower_thirds?.live,
+                                        },
+                                    })
+                                }>
+                                <CallToActionIcon />
+                            </Fab>
+                        </Tooltip>
+
+                        <Tooltip title="Toggle INTEL Banner" placement="left">
+                            <Fab
+                                className="fab"
+                                // aria-haspopup="true"
+                                size="medium"
+                                color={banners.intel ? "secondary" : "primary"}
+                                onClick={() =>
+                                    ws.set_live_settings({
+                                        banners: { intel: !banners.intel },
+                                    })
+                                }>
+                                <TurnedInIcon />
+                            </Fab>
+                        </Tooltip>
+                        <Tooltip title="Toggle VETO" placement="left">
+                            <Fab
+                                className="fab"
+                                size="medium"
+                                color={
+                                    maps.liveOnLowerThirds
+                                        ? "secondary"
+                                        : "primary"
+                                }
+                                onClick={() =>
+                                    ws.set_live_settings({
+                                        maps: {
+                                            ...maps,
+                                            liveOnLowerThirds: !maps.liveOnLowerThirds,
+                                        },
+                                    })
+                                }>
+                                <BlockIcon />
+                            </Fab>
+                        </Tooltip>
+                        <Tooltip
+                            title={<span>Swap Team Sides</span>}
+                            placement="left">
+                            <Fab
+                                className="fab"
+                                // aria-haspopup="true"
+                                size="medium"
+                                color={inverse ? "secondary" : "primary"}
+                                onClick={() =>
+                                    ws.set_live_settings({ inverse: !inverse })
+                                }>
+                                <SwapHorizIcon />
+                            </Fab>
+                        </Tooltip>
+
+                        <Tooltip
+                            title={
+                                <span>
+                                    Click to{" "}
+                                    {talents?.live && talents?.liveOnLowerThirds
+                                        ? "HIDE"
+                                        : "SHOW"}{" "}
+                                    Talents
+                                </span>
+                            }
+                            placement="left">
+                            <Fab
+                                className="fab"
+                                // aria-haspopup="true"
+                                size="medium"
+                                color={
+                                    talents?.live && talents?.liveOnLowerThirds
+                                        ? "secondary"
+                                        : "primary"
+                                }
+                                onClick={() =>
+                                    ws.set_live_settings({
+                                        talents: {
+                                            ...talents,
+                                            live: !Boolean(
+                                                talents?.live &&
+                                                    talents?.liveOnLowerThirds
+                                            ),
+                                            liveOnLowerThirds: !Boolean(
+                                                talents?.live &&
+                                                    talents?.liveOnLowerThirds
+                                            ),
+                                        },
+                                    })
+                                }>
+                                <HeadsetMicIcon />
+                            </Fab>
+                        </Tooltip>
+                        <Tooltip
+                            title="Hide Round Winner Flash Screen"
+                            placement="left">
+                            <Fab
+                                className="fab"
+                                // aria-haspopup="true"
+                                size="medium"
+                                color="secondary"
+                                onClick={deleteRoundWinner}>
+                                <DeleteIcon />
+                            </Fab>
+                        </Tooltip>
+                    </>
+                ) : (
+                    <>
+                        <Fab
+                            className="fab"
+                            // aria-haspopup="true"
+                            size="medium"
+                            color={lower_thirds?.live ? "secondary" : "primary"}
+                            onClick={() =>
+                                ws.set_live_settings({
+                                    lower_thirds: {
+                                        ...lower_thirds,
+                                        live: !lower_thirds?.live,
+                                    },
+                                })
+                            }>
+                            <CallToActionIcon />
+                        </Fab>
+
+                        <Fab
+                            className="fab"
+                            // aria-haspopup="true"
+                            size="medium"
+                            color={banners.intel ? "secondary" : "primary"}
+                            onClick={() =>
+                                ws.set_live_settings({
+                                    banners: { intel: !banners.intel },
+                                })
+                            }>
+                            <TurnedInIcon />
+                        </Fab>
+                        <Fab
+                            className="fab"
+                            size="medium"
+                            color={
+                                maps.liveOnLowerThirds ? "secondary" : "primary"
+                            }
+                            onClick={() =>
+                                ws.set_live_settings({
+                                    maps: {
+                                        ...maps,
+                                        liveOnLowerThirds: !maps.liveOnLowerThirds,
+                                    },
+                                })
+                            }>
+                            <BlockIcon />
+                        </Fab>
+                        <Fab
+                            className="fab"
+                            // aria-haspopup="true"
+                            size="medium"
+                            color={inverse ? "secondary" : "primary"}
+                            onClick={() =>
+                                ws.set_live_settings({ inverse: !inverse })
+                            }>
+                            <SwapHorizIcon />
+                        </Fab>
+
+                        <Fab
+                            className="fab"
+                            // aria-haspopup="true"
+                            size="medium"
+                            color={
+                                talents?.live && talents?.liveOnLowerThirds
+                                    ? "secondary"
+                                    : "primary"
+                            }
+                            onClick={() =>
+                                ws.set_live_settings({
+                                    talents: {
+                                        ...talents,
+                                        live: !Boolean(
+                                            talents?.live &&
+                                                talents?.liveOnLowerThirds
+                                        ),
+                                        liveOnLowerThirds: !Boolean(
+                                            talents?.live &&
+                                                talents?.liveOnLowerThirds
+                                        ),
+                                    },
+                                })
+                            }>
+                            <HeadsetMicIcon />
+                        </Fab>
+                        <Fab
+                            className="fab"
+                            // aria-haspopup="true"
+                            size="medium"
+                            color="secondary"
+                            onClick={deleteRoundWinner}>
+                            <DeleteIcon />
+                        </Fab>
+                    </>
                 )}
-
-                <Tooltip
-                    title={
-                        <span>
-                            Click to {lower_thirds?.live ? "HIDE" : "SHOW"}{" "}
-                            Lower Thirds
-                        </span>
-                    }
-                    placement="left">
-                    <Fab
-                        className="fab"
-                        // aria-haspopup="true"
-                        size="medium"
-                        color={lower_thirds?.live ? "secondary" : "primary"}
-                        onClick={() =>
-                            ws.set_live_settings({
-                                lower_thirds: {
-                                    ...lower_thirds,
-                                    live: !lower_thirds?.live,
-                                },
-                            })
-                        }>
-                        <CallToActionIcon />
-                    </Fab>
-                </Tooltip>
-
-                <Tooltip title={<span>Swap Team Sides</span>} placement="left">
-                    <Fab
-                        className="fab"
-                        // aria-haspopup="true"
-                        size="medium"
-                        color={inverse ? "secondary" : "primary"}
-                        onClick={() =>
-                            ws.set_live_settings({ inverse: !inverse })
-                        }>
-                        <SwapHorizIcon />
-                    </Fab>
-                </Tooltip>
-
-                <Tooltip
-                    title={
-                        <span>
-                            Click to{" "}
-                            {talents?.live && talents?.liveOnLowerThirds
-                                ? "HIDE"
-                                : "SHOW"}{" "}
-                            Talents
-                        </span>
-                    }
-                    placement="left">
-                    <Fab
-                        className="fab"
-                        // aria-haspopup="true"
-                        size="medium"
-                        color={
-                            talents?.live && talents?.liveOnLowerThirds
-                                ? "secondary"
-                                : "primary"
-                        }
-                        onClick={() =>
-                            ws.set_live_settings({
-                                talents: {
-                                    ...talents,
-                                    live: !Boolean(
-                                        talents?.live &&
-                                            talents?.liveOnLowerThirds
-                                    ),
-                                    liveOnLowerThirds: !Boolean(
-                                        talents?.live &&
-                                            talents?.liveOnLowerThirds
-                                    ),
-                                },
-                            })
-                        }>
-                        <HeadsetMicIcon />
-                    </Fab>
-                </Tooltip>
-                <Tooltip
-                    title="Hide Round Winner Flash Screen"
-                    placement="left">
-                    <Fab
-                        className="fab"
-                        // aria-haspopup="true"
-                        size="medium"
-                        color="secondary"
-                        onClick={deleteRoundWinner}>
-                        <DeleteIcon />
-                    </Fab>
-                </Tooltip>
             </div>
-
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorElement}
-                keepMounted
-                open={Boolean(anchorElement)}
-                onClose={closeMenu}>
-                <div className={c.menu}>
-                    <FormGroup>
-                        {Object.keys(state).map((key) => (
+            {!fabsOnly && (
+                <Menu
+                    id="simple-menu"
+                    anchorEl={anchorElement}
+                    keepMounted
+                    open={Boolean(anchorElement)}
+                    onClose={closeMenu}>
+                    <div className={c.menu}>
+                        <FormGroup>
+                            {Object.keys(state).map((key) => (
+                                <FormControlLabel
+                                    key={key}
+                                    control={
+                                        <Checkbox
+                                            style={{
+                                                color: !state[key]
+                                                    ? "rgba(255,255,255,.5)"
+                                                    : "",
+                                            }}
+                                            checked={state[key]}
+                                            onChange={handleChange}
+                                            name={key}
+                                        />
+                                    }
+                                    label={key}
+                                />
+                            ))}
                             <FormControlLabel
-                                key={key}
                                 control={
                                     <Checkbox
-                                        style={{
-                                            color: !state[key]
-                                                ? "rgba(255,255,255,.5)"
-                                                : "",
-                                        }}
-                                        checked={state[key]}
-                                        onChange={handleChange}
-                                        name={key}
-                                    />
-                                }
-                                label={key}
-                            />
-                        ))}
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={Object.values(state).every(
-                                        (v) => v === true
-                                    )}
-                                    indeterminate={
-                                        !Object.values(state).every(
+                                        checked={Object.values(state).every(
                                             (v) => v === true
-                                        ) &&
-                                        !Object.values(state).every(
-                                            (v) => v === false
-                                        )
-                                    }
-                                    onChange={changeAll}
-                                    style={{
-                                        color:
+                                        )}
+                                        indeterminate={
                                             !Object.values(state).every(
                                                 (v) => v === true
-                                            ) && "rgba(255,255,255,.5)",
-                                    }}
-                                />
-                            }
-                            label="Show All"
-                        />
-                    </FormGroup>
-                </div>
-                <MenuItem
-                    button
-                    onClick={() =>
-                        history.push("/tournament?noSidebar=1&simple=1")
-                    }>
-                    Go to Match list
-                </MenuItem>
-            </Menu>
-        </>
+                                            ) &&
+                                            !Object.values(state).every(
+                                                (v) => v === false
+                                            )
+                                        }
+                                        onChange={changeAll}
+                                        style={{
+                                            color:
+                                                !Object.values(state).every(
+                                                    (v) => v === true
+                                                ) && "rgba(255,255,255,.5)",
+                                        }}
+                                    />
+                                }
+                                label="Show All"
+                            />
+                        </FormGroup>
+                    </div>
+                    <MenuItem
+                        button
+                        onClick={() =>
+                            history.push("/tournament?noSidebar=1&simple=1")
+                        }>
+                        Go to Match list
+                    </MenuItem>
+                </Menu>
+            )}
+        </div>
     );
 };
 
