@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
+import topOverlay from "../../assets/top-overlay.png";
 
 const q = makeStyles((theme) => ({
     root: {
@@ -12,88 +13,110 @@ const q = makeStyles((theme) => ({
         justifyContent: "center",
 
         "& .bar": {
-            marginTop: 72,
-            marginLeft: 2,
-            height: 36,
-            width: 405,
+            // marginTop: 72,
+            // marginLeft: 2,
+            height: 50,
+            width: 1408,
             display: "flex",
-
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "top center",
+            backgroundImage: `url(${topOverlay})`,
             "& .a": {
-                marginRight: 17.5,
+                marginRight: 32,
                 flexDirection: "row-reverse",
 
                 "& .score": {
-                    transform: "skewX(22deg) translate(-5px, -1px)",
+                    transform: "skewX(25deg) translate(-10px, -2px)",
                     flexDirection: "row-reverse",
                 },
 
-                "& .logo": { transform: "translate(-3px)" },
+                "& .shortname": {
+                    justifyContent: "flex-start",
+                    transform: "translateX(-20px)",
+                },
+
+                "& .logo-wrap": { transform: "translate(-55px)" },
             },
             "& .b": {
-                marginLeft: 17.5,
+                marginLeft: 32,
+
+                "& .shortname": {
+                    justifyContent: "flex-end",
+
+                    transform: "translateX(20px)",
+                },
 
                 "& .score": {
-                    transform: "skewX(-22deg)  translate(7px, -1px)",
+                    transform: "skewX(-25deg)  translate(10px, -2px)",
                 },
-                "& .logo": { transform: "translate(3px)" },
+                "& .logo-wrap": { transform: "translate(55px)" },
             },
 
             "& .team": {
                 height: "100%",
                 flex: 1,
                 display: "flex",
-                alignItems: "center",
+                // alignItems: "center",
 
-                "& .logo": {
-                    height: 36,
-                    width: 36,
-                    backgroundSize: "contain",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    // backgroundColor: "blue",
+                "& .logo-wrap": {
+                    height: 50,
+                    width: 100,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    color: "white",
-                    fontSize: "1.5rem",
-                    fontWeight: "bolder",
-                    fontFamily: "Tungsten",
-                    wordBreak: "break-all",
-                    lineHeight: "1rem",
-                    textAlign: "center",
-                    borderRadius: 5,
+                    "& .logo": {
+                        height: 48,
+                        width: 100,
+                        backgroundSize: "contain",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        // backgroundColor: "blue",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        color: "white",
+                        fontSize: "1.5rem",
+                        fontWeight: "bolder",
+                        fontFamily: "Tungsten",
+                        wordBreak: "break-all",
+                        lineHeight: "1rem",
+                        textAlign: "center",
+                        borderRadius: 5,
+                    },
                 },
 
                 "& .shortname": {
                     display: "flex",
-                    justifyContent: "center",
                     alignItems: "center",
-                    width: 98,
-                    color: "#0b1319",
-                    height: "100%",
+                    width: 350,
+                    color: "#fff",
+                    height: 30,
+                    fontFamily: "Tungsten",
+                    letterSpacing: "1pt",
+                    fontSize: "1.5rem",
                 },
 
                 "& .score": {
-                    width: 40,
-                    height: "100%",
+                    width: 67,
+                    height: 48,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-
                     "& .score-bar": {
                         backfaceVisibility: "hidden",
-                        height: 25,
-                        width: 8,
+                        height: 29,
+                        width: 10,
                         // border: "1px solid rgba(0,0,0,.6)",
-                        boxShadow: "inset 0 0 3px #000",
-                        backgroundColor: "#ededed",
-                        margin: "0px 2px",
+                        // boxShadow: "inset 0 0 3px #000",
+                        backgroundColor: "rgba(255,255,255,.3)",
+                        margin: "0px 4px",
                     },
 
                     "& .win": {
-                        backgroundColor: "rgb(189,112,3)",
-                        background:
-                            "linear-gradient(0deg, rgba(189,112,3,1) 0%, rgba(255,252,0,1) 100%)",
+                        backgroundColor: "#fff",
+                        // background:
+                        //     "linear-gradient(0deg, rgba(189,112,3,1) 0%, rgba(255,252,0,1) 100%)",
                     },
                 },
             },
@@ -123,7 +146,7 @@ const LiveScore = () => {
     const gitTeamLogo = (profile) => {
         // prettier-ignore
         try {
-            let src = require(`../../assets/${profile?.Nickname.toLowerCase().replace(/ /gi, '_')}.png`);
+            let src = require(`../../assets/${profile?.Nickname.toLowerCase().replace(' ', '_')}.png`);
             console.log(src);
             return src;
         } catch (err) {
@@ -131,7 +154,7 @@ const LiveScore = () => {
         }
     };
     return (
-        <div class={c.root}>
+        <div className={c.root}>
             {/* prettier-ignore */}
             <div className="bar">
                 <div className="team a">
@@ -143,8 +166,10 @@ const LiveScore = () => {
                             <div className={clsx("score-bar", {win: !inverse ? a.Score > 2 : b.Score > 2 })}></div>
                         </>}
                     </div>
-                    <Typography variant="h5" className="shortname">{!inverse ? aShortname : bShortname}</Typography>
-                    <div className="logo" style={{backgroundImage: `url(${gitTeamLogo(!inverse ? a.Profile : b.Profile)})`}}>{!gitTeamLogo(!inverse ? a.Profile : b.Profile) && (!inverse ? aShortname : bShortname)}</div>
+                    <Typography variant="h5" className="shortname">{!inverse ? a?.Profile?.DisplayName : b?.Profile?.DisplayName}</Typography>
+                    <div className="logo-wrap">
+                        <div className="logo" style={{backgroundImage: `url(${gitTeamLogo(!inverse ? a.Profile : b.Profile)})`}}>{!gitTeamLogo(!inverse ? a.Profile : b.Profile) && (!inverse ? aShortname : bShortname)}</div>
+                    </div>
                 </div>
 
                 <div className="team b">
@@ -156,8 +181,10 @@ const LiveScore = () => {
                             <div className={clsx("score-bar", {win: inverse ? a.Score > 2 : b.Score > 2 })}></div>
                         </>}
                     </div>
-                    <Typography variant="h5" className="shortname">{inverse ? aShortname : bShortname}</Typography>
-                    <div className="logo" style={{backgroundImage: `url(${gitTeamLogo(inverse ? a.Profile : b.Profile)})`}}>{!gitTeamLogo(inverse ? a.Profile : b.Profile) && (inverse ? aShortname : bShortname)}</div>
+                    <Typography variant="h5" className="shortname">{inverse ? a?.Profile?.DisplayName : b?.Profile?.DisplayName}</Typography>
+                    <div className="logo-wrap">
+                        <div className="logo" style={{backgroundImage: `url(${gitTeamLogo(inverse ? a.Profile : b.Profile)})`}}>{!gitTeamLogo(inverse ? a.Profile : b.Profile) && (inverse ? aShortname : bShortname)}</div>
+                    </div>
                 </div>
             </div>
         </div>

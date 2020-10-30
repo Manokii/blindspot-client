@@ -25,18 +25,15 @@ const q = makeStyles((theme) => ({
         alignItems: "flex-start",
         "& .sponsor-slot": {
             position: "relative",
+
             "& .headline": {
                 position: "relative",
-                backgroundSize: "100% 100%",
-                backgroundPositionX: "left",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tape})`,
-                padding: theme.spacing(2),
-                transform: "translateY(25px)",
+                backgroundColor: theme.palette.secondary.main,
+                padding: theme.spacing(1, 2),
+                transform: "translateY(10px)",
                 zIndex: 10,
 
                 "& .headline-text": {
-                    transform: "translateY(-4px)",
                     textAlign: "center",
                 },
             },
@@ -48,11 +45,7 @@ const q = makeStyles((theme) => ({
                 display: "flex",
                 alignItems: "center",
                 position: "relative",
-                backgroundColor: "#141414",
-
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
+                backgroundColor: theme.palette.primary.dark,
                 backgroundImage: `url(${sponsorsLockUp})`,
                 zIndex: 1,
                 "& .texture": {
@@ -182,9 +175,7 @@ const LiveSponsorSlot = () => {
                                           {maps.bestOf.toUpperCase()}
                                       </Typography>
                                   </div>
-                                  <div className="sponsors">
-                                      <div className="texture"></div>
-                                  </div>
+                                  <div className="sponsors"></div>
                               </div>
                           )
                         : (props) => (

@@ -60,7 +60,8 @@ const q = makeStyles((theme) => ({
                     wordBreak: "break-all",
                     lineHeight: "2rem",
                     textAlign: "center",
-                    filter: "drop-shadow(0px 10px 5px rgba(0,0,0,0.5))",
+                    filter:
+                        "invert(100%) drop-shadow(0px 10px 5px rgba(0,0,0,0.5))",
                 },
 
                 "& .vs": {
