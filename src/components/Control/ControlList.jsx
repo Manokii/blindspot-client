@@ -18,6 +18,7 @@ import Downstage from "./ControlDownstageMonitor";
 import Downstage2 from "./ControlDownstageMonitor2";
 import Giveaways from "./ControlGiveaways";
 import ManualInput from "./ControlManualInput";
+import ManualInput2 from "./ControlManualInput2";
 import FABs from "./FABs";
 
 const us = makeStyles((theme) => ({
@@ -91,8 +92,9 @@ const ControlList = ({ history, location: { search } }) => {
 
     const {
         control_view = {
-            matches: true,
+            // matches: true,
             manualInput: false,
+            manualInput2: true,
             match: true,
             lowerThirds: true,
             talents: true,
@@ -136,6 +138,12 @@ const ControlList = ({ history, location: { search } }) => {
                 <Paper elevation={5} className="section matchup">
                     <Typography variant="button">Manual Input</Typography>
                     <ManualInput />
+                </Paper>
+            )}
+            {state.manualInput2 && (
+                <Paper elevation={5} className="section matchup">
+                    <Typography variant="button">Manual Input 2</Typography>
+                    <ManualInput2 />
                 </Paper>
             )}
 

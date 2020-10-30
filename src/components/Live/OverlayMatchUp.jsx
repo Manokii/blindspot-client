@@ -3,7 +3,6 @@ import { makeStyles, Typography } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import agents from "../../assets/agents.json";
-import defaultAgent from "../../assets/default-agent-light.png";
 import { Transition } from "react-spring/renderprops";
 
 const us = makeStyles((theme) => ({
@@ -90,6 +89,7 @@ const us = makeStyles((theme) => ({
                 "& .card": {
                     height: 258,
                     width: 200,
+                    transition: "background-image 1000ms ease-in-out",
                     borderTopLeftRadius: 25,
                     borderTopRightRadius: 25,
                     border: `2px solid ${theme.palette.secondary.main}`,
@@ -101,7 +101,7 @@ const us = makeStyles((theme) => ({
                     // backgroundSize: "375%",
 
                     backgroundSize: "cover",
-                    backgroundPosition: "top center",
+                    backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                     overflow: "hidden",
                     transitionProperty: "background-image",
@@ -143,7 +143,6 @@ const us = makeStyles((theme) => ({
                     textAlign: "center",
                     fontFamily: "Anton",
                     textTransform: "uppercase",
-                    display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     color: theme.palette.primary.main,
@@ -307,12 +306,12 @@ const LiveMatchUp = ({ history }) => {
                             <div
                                 className="card"
                                 style={{
-                                    backgroundColor: inverse
-                                        ? "#0b1f37"
-                                        : "#ff4050",
                                     backgroundImage: `url(${gitPlayerPhoto(
                                         player.name
                                     )})`,
+                                    backgroundColor: inverse
+                                        ? "#0b1f37"
+                                        : "#ff4050",
                                 }}>
                                 <Transition
                                     items={player.agent}
@@ -329,20 +328,9 @@ const LiveMatchUp = ({ history }) => {
                                                 className="agent"
                                                 style={{
                                                     ...props,
-                                                    backgroundImage:
-                                                        player.agent &&
-                                                        !getAgentVideo(
-                                                            player.agent
-                                                        )
-                                                            ? `url(${getAgentImage(
-                                                                  player.agent
-                                                              )})`
-                                                            : imgOnly &&
-                                                              player.agent
-                                                            ? `url(${getAgentImage(
-                                                                  player.agent
-                                                              )})`
-                                                            : "none",
+                                                    backgroundImage: `url(${getAgentImage(
+                                                        player.agent
+                                                    )})`,
                                                     backgroundColor: inverse
                                                         ? "#0b1f37"
                                                         : "#ff4050",
@@ -386,15 +374,6 @@ const LiveMatchUp = ({ history }) => {
                         </Typography>
                     ))}
                 </div>
-
-                {/* prettier-ignore */}
-                <div className={c.logowrap}>
-                    <div className="logo a"
-                        style={{
-                            backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(ateam?.Profile?.Nickname)})` : '',
-                            // backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#ff4050' : '#0b1f37')
-                        }}></div>
-                </div>
             </div>
 
             <div className="team b">
@@ -413,6 +392,7 @@ const LiveMatchUp = ({ history }) => {
                                 }}>
                                 <Transition
                                     items={player.agent}
+                                    keys={player.agent}
                                     from={{
                                         transform: "translateY(-100%)",
                                     }}
@@ -426,20 +406,9 @@ const LiveMatchUp = ({ history }) => {
                                                 className="agent"
                                                 style={{
                                                     ...props,
-                                                    backgroundImage:
-                                                        player.agent &&
-                                                        !getAgentVideo(
-                                                            player.agent
-                                                        )
-                                                            ? `url(${getAgentImage(
-                                                                  player.agent
-                                                              )})`
-                                                            : imgOnly &&
-                                                              player.agent
-                                                            ? `url(${getAgentImage(
-                                                                  player.agent
-                                                              )})`
-                                                            : "none",
+                                                    backgroundImage: `url(${getAgentImage(
+                                                        player.agent
+                                                    )})`,
                                                     backgroundColor: !inverse
                                                         ? "#0b1f37"
                                                         : "#ff4050",
@@ -465,15 +434,6 @@ const LiveMatchUp = ({ history }) => {
                             {player.name}
                         </Typography>
                     ))}
-                </div>
-
-                {/* prettier-ignore */}
-                <div className={c.logowrap}>
-                    <div className="logo b"
-                        style={{
-                            backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(bteam?.Profile?.Nickname)})` : '',
-                            // backgroundColor: !gitTeamLogo(bteam?.Profile) && (!inverse ? '#ff4050' : '#0b1f37')
-                        }}></div>
                 </div>
 
                 <div className="headline">

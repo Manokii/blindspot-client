@@ -103,8 +103,9 @@ const FABs = ({ history, location: { search }, state, set, fabsOnly }) => {
     const changeAll = () => {
         if (!Object.values(state).every((v) => v === true)) {
             set({
-                matches: true,
+                // matches: true,
                 manualInput: true,
+                manualInput2: true,
                 match: true,
                 lowerThirds: true,
                 talents: true,
@@ -120,8 +121,9 @@ const FABs = ({ history, location: { search }, state, set, fabsOnly }) => {
             });
         } else {
             set({
-                matches: false,
+                // matches: false,
                 manualInput: false,
+                manualInput2: false,
                 match: false,
                 lowerThirds: false,
                 talents: false,
