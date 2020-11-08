@@ -9,7 +9,7 @@ import io from "socket.io-client";
 
 export const wsContext = createContext(null);
 
-const host = window.location.hostname;
+const host = process.env.REACT_APP_WEBSOCKETHOST || 'localhost:3100'
 
 const WebsocketProvider = ({ children }) => {
     let socket;
@@ -18,7 +18,7 @@ const WebsocketProvider = ({ children }) => {
 
     // prettier-ignore
     if (!socket) {
-        socket = io.connect(`${host}:3100/live`)
+        socket = io.connect(`${host}/live`)
         socket.on("set_live_settings", (settings) => dispatch(setLiveSettings(settings)))
         socket.on('add_match_widget', (match) => dispatch(addLiveMatchWidget(match)))
         socket.on('remove_match_widget', (tournamentId) => dispatch(removeLiveMatchWidget(tournamentId)))
