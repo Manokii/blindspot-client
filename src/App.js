@@ -5,23 +5,22 @@ import { makeStyles, Box } from "@material-ui/core";
 import SideNav from "./components/Navigation";
 import TournamentPage from "./components/TournamentPage";
 import ControlList from "./components/Control/ControlList";
-import Live from "./components/KDR/KDRPage";
-import LiveInfoBox from "./components/KDR/KDRInfoBox";
-import LiveMatchWidgets from "./components/KDR/KDRMatchWidgets";
-import LiveIngame from "./components/KDR/KDRIngame";
-import LiveMatchUp from "./components/KDR/KDRMatchUp";
-import LiveVeto from "./components/KDR/KDRVeto";
-import LiveLowerThirds from "./components/KDR/KDRLowerThirds";
-import LiveScore from "./components/KDR/KDRScore";
-import LiveIngamePlayers from "./components/KDR/KDRIngamePlayers";
-import LiveSponsorSlot from "./components/KDR/KDRSponsorSlot";
-import LivePreviousMatches from "./components/KDR/KDRPreviousMatches";
-import LiveMVP from "./components/KDR/KDRMVP";
-import Downstage from "./components/KDR/Downstage";
-import Downstage2 from "./components/KDR/Downstage2";
+import Live from "./components/Live/LivePage";
+import LiveMatchWidgets from "./components/Live/LiveMatchWidgets";
+import LiveIngame from "./components/Live/LiveIngame";
+import LiveMatchUp from "./components/Live/LiveMatchUp";
+import LiveVeto from "./components/Live/LiveVeto";
+import LiveLowerThirds from "./components/Live/LiveLowerThirds";
+import LiveScore from "./components/Live/LiveScore";
+import LiveIngamePlayers from "./components/Live/LiveIngamePlayers";
+import LiveSponsorSlot from "./components/Live/LiveSponsorSlot";
+import LivePreviousMatches from "./components/Live/LivePreviousMatches";
+import LiveMVP from "./components/Live/LiveMVP";
+import Downstage from "./components/Live/Downstage";
+import Downstage2 from "./components/Live/Downstage2";
 import GiveawayPage from "./components/GiveawayPage";
-import KDRTalents from "./components/KDR/KDRTalents";
-import KDRRoundWinner from "./components/KDR/KDRRoundWinner";
+import LiveTalents from "./components/Live/LiveTalents";
+import LiveRoundWinner from "./components/Live/LiveRoundWinner";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,23 +46,22 @@ const App = () => {
                 <Switch>
                     <Route path="/tournament" component={TournamentPage} />
                     <Route path="/control" component={ControlList} />
-                    <Route path="/kdr" exact component={Live} />
-                    <Route path="/kdr/infobox" exact component={LiveInfoBox} />
-                    <Route path="/kdr/matchwidgets" exact component={LiveMatchWidgets} />
-                    <Route path="/kdr/ingame" exact component={LiveIngame} />
-                    <Route path="/kdr/matchup" exact component={LiveMatchUp} />
-                    <Route path="/kdr/veto" exact component={LiveVeto} />
-                    <Route path="/kdr/lowerthirds" exact component={LiveLowerThirds} />
-                    <Route path="/kdr/scores" exact component={LiveScore} />
-                    <Route path="/kdr/players" exact component={LiveIngamePlayers} />
-                    <Route path="/kdr/sponsors" exact component={LiveSponsorSlot} />
-                    <Route path="/kdr/previousmatches" exact component={LivePreviousMatches} />
-                    <Route path="/kdr/mvp" exact component={LiveMVP} />
+                    <Route path="/live" exact component={Live} />
+                    <Route path="/live/matchwidgets" exact component={LiveMatchWidgets} />
+                    <Route path="/live/ingame" exact component={LiveIngame} />
+                    <Route path="/live/matchup" exact component={LiveMatchUp} />
+                    <Route path="/live/veto" exact component={LiveVeto} />
+                    <Route path="/live/lowerthirds" exact component={LiveLowerThirds} />
+                    <Route path="/live/scores" exact component={LiveScore} />
+                    <Route path="/live/players" exact component={LiveIngamePlayers} />
+                    <Route path="/live/sponsors" exact component={LiveSponsorSlot} />
+                    <Route path="/live/previousmatches" exact component={LivePreviousMatches} />
+                    <Route path="/live/mvp" exact component={LiveMVP} />
                     <Route path="/downstage" exact component={Downstage} />
                     <Route path="/downstage2" exact component={Downstage2} />
                     <Route path="/giveaways" exact component={GiveawayPage} />
-                    <Route path="/kdr/talents" exact component={KDRTalents} />
-                    <Route path="/kdr/roundwinner" exact component={KDRRoundWinner} />
+                    <Route path="/live/talents" exact component={LiveTalents} />
+                    <Route path="/live/roundwinner" exact component={LiveRoundWinner} />
                 </Switch>
             </Box>
         </div>
