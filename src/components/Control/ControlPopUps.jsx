@@ -238,7 +238,8 @@ const ControlPopUps = () => {
                             onChange={setState("popup_sponsor")}
                             name="ad">
                             <MenuItem value={"globe"}>Globe</MenuItem>
-                            <MenuItem value={"legion"}>Legion | Intel</MenuItem>
+                            <MenuItem value={"intel"}>Intel</MenuItem>
+                            <MenuItem value={"legion"}>Legion</MenuItem>
                             <MenuItem value={"xsplit"}>XSplit</MenuItem>
                             <MenuItem value={"music"}>$auceboss</MenuItem>
                         </Select>

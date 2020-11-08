@@ -5,6 +5,7 @@ import Paper from "../../assets/paper_texture2.jpg";
 import { Spring, Transition } from "react-spring/renderprops";
 import { config } from "react-spring";
 import agents from "../../assets/agents.json";
+import bg from "../../assets/BG.png";
 
 const useStyles = makeStyles((theme) => ({
     roundWinner: {
@@ -26,22 +27,10 @@ const useStyles = makeStyles((theme) => ({
                 position: "absolute",
                 top: 0,
                 left: 0,
-                backgroundColor: "white",
-
+                backgroundColor: theme.palette.primary.main,
+                backgroundSize: "cover",
+                backgroundImage: `url(${bg})`,
                 padding: theme.spacing(5),
-                "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    height: "100%",
-                    width: "100%",
-                    backgroundSize: "cover",
-                    backgroundImage: `url(${Paper})`,
-                    opacity: 0.5,
-                    mixBlendMode: "multiply",
-                    zIndex: 4,
-                },
 
                 "& .border": {
                     height: "100%",
@@ -150,7 +139,7 @@ const KDRRoundWinner = () => {
     const {
         round_winner = { side: "a" },
         match_current_player_agents = { a: [], b: [] },
-        match_current
+        match_current,
     } = useSelector((state) => state.live);
 
     const gitImageStyle = {
@@ -189,12 +178,12 @@ const KDRRoundWinner = () => {
     };
 
     const getScore = () => {
-        if(round_winner?.side === 'a'){
-            return `${match_current?.EntityParticipantA?.Score} - ${match_current?.EntityParticipantB?.Score} — `
+        if (round_winner?.side === "a") {
+            return `${match_current?.EntityParticipantA?.Score} - ${match_current?.EntityParticipantB?.Score} — `;
         } else {
-            return `${match_current?.EntityParticipantB?.Score} - ${match_current?.EntityParticipantA?.Score} — `
+            return `${match_current?.EntityParticipantB?.Score} - ${match_current?.EntityParticipantA?.Score} — `;
         }
-    }
+    };
 
     return (
         <div className={classes.roundWinner}>
@@ -327,22 +316,35 @@ const KDRRoundWinner = () => {
                                                 className="headline"
                                                 variant="h1"
                                                 color="initial">
-                                                {round_winner?.isFinalGame ? 'GRAND CHAMPIONS' : round_winner?.profile
-                                                    ?.DisplayName + " Win"}
+                                                {round_winner?.isFinalGame
+                                                    ? "GRAND CHAMPIONS"
+                                                    : round_winner?.profile
+                                                          ?.DisplayName +
+                                                      " Win"}
                                             </Typography>
                                             <Typography
                                                 className="subtext"
-                                                variant="h4">{round_winner?.isFinalGame && getScore()}{`VS ${
-                                                round_winner?.loser?.DisplayName
-                                            }${!round_winner?.isFinalGame ? ` — Game ${
-                                                match_current
-                                                    ?.EntityParticipantA
-                                                    ?.Score +
-                                                match_current
-                                                    ?.EntityParticipantB?.Score
-                                            } — ${
-                                                round_winner?.map
-                                            }` : ''}`}</Typography>
+                                                variant="h4">
+                                                {round_winner?.isFinalGame &&
+                                                    getScore()}
+                                                {`VS ${
+                                                    round_winner?.loser
+                                                        ?.DisplayName
+                                                }${
+                                                    !round_winner?.isFinalGame
+                                                        ? ` — Game ${
+                                                              match_current
+                                                                  ?.EntityParticipantA
+                                                                  ?.Score +
+                                                              match_current
+                                                                  ?.EntityParticipantB
+                                                                  ?.Score
+                                                          } — ${
+                                                              round_winner?.map
+                                                          }`
+                                                        : ""
+                                                }`}
+                                            </Typography>
                                         </div>
                                     )}
                                 </Spring>

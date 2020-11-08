@@ -75,7 +75,7 @@ const ControlManualInput = () => {
             players: ["beats", "Borkum", "JG", "Kachow", "Nash"],
         },
         {
-            name: "Jillian's Angels",
+            name: "Jillians Angels",
             shortName: "JA",
             players: [
                 "Calamitus",

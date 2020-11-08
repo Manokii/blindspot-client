@@ -79,7 +79,48 @@ const GiveawayPage = () => {
     const c = q();
     const ws = useContext(wsContext);
     const [state, set] = useState({
-        giveaways: []
+        giveaways: [{
+          prizes: [
+            {
+              product: 'GCash 500',
+              imgUrl: 'https://i.imgur.com/kDw12Xx.png',
+              amount: 3,
+              winners: []
+            },
+            {
+              product: 'Legion K500 Gaming Keyboard',
+              imgUrl: 'https://i.imgur.com/kDw12Xx.png',
+              amount: 1,
+              winners: []
+            },
+            {
+              product: 'Legion M500 Gaming Mouse',
+              imgUrl: 'https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-legion-m500-mouse-feature-01.png',
+              amount: 1,
+              winners: []
+            },
+            {
+              product: 'Legion H300 Gaming Headset Gaming Headset',
+              imgUrl: 'https://static.lenovo.com/na/subseries/featured-images/lenovo-halo-page-h300-feature-03.png',
+              amount: 1,
+              winners: []
+            },
+            {
+              product: 'XSplit License (1-month)',
+              imgUrl: 'https://i.imgur.com/TRNCeML.png',
+              amount: 10,
+              winners: []
+            },
+            {
+              product: 'XSplit License (3-months)',
+              imgUrl: 'https://i.imgur.com/TRNCeML.png',
+              amount: 5,
+              winners: []
+            }
+          ],
+          date: '2020-10-31T06:49:00.000Z',
+          live: false
+        }]
       });
 
     const {giveaways} = useSelector((state) => state.live);

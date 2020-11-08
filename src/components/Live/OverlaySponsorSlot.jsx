@@ -13,6 +13,7 @@ import AdSmLegion from "./ad_sm/AdSmallLenovo";
 import AdSmXSplit from "./ad_sm/AdSmallXSplit";
 import AdSmGlobe from "./ad_sm/AdSmallGlobe";
 import AdSmMusic from "./ad_sm/AdSmallMusic";
+import AdSmallIntel from "./ad_sm/AdSmallIntel";
 
 const q = makeStyles((theme) => ({
     root: {
@@ -135,6 +136,8 @@ const LiveSponsorSlot = () => {
 
     const getSrc = (ad) => {
         switch (ad) {
+            case "intel":
+                return <AdSmallIntel />;
             case "legion":
                 return <AdSmLegion />;
             case "xsplit":

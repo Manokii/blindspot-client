@@ -288,14 +288,14 @@ const LiveMatchUp = ({ history }) => {
                 {/* prettier-ignore */}
                 <div className="headline">
 
-                    {gitTeamLogo(ateam?.Profile) && 
+                    {/* {gitTeamLogo(ateam?.Profile) && 
                     
                     <div className="logo"
                         style={{ 
                             backgroundImage: `url(${gitTeamLogo(ateam?.Profile)})`,
                             backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#0b1f37' : '#ff4050')
                         }}>{!gitTeamLogo(ateam?.Profile) && aShortname}</div>
-                    }
+                    } */}
                     <Typography color="textSecondary" variant="h2" className="team-name">
                         {ateam?.Profile?.Nickname}
                     </Typography>
@@ -437,7 +437,7 @@ const LiveMatchUp = ({ history }) => {
                 </div>
 
                 <div className="headline">
-                    {gitTeamLogo(bteam?.Profile) && (
+                    {/* {gitTeamLogo(bteam?.Profile) && (
                         <div
                             className="logo"
                             style={{
@@ -450,7 +450,7 @@ const LiveMatchUp = ({ history }) => {
                             }}>
                             {!gitTeamLogo(bteam?.Profile) && bShortname}
                         </div>
-                    )}
+                    )} */}
                     <Typography
                         color="textSecondary"
                         variant="h2"

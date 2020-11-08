@@ -47,13 +47,11 @@ const q = makeStyles((theme) => ({
                 display: "flex",
                 alignItems: "center",
                 margin: theme.spacing(1.5, 0),
-
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${paper})`,
+                backgroundColor: theme.palette.primary.dark,
 
                 "& .name": {
                     flex: 1,
+                    color: "#fff",
                 },
 
                 "& .agent": {
@@ -105,7 +103,7 @@ const LiveIngamePlayers = () => {
                     config={{ mass: 1, tension: 500, friction: 40 }}>
                     {(player) => (props) => (
                         <animated.div style={props} className="player">
-                            <Typography variant="h5" className="name">
+                            <Typography variant="h6" className="name">
                                 {player.name}
                             </Typography>
 
@@ -134,7 +132,7 @@ const LiveIngamePlayers = () => {
                     config={{ mass: 1, tension: 500, friction: 40 }}>
                     {(player) => (props) => (
                         <div style={props} className="player">
-                            <Typography variant="h5" className="name">
+                            <Typography variant="h6" className="name">
                                 {player.name}
                             </Typography>
                             <div
