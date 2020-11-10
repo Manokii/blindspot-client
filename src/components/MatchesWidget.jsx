@@ -119,13 +119,13 @@ const MatchesWidget = ({ options }) => {
 
     const setCurrentMatch = (id) => {
         ws.set_live_settings({ is_current_match_polling: false });
-        const cors = `${window.location.hostname}:8080/`;
+        const cors = `noki-cors.herokuapp.com/`;
         const headers = {
             "arena-api-key": "C434EDE3-2E7E-4B9D-A070-58B2CF94846D",
             "arena-login-token": "fd1e9e0d-3c25-4ccd-b6b5-9b70be315e18",
         };
         // prettier-ignore
-        axios.get(`http://${isDev() ? cors : ''}polling.mogul.gg/api/tournament/match/${id}/?LastUpdatedDateTime=`, {headers})
+        axios.get(`https://${isDev() ? cors : ''}polling.mogul.gg/api/tournament/match/${id}/?LastUpdatedDateTime=`, {headers})
             .then(({ data:{Response: match_current} }) => {
 
                 const {TeamAPlayers, TeamBPlayers} = match_current

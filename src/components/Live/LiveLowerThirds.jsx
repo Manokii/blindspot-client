@@ -303,7 +303,7 @@ const LiveLowerThirds = () => {
                                     variant="h3"
                                     className="vs"
                                     color="primary"
-                                    style={{ fontFamily: "Sivar" }}>
+                                    style={{ color: "#fff" }}>
                                     {a.Score} - {b.Score}
                                 </Typography>
                                 <div

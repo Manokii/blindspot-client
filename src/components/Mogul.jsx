@@ -45,7 +45,7 @@ const Mogul = () => {
     // Loads tournament
     useEffect(() => {
         if (!tournamentId) return;
-        const cors = `${window.location.hostname}:8080/`;
+        const cors = `noki-cors.herokuapp.com/`;
         const headers = {
             "arena-api-key": "C434EDE3-2E7E-4B9D-A070-58B2CF94846D",
             "arena-login-token": "fd1e9e0d-3c25-4ccd-b6b5-9b70be315e18",
@@ -62,7 +62,7 @@ const Mogul = () => {
 
     const loadTournament = () => {
         const host = window.location.hostname;
-        const cors = `http://${host}:8080/`;
+        const cors = `https://noki-cors.herokuapp.com/`;
         const headers = {
             "arena-api-key": "C434EDE3-2E7E-4B9D-A070-58B2CF94846D",
             "arena-login-token": "fd1e9e0d-3c25-4ccd-b6b5-9b70be315e18",
