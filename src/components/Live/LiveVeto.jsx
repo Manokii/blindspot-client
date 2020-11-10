@@ -16,40 +16,19 @@ const q = makeStyles((theme) => ({
         justifyContent: "center",
         alignItems: "center",
         "& .headline": {
-            fontFamily: "Sivar",
-            color: "#1f1f1f",
+            // fontFamily: "Sivar",
+            color: "#fff",
         },
         "& .box": {
             width: 895,
             height: 126,
-            backgroundImage: `url(${border})`,
+            // backgroundImage: `url(${border})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             display: "flex",
             padding: theme.spacing(0, 2),
             // justifyContent: "space-between",
-
-            "& .wrap": {
-                "&:nth-child(0)": {
-                    "& .map": {
-                        transform:
-                            "rotate(-5.58218deg) translate(-8.39836px, -3.88861px)",
-                    },
-                },
-                "&:nth-child(1)": {
-                    "& .map": {
-                        transform:
-                            "rotate(-2.09882deg) translate(7.25141px, 5.40826px)",
-                    },
-                },
-                "&:nth-child(2)": {
-                    "& .map": {
-                        transform:
-                            "rotate(3.68383deg) translate(-0.199985px, -9.41075px)",
-                    },
-                },
-            },
             "& .map": {
                 margin: theme.spacing(0, 2),
                 WebkitBackfaceVisibility: "hidden",

@@ -24,31 +24,8 @@ const us = makeStyles((theme) => ({
         // padding: theme.spacing(0, 5.5), //
         "& .a": {
             // left: 44,
-            transform: "rotate(-2deg)",
-            "& .texture": { backgroundImage: `url(${textureA})` },
 
-            "& .tape1": {
-                position: "absolute",
-                height: 109,
-                width: 283,
-                top: -50,
-                left: -50,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tapeA1})`,
-                zIndex: 4,
-            },
-            "& .tape2": {
-                position: "absolute",
-                height: 109,
-                width: 283,
-                bottom: -60,
-                left: 380,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tapeA2})`,
-                zIndex: 4,
-            },
+
 
             "& .headline": {
                 flexDirection: "row-reverse",
@@ -62,31 +39,7 @@ const us = makeStyles((theme) => ({
 
         "& .b": {
             // left: 976,
-            transform: "rotate(1deg)",
-            "& .texture": { backgroundImage: `url(${textureB})` },
 
-            "& .tape1": {
-                position: "absolute",
-                height: 106,
-                width: 148,
-                right: -40,
-                top: -40,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tapeB1})`,
-                zIndex: 4,
-            },
-            "& .tape2": {
-                position: "absolute",
-                height: 64,
-                width: 131,
-                left: -37,
-                bottom: -40,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tapeB2})`,
-                zIndex: 4,
-            },
             "& .cards": {
                 "& .card": {
                     // transform: "scaleX(-1)",
@@ -115,23 +68,14 @@ const us = makeStyles((theme) => ({
             justifyContent: "space-around",
             padding: theme.spacing(3, 3, 1, 3),
             margin: theme.spacing(0, 2),
+            backgroundColor: 'rgba(13, 10, 32, .9)',
 
             boxShadow: "-5px 5px 20px rgba(0,0,0,.2)",
 
-            "& .texture": {
-                position: "absolute",
-                height: "100%",
-                width: "100%",
-                top: 0,
-                left: 0,
-                mixBlendMode: "multiply",
-                backgroundSize: "cover",
-                zIndex: 3,
-            },
-
             "& .headline": {
                 display: "flex",
-                alignItems: "center",
+                alignItems: "center",  
+                color:'#fff',
 
                 transform: "translateY(-5px)",
                 zIndex: 2,
@@ -158,10 +102,11 @@ const us = makeStyles((theme) => ({
                     textAlign: "center",
                 },
                 "& .team-name": {
-                    fontFamily: "Sivar",
+                    // fontFamily: "Sivar",
                     textAlign: "center",
                     paddingBottom: theme.spacing(1),
                     // fontWeight: "bolder",
+                    color: '#fff',
                     letterSpacing: 2,
                     zIndex: 2,
                     paddingTop: 2,
@@ -213,6 +158,7 @@ const us = makeStyles((theme) => ({
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    color: 'rgba(255,255,255,.95)'
                 },
             },
         },
@@ -404,12 +350,9 @@ const LiveMatchUp = ({ history }) => {
                     <div className="logo a"
                         style={{
                             backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(ateam?.Profile?.Nickname)})` : '',
-                            backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#ff4656' : '#101a23')
+                            // backgroundColor: !gitTeamLogo(ateam?.Profile) && (inverse ? '#ff4656' : '#101a23')
                         }}></div>
                 </div>
-                <div className="texture"></div>
-                <div className="tape1"></div>
-                <div className="tape2"></div>
             </div>
 
             <div className="team b">
@@ -482,13 +425,9 @@ const LiveMatchUp = ({ history }) => {
                     <div className="logo b"
                         style={{
                             backgroundImage: showLogoAsBG ? `url(${getTeamLogoBG(bteam?.Profile?.Nickname)})` : '',
-                            backgroundColor: !gitTeamLogo(bteam?.Profile) && (!inverse ? '#ff4656' : '#101a23')
+                            // backgroundColor: !gitTeamLogo(bteam?.Profile) && (!inverse ? '#ff4656' : '#101a23')
                         }}></div>
                 </div>
-
-                <div className="texture"></div>
-                <div className="tape1"></div>
-                <div className="tape2"></div>
             </div>
         </div>
     );
