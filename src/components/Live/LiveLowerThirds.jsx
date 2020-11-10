@@ -9,7 +9,7 @@ import { Transition } from "react-spring/renderprops";
 import paper from "../../assets/paper1.jpg";
 import albumCover from "../../assets/kdr-album-cover.jpg";
 import LiveVeto from "./LiveVeto";
-import logoLockup from "../../assets/logos.png";
+import logoLockup from "../../assets/logos3.png";
 import Livetalents from "./LiveTalents";
 
 import Ticker from "react-ticker";
@@ -41,6 +41,7 @@ const q = makeStyles((theme) => ({
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                backgroundColor: "rgba(13, 10, 32, .95)",
                 "& .team": {
                     height: 82,
                     width: 82,
@@ -65,18 +66,6 @@ const q = makeStyles((theme) => ({
                     margin: theme.spacing(0, 3),
                     fontWeight: "bold",
                 },
-
-                "& .texture": {
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    height: "100%",
-                    width: "100%",
-                    backgroundColor: "white",
-                    backgroundSize: "cover",
-                    backgroundImage: `url(${matchTexture})`,
-                    mixBlendMode: "multiply",
-                },
             },
 
             "& .longbar": {
@@ -87,8 +76,6 @@ const q = makeStyles((theme) => ({
 
                 "& .main": {
                     height: 76,
-                    backgroundSize: "cover",
-                    backgroundImage: `url(${mainbar})`,
                     display: "flex",
                     alignItems: "center",
                     padding: theme.spacing(1, 3),
@@ -103,9 +90,8 @@ const q = makeStyles((theme) => ({
                 "& .sub": {
                     height: 54,
                     overflowY: "hidden",
-                    backgroundSize: "cover",
-                    backgroundImage: `url(${subbar})`,
                     display: "flex",
+                    backgroundColor: "#141414",
                     alignItems: "center",
                     padding: theme.spacing(0, 3),
                     fontFamily: "Anton",
@@ -130,6 +116,7 @@ const q = makeStyles((theme) => ({
                 backgroundColor: "white",
                 display: "flex",
                 padding: theme.spacing(2),
+                backgroundColor: "rgba(13, 10, 32, .95)",
 
                 backgroundSize: "90%",
                 backgroundRepeat: "no-repeat",
@@ -335,7 +322,6 @@ const LiveLowerThirds = () => {
                                     }}>
                                     {!logoCheck(b.Profile) && bShortname}
                                 </div>
-                                <div className="texture"></div>
                             </div>
                             <div className="longbar">
                                 <div className="main">
@@ -366,7 +352,6 @@ const LiveLowerThirds = () => {
                                 </div>
                             </div>
                             <div className="sponsors">
-                                <div className="texture"></div>
                             </div>
                         </div>
                     ))

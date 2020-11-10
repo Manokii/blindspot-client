@@ -15,19 +15,25 @@ const q = makeStyles((theme) => ({
             position: "relative",
             padding: theme.spacing(1, 2),
             backgroundColor: "white",
+            backgroundColor: "rgba(13, 10, 32, .95)",
             borderLeft: `3px solid ${theme.palette.secondary.main}`,
-            "&::after": {
-                content: '""',
-                position: "absolute",
-                height: "100%",
-                width: "100%",
-                top: 0,
-                left: 0,
-                backgroundSize: "cover",
-                backgroundImage: `url(${mainPaper})`,
-                mixBlendMode: "multiply",
-                opacity: 0.4,
-            },
+            color: 'rgba(255,255,255,1)',
+
+            "& h4": {
+                color: 'white'
+            }
+            // "&::after": {
+            //     content: '""',
+            //     position: "absolute",
+            //     height: "100%",
+            //     width: "100%",
+            //     top: 0,
+            //     left: 0,
+            //     backgroundSize: "cover",
+            //     backgroundImage: `url(${mainPaper})`,
+            //     mixBlendMode: "multiply",
+            //     opacity: 0.4,
+            // },
         },
 
         "& .giveaways": {
@@ -35,32 +41,36 @@ const q = makeStyles((theme) => ({
             flexWrap: "wrap-reverse",
 
             "& .product": {
-                backgroundColor: "white",
                 margin: theme.spacing(1, 1, 0, 0),
                 display: "flex",
                 alignItems: "center",
                 padding: theme.spacing(1, 2),
                 position: "relative",
                 borderRadius: 5,
+                backgroundColor: "rgba(13, 10, 32, .95)",
                 // overflow: "hidden",
-                "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    height: "100%",
-                    width: "100%",
-                    backgroundSize: "cover",
-                    opacity: 0.5,
-                    backgroundImage: `url(${mainPaper})`,
-                    backgroundPosition: "center",
-                    mixBlendMode: "multiply",
-                },
+                // "&::after": {
+                //     content: '""',
+                //     position: "absolute",
+                //     top: 0,
+                //     left: 0,
+                //     height: "100%",
+                //     width: "100%",
+                //     backgroundSize: "cover",
+                //     opacity: 0.5,
+                //     backgroundImage: `url(${mainPaper})`,
+                //     backgroundPosition: "center",
+                //     mixBlendMode: "multiply",
+                // },
                 "& .details": {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                     height: "100%",
+
+                    "& .name": {
+                        color: 'rgba(255,255,255,.9)'
+                    }, 
                     "& .img-container": {
                         flex: 1,
                         display: "flex",
@@ -169,7 +179,7 @@ const KDRGiveaways = ({ onLowerThirds }) => {
                                             color="primary">
                                             <span
                                                 style={{
-                                                    color: "royalblue",
+                                                    color: "#ff4656",
                                                     textTransform: "lowercase",
                                                     fontVariant: "small-caps",
                                                 }}>
