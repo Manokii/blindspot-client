@@ -193,8 +193,7 @@ const KDRGiveaways = ({ onLowerThirds }) => {
                                         <div className="winners-wrap">
                                             <Typography
                                                 variant="h6"
-                                                color="primary"
-                                                style={{ opacity: 0.8 }}>
+                                                style={{ opacity: 0.8, color: '#fff' }}>
                                                 winner{amount > 1 ? "s" : ""}
                                             </Typography>
 
@@ -203,7 +202,7 @@ const KDRGiveaways = ({ onLowerThirds }) => {
                                                     <Typography
                                                         className="winner"
                                                         variant="caption"
-                                                        color="primary">
+                                                        style={{color:'#fff'}}>
                                                         {w}
                                                     </Typography>
                                                 ))}

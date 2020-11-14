@@ -1,18 +1,14 @@
 import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-// import paper from "../../assets/paper1.jpg";
-import paper1 from "../../assets/paper_texture2.jpg";
-import tape from "../../assets/tape2.png";
 import globeLogo from "../../assets/globe.png";
-import sponsorsLockUp from "../../assets/KDR-Sponsor-Lock-up.png";
+import sponsorsLockUp from "../../assets/logos2.png";
 import legion_intel from "../../assets/legion.png";
 import { useSelector } from "react-redux";
 import { Transition } from "react-spring/renderprops";
 
-import AdSmLegion from "./ad_sm/AdSmallLenovo";
-import AdSmXSplit from "./ad_sm/AdSmallXSplit";
-import AdSmGlobe from "./ad_sm/AdSmallGlobe";
-import AdSmMusic from "./ad_sm/AdSmallMusic";
+import globe from "../../assets/globe-ad-small.jpg";
+import legion from "../../assets/legion-ad-small.png";
+import xsplit from "../../assets/xsplit-ad-small.png";
 
 const q = makeStyles((theme) => ({
     root: {
@@ -30,13 +26,14 @@ const q = makeStyles((theme) => ({
                 backgroundSize: "100% 100%",
                 backgroundPositionX: "left",
                 backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tape})`,
-                padding: theme.spacing(2),
-                transform: "translateY(25px)",
+                // backgroundImage: `url(${tape})`,
+                padding: theme.spacing(1),
+                backgroundColor: "rgba(255,	70,	86, .8)",
+                // transform: "translateY(25px)",
                 zIndex: 10,
 
                 "& .headline-text": {
-                    transform: "translateY(-4px)",
+                    // transform: "translateY(-4px)",
                     textAlign: "center",
                 },
             },
@@ -48,33 +45,20 @@ const q = makeStyles((theme) => ({
                 display: "flex",
                 alignItems: "center",
                 position: "relative",
-                backgroundColor: "#141414",
+
+                backgroundColor: "rgba(13, 10, 32, .8)",
 
                 backgroundSize: "contain",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundImage: `url(${sponsorsLockUp})`,
                 zIndex: 1,
-                "& .texture": {
-                    position: "absolute",
-                    display: "block",
-                    height: 125,
-                    width: 470,
-                    top: 0,
-                    left: 0,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundImage: `url(${paper1})`,
-                    // backgroundColor: "red",
-                    mixBlendMode: "multiply",
-                    zIndex: 5,
-                },
                 "& .main": {
                     position: "relative",
                     zIndex: 2,
                     display: "flex",
                     flexDirection: "column",
+                    position: "relative",
                     height: "100%",
                     width: "50%",
                     "& .caption": {
@@ -84,7 +68,8 @@ const q = makeStyles((theme) => ({
 
                     "& .globe": {
                         flex: 1,
-                        backgroundSize: "80%",
+                        // backgroundSize: "80%",
+                        backgroundSize: "contain",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
                         backgroundImage: `url(${globeLogo})`,
@@ -137,19 +122,17 @@ const LiveSponsorSlot = () => {
     const {
         popup_sponsor = { live: false },
         current_match_state = "KDR Series",
-        maps = { bestOf: "bo1" },
+        maps = { bestOf: "bo3" },
     } = useSelector((state) => state.live);
 
     const getSrc = (ad) => {
         switch (ad) {
-            case "legion":
-                return <AdSmLegion />;
-            case "xsplit":
-                return <AdSmXSplit />;
             case "globe":
-                return <AdSmGlobe />;
-            case "music":
-                return <AdSmMusic />;
+                return globe;
+            case "legion":
+                return legion;
+            case "xsplit":
+                return xsplit;
 
             default:
                 break;
@@ -159,7 +142,6 @@ const LiveSponsorSlot = () => {
     return (
         <div className={c.root}>
             <Transition
-                // config={{ mass: 1, tension: 500, friction: 40 }}
                 items={popup_sponsor.live && !popup_sponsor.showAd}
                 from={{ opacity: 0, transform: "translateX(-120%)", height: 0 }}
                 enter={[
@@ -183,13 +165,16 @@ const LiveSponsorSlot = () => {
                                       </Typography>
                                   </div>
                                   <div className="sponsors">
-                                      <div className="texture"></div>
+                                      {/* <div className="texture"></div> */}
                                   </div>
                               </div>
                           )
                         : (props) => (
                               <div className={c.ad} style={props}>
-                                  {getSrc(popup_sponsor.ad)}
+                                  <img
+                                      src={getSrc(popup_sponsor.ad)}
+                                      className="img"
+                                  />
                               </div>
                           )
                 }

@@ -281,7 +281,7 @@ const ControlGiveaways = () => {
                 live: false,
             },
         ],
-        selectedIndex: 4,
+        selectedIndex: 0,
     });
 
     const { giveaways: gg, selectedIndex: ii } = state;

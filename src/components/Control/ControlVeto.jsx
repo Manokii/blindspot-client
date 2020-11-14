@@ -102,7 +102,7 @@ const us = makeStyles((theme) => ({
 const ControlVeto = () => {
     const c = us();
     const [isFinals, setIsFinals] = useState(false);
-    const mapPool = ["Bind", "Haven", "Split", "Ascent"];
+    const mapPool = ["Bind", "Haven", "Split", "Ascent", "Icebox"];
     const ws = useContext(wsContext);
     const {
         match_current,
@@ -194,7 +194,7 @@ const ControlVeto = () => {
     };
 
     const grabVeto = () => {
-        const cors = `${window.location.hostname}:8080/`;
+        const cors = `noki-cors.herokuapp.com/`;
         const headers = {
             "arena-api-key": "C434EDE3-2E7E-4B9D-A070-58B2CF94846D",
             "arena-login-token": "fd1e9e0d-3c25-4ccd-b6b5-9b70be315e18",

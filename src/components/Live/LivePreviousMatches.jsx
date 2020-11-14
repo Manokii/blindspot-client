@@ -23,13 +23,11 @@ const q = makeStyles((theme) => ({
             flexDirection: "column",
 
             "& .headline": {
-                backgroundSize: "100% 100%",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${tape2})`,
-                padding: theme.spacing(1, 1, 2, 1),
+                height: 56,
+                padding: theme.spacing(1),
                 textAlign: "center",
-                transform: "translateY(40%)",
+                // transform: "translateY(40%)",
+                backgroundColor:theme.palette.secondary.main
             },
 
             "& .wrap": {
@@ -37,11 +35,11 @@ const q = makeStyles((theme) => ({
                 padding: theme.spacing(2),
                 justifyContent: "space-between",
                 alignItems: "center",
-
+                
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${paper})`,
+                backgroundColor: 'rgba(13, 10, 32, .9)',
                 "& .team": {
                     height: 80,
                     width: 80,
@@ -52,9 +50,9 @@ const q = makeStyles((theme) => ({
                 },
 
                 "& .vs": {
-                    fontFamily: "sivar",
-                    color: "#111111",
-                    fontSize: 30,
+                    fontFamily: "Tungsten",
+                    color: "#fff",
+                    fontSize: 35,
                     fontWeight: "bold",
                 },
             },
@@ -123,8 +121,8 @@ const LivePreviousMatches = () => {
                     b = { score: 0 },
                 }) => (props) => (
                     <div style={props} className="match">
-                        <Typography className="headline" variant="h6">
-                            {headline}
+                        <Typography className="headline" variant="h4">
+                            {headline ? headline : 'Match Result'}
                         </Typography>
 
                         <div className="wrap">

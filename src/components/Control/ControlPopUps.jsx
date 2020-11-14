@@ -217,7 +217,7 @@ const ControlPopUps = () => {
             <Paper elevation={2} className="section sponsors">
                 <Typography variant="h6">Sponsors</Typography>
 
-                <FormControlLabel
+                {/* <FormControlLabel
                     control={
                         <Switch
                             checked={form.popup_sponsor.showAd}
@@ -243,7 +243,7 @@ const ControlPopUps = () => {
                             <MenuItem value={"music"}>$auceboss</MenuItem>
                         </Select>
                     </FormControl>
-                )}
+                )} */}
 
                 <Button
                     variant="contained"

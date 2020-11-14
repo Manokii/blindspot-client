@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import Paper from "../../assets/paper_texture2.jpg";
+import Paper from "../../assets/bg.jpg.png";
 import { Spring, Transition } from "react-spring/renderprops";
 import { config } from "react-spring";
 import agents from "../../assets/agents.json";
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
                 position: "absolute",
                 top: 0,
                 left: 0,
-                backgroundColor: "white",
+                // backgroundColor: "white",
 
                 padding: theme.spacing(5),
                 "&::after": {
@@ -38,14 +38,13 @@ const useStyles = makeStyles((theme) => ({
                     width: "100%",
                     backgroundSize: "cover",
                     backgroundImage: `url(${Paper})`,
-                    opacity: 0.5,
                     mixBlendMode: "multiply",
                     zIndex: 4,
                 },
 
                 "& .border": {
                     height: "100%",
-                    border: "5px solid rgba(0,0,0,1)",
+                    // border: "5px solid rgba(0,0,0,1)",
                 },
             },
 

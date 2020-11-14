@@ -5,7 +5,7 @@ import borderlt from "../../assets/veto-rect-lt.png";
 import mapTexture from "../../assets/map.png";
 import { useSelector } from "react-redux";
 import { Transition } from "react-spring/renderprops";
-import banned from "../../assets/banned.png";
+// import banned from "../../assets/banned.png";
 import xspray from "../../assets/xspray.png";
 
 const q = makeStyles((theme) => ({
@@ -34,11 +34,10 @@ const q = makeStyles((theme) => ({
                 WebkitBackfaceVisibility: "hidden",
                 height: 133,
                 width: 254,
-                backgroundImage: `url(${mapTexture})`,
-                backgroundColor: "rgba(0,0,0,.3)",
+                backgroundColor: "rgba(13, 10, 32, .95)",
                 boxShadow: "-2px 4px 8px rgba(0,0,0,.4)",
                 color: "black",
-                padding: theme.spacing(1),
+                // padding: theme.spacing(1),
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -54,8 +53,9 @@ const q = makeStyles((theme) => ({
                 },
 
                 "& .map-name": {
-                    paddingTop: theme.spacing(1),
+                    paddingBottom: 6,
                     textAlign: "center",
+                    color: 'rgba(255,255,255,.9)'
                 },
 
                 "& .banned": {
@@ -67,9 +67,8 @@ const q = makeStyles((theme) => ({
                     backgroundSize: "contain",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    backgroundImage: `url(${banned})`,
                     transform:
-                        "rotate(20deg) scale(1.3) translate(-10px, -20px)",
+                        "rotate(20deg) translate(-10px, -20px)",
                     // opacity: 0.4,
                 },
 
@@ -82,8 +81,8 @@ const q = makeStyles((theme) => ({
                     backgroundSize: "contain",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    backgroundImage: `url(${xspray})`,
-                    transform: "rotate(20deg) scale(2) translate(-10px, -20px)",
+                    // backgroundImage: `url(${xspray})`,
+                    // transform: "rotate(20deg) translate(-10px, -20px)",
                     // opacity: 0.4,
                     display: "flex",
                     justifyContent: "center",
@@ -93,8 +92,6 @@ const q = makeStyles((theme) => ({
                         height: 90,
                         width: 90,
                         borderRadius: 10,
-                        transform:
-                            "rotate(-20deg) scale(0.7) translate(10px, 5px)",
                         backgroundSize: "contain",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
@@ -174,7 +171,7 @@ const LiveVeto = ({ onLowerThirds = false }) => {
                 alignItems: onLowerThirds ? "flex-start" : "",
             }}>
             <Typography
-                variant="h2"
+                variant="h3"
                 className="headline"
                 style={{ color: onLowerThirds ? "white" : "" }}>
                 {onLowerThirds ? `${aShortname} VS ${bShortname}` : state} -{" "}
@@ -183,22 +180,22 @@ const LiveVeto = ({ onLowerThirds = false }) => {
             <div
                 className="box"
                 style={{
-                    backgroundImage: onLowerThirds ? `url(${borderlt})` : "",
+                    padding: onLowerThirds ? `0px`: ''
                 }}>
                 <Transition
                     items={maps.veto}
                     keys={(v, i) => i}
                     from={{
                         opacity: 0,
-                        transform: "scale(2) translateY(0px)",
+                        transform: "translateY(20px)",
                     }}
                     enter={{
                         opacity: 1,
-                        transform: "scale(1) translateY(0px)",
+                        transform: "translateY(0px)",
                     }}
                     leave={{
                         opacity: 0,
-                        transform: "scale(1) translateY(20px)",
+                        transform: "translateY(20px)",
                     }}
                     trail={300}>
                     {(veto) => (props) => (
@@ -211,6 +208,7 @@ const LiveVeto = ({ onLowerThirds = false }) => {
                                 //         Math.random() * 20 - 10
                                 //     }px, ${Math.random() * 20 - 10}px)`,
                                 // }}
+                                style={{margin: onLowerThirds ? '0px 32px 0px 0px': '0px 16px'}}
                                 className="map">
                                 <div
                                     className="img"
@@ -218,6 +216,7 @@ const LiveVeto = ({ onLowerThirds = false }) => {
                                         backgroundImage: `url(${getMapImg(
                                             veto.map
                                         )})`,
+                                        filter: veto.type === 'ban' ? 'grayscale(100%) brightness(50%)' : veto.winner ?  'brightness(25%)': '',
                                     }}></div>
                                 {/* prettier-ignore */}
                                 <Typography variant="h5" className="map-name">
@@ -235,17 +234,17 @@ const LiveVeto = ({ onLowerThirds = false }) => {
                                     from={{
                                         opacity: 0,
                                         transform:
-                                            "rotate(20deg) scale(2) translate(-10px, -20px)",
+                                            "rotate(20deg) translate(-10px, -20px)",
                                     }}
                                     enter={{
                                         opacity: 1,
                                         transform:
-                                            "rotate(20deg) scale(1.3) translate(-10px, -20px)",
+                                            "rotate(20deg) translate(-10px, -20px)",
                                     }}
                                     leave={{
                                         opacity: 0,
                                         transform:
-                                            "rotate(20deg) scale(2) translate(-10px, -20px)",
+                                            "rotate(20deg) translate(-10px, -20px)",
                                     }}
                                     config={{ delay: 300 }}>
                                     {(show) =>
@@ -262,17 +261,17 @@ const LiveVeto = ({ onLowerThirds = false }) => {
                                     from={{
                                         opacity: 0,
                                         transform:
-                                            "rotate(20deg) scale(4) translate(-10px, 0px)",
+                                            "translate(0px, -20px)",
                                     }}
                                     enter={{
                                         opacity: 1,
                                         transform:
-                                            "rotate(20deg) scale(2) translate(-10px, 0px)",
+                                            "translate(0px, -20px)",
                                     }}
                                     leave={{
                                         opacity: 0,
                                         transform:
-                                            "rotate(20deg) scale(3) translate(-10px, 0px)",
+                                            "translate(0px, -20px)",
                                     }}
                                     config={{ delay: 300 }}>
                                     {(show) =>

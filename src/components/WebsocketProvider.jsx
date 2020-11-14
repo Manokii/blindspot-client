@@ -9,7 +9,7 @@ import io from "socket.io-client";
 
 export const wsContext = createContext(null);
 
-const host = process.env.REACT_APP_WEBSOCKETHOST || 'localhost:3100'
+const host = 'localhost:3100'
 
 const WebsocketProvider = ({ children }) => {
     let socket;

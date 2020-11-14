@@ -42,7 +42,8 @@ const q = makeStyles((theme) => ({
             "& .player": {
                 height: 60,
                 width: 250,
-                backgroundColor: "rgba(255,255,255,.9)",
+                // backgroundColor: "rgba(255,255,255,.9)",
+                backgroundColor: 'rgba(13, 10, 32, .9)',
                 color: "black",
                 display: "flex",
                 alignItems: "center",
@@ -50,16 +51,18 @@ const q = makeStyles((theme) => ({
 
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${paper})`,
+                // backgroundImage: `url(${paper})`,
 
                 "& .name": {
                     flex: 1,
+                    color: '#fff'
                 },
 
                 "& .agent": {
                     height: 60,
                     width: 80,
-                    backgroundColor: theme.palette.primary.main,
+                    // backgroundColor: theme.palette.primary.main,
+                    backgroundColor: `rgba(0,0,0,.5)`,
                     backgroundSize: "contain",
                     backgroundRepeat: "no-repeat",
                 },

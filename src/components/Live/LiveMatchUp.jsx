@@ -58,6 +58,7 @@ const us = makeStyles((theme) => ({
 
         "& .team": {
             // position: "absolute",
+            position:'relative',
             height: 601,
             width: 901,
             // top: 237,
@@ -70,6 +71,7 @@ const us = makeStyles((theme) => ({
             margin: theme.spacing(0, 2),
             backgroundColor: 'rgba(13, 10, 32, .9)',
 
+            overflow: "hidden",
             boxShadow: "-5px 5px 20px rgba(0,0,0,.2)",
 
             "& .headline": {
@@ -174,6 +176,7 @@ const us = makeStyles((theme) => ({
         zIndex: 1,
         overflow: "hidden",
         opacity: 0.3,
+        
         // mixBlendMode: "multiply",
 
         "& .logo": {
